@@ -100,7 +100,7 @@ function BottomTabNavigator() {
           <Image
             style={{ marginLeft: 15, width: 30, height: 30 }}
             resizeMode="contain"
-            source={require('../assets/images/secondary-logo.png')} // TODO: Replace with better image version
+            source={require('../assets/images/logos/secondary-logo.png')} // TODO: Replace with better image version
           />
         ),
 
