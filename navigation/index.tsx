@@ -11,7 +11,7 @@ import {
   DarkTheme,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ColorSchemeName, Pressable, Image } from 'react-native';
+import { Pressable, Image } from 'react-native';
 
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -24,8 +24,7 @@ import {
   RootTabParamList,
   RootTabScreenProps,
 } from '../types';
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import { COLOURS } from '../constants/Colours';
 import LinkingConfiguration from './LinkingConfiguration';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
@@ -35,16 +34,9 @@ import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
 
-export default function Navigation({
-  colorScheme,
-}: {
-  colorScheme: ColorSchemeName;
-}) {
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
+    <NavigationContainer linking={LinkingConfiguration}>
       <RootNavigator />
     </NavigationContainer>
   );
@@ -83,18 +75,16 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
       screenOptions={({ navigation }: RootTabScreenProps<any>) => ({
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: COLOURS.RED,
         tabBarStyle: {
-          backgroundColor: Colors[colorScheme].tabBarBackground,
+          backgroundColor: COLOURS.BEIGE,
         },
         headerStyle: {
-          backgroundColor: Colors[colorScheme].headerBackground,
+          backgroundColor: COLOURS.BEIGE,
         },
         headerLeft: () => (
           <Image
@@ -114,7 +104,7 @@ function BottomTabNavigator() {
             <FontAwesome
               name="user-circle-o"
               size={30}
-              color={Colors[colorScheme].text}
+              color={COLOURS.BLACK}
               style={{ marginRight: 15 }}
             />
           </Pressable>

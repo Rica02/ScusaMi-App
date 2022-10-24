@@ -1,21 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+import { COLOURS } from '../constants/Colours';
 import { RootTabScreenProps } from '../types';
+import React from 'react';
 
 export default function HomeScreen({
   navigation,
 }: RootTabScreenProps<'HomeScreen'>) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home Screen</Text>
-      <View
-        style={styles.separator}
-        lightColor="#eee"
-        darkColor="rgba(255,255,255,0.1)"
-      />
-      <EditScreenInfo path="/screens/HomeScreen.tsx" />
+      <View>
+        <Text style={styles.headerText}>
+          <Text>Ciao! We are italiano</Text>
+          <Text>Classico, casuale & cultured</Text>
+        </Text>
+      </View>
     </View>
   );
 }
@@ -23,12 +22,10 @@ export default function HomeScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  headerText: {
+    fontFamily: 'caveat-brush',
+    color: COLOURS.BLACK,
   },
   separator: {
     marginVertical: 30,
