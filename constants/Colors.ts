@@ -1,11 +1,11 @@
 export const COLORS = {
-  TEXT_BLACK: "#222020",
-  PLACEHOLDER_GREY: "#9FA5AA",
-  WHITE: "#FFFFFF",
-  GREEN: "#006F62",
-  RED: "#CD545B",
-  BEIGE: "#F8F4F4",
-  TEAL: "#A0DCCC",
+  TEXT_BLACK: '#222020',
+  PLACEHOLDER_GREY: '#9FA5AA',
+  WHITE: '#FFFFFF',
+  GREEN: '#006F62',
+  RED: '#CD545B',
+  BEIGE: '#F8F4F4',
+  TEAL: '#A0DCCC',
 };
 
 export default {

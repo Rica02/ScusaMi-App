@@ -3,37 +3,37 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import * as React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import * as React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
-} from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ColorSchemeName, Pressable, Image } from "react-native";
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ColorSchemeName, Pressable, Image } from 'react-native';
 
-import { FontAwesome } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
-} from "../types";
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import LinkingConfiguration from "./LinkingConfiguration";
-import ModalScreen from "../screens/ModalScreen";
-import NotFoundScreen from "../screens/NotFoundScreen";
-import HomeScreen from "../screens/HomeScreen";
-import MenuScreen from "../screens/MenuScreen";
-import OrderScreen from "../screens/OrderScreen";
-import ReserveScreen from "../screens/ReserveScreen";
-import OtherScreen from "../screens/OtherScreen";
+} from '../types';
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
+import LinkingConfiguration from './LinkingConfiguration';
+import ModalScreen from '../screens/ModalScreen';
+import NotFoundScreen from '../screens/NotFoundScreen';
+import HomeScreen from '../screens/HomeScreen';
+import MenuScreen from '../screens/MenuScreen';
+import OrderScreen from '../screens/OrderScreen';
+import ReserveScreen from '../screens/ReserveScreen';
+import OtherScreen from '../screens/OtherScreen';
 
 export default function Navigation({
   colorScheme,
@@ -43,7 +43,7 @@ export default function Navigation({
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
     </NavigationContainer>
@@ -67,9 +67,9 @@ function RootNavigator() {
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
-        options={{ title: "Oops!" }}
+        options={{ title: 'Oops!' }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
@@ -100,13 +100,13 @@ function BottomTabNavigator() {
           <Image
             style={{ marginLeft: 15, width: 30, height: 30 }}
             resizeMode="contain"
-            source={require("../assets/images/secondary-logo.png")} // TODO: Replace with better image version
+            source={require('../assets/images/secondary-logo.png')} // TODO: Replace with better image version
           />
         ),
 
         headerRight: () => (
           <Pressable
-            onPress={() => navigation.navigate("Modal")}
+            onPress={() => navigation.navigate('Modal')}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}
@@ -124,8 +124,8 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={({ navigation }: RootTabScreenProps<"HomeScreen">) => ({
-          title: "Home",
+        options={({ navigation }: RootTabScreenProps<'HomeScreen'>) => ({
+          title: 'Home',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="home"
@@ -139,8 +139,8 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="MenuScreen"
         component={MenuScreen}
-        options={({ navigation }: RootTabScreenProps<"MenuScreen">) => ({
-          title: "Menu",
+        options={({ navigation }: RootTabScreenProps<'MenuScreen'>) => ({
+          title: 'Menu',
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons
               name="book-open"
@@ -154,8 +154,8 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="OrderScreen"
         component={OrderScreen}
-        options={({ navigation }: RootTabScreenProps<"OrderScreen">) => ({
-          title: "Order",
+        options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
+          title: 'Order',
           tabBarIcon: ({ color }) => (
             <Ionicons
               name="restaurant-outline"
@@ -169,8 +169,8 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="ReserveScreen"
         component={ReserveScreen}
-        options={({ navigation }: RootTabScreenProps<"ReserveScreen">) => ({
-          title: "Reserve",
+        options={({ navigation }: RootTabScreenProps<'ReserveScreen'>) => ({
+          title: 'Reserve',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="calendar"
@@ -185,7 +185,7 @@ function BottomTabNavigator() {
         name="OtherScreen"
         component={OtherScreen}
         options={{
-          title: "Other",
+          title: 'Other',
           tabBarIcon: ({ color }) => (
             <Feather
               name="more-horizontal"
