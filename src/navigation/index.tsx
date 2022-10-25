@@ -5,11 +5,7 @@
  */
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {
-  NavigationContainer,
-  DefaultTheme,
-  DarkTheme,
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Pressable, Image } from 'react-native';
 
@@ -23,7 +19,7 @@ import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
-} from '../types';
+} from '../typings/navigationTypes';
 import { COLOURS } from '../constants/Colours';
 import LinkingConfiguration from './LinkingConfiguration';
 import ModalScreen from '../screens/ModalScreen';
@@ -90,7 +86,7 @@ function BottomTabNavigator() {
           <Image
             style={{ marginLeft: 15, width: 30, height: 30 }}
             resizeMode="contain"
-            source={require('../assets/images/logos/secondary-logo.png')} // TODO: Replace with better image version
+            source={require('../../assets/images/logos/secondary-logo.png')} // TODO: Replace with better image version
           />
         ),
 
