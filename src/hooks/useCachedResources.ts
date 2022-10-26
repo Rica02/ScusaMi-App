@@ -1,7 +1,7 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
+import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -12,9 +12,10 @@ export default function useCachedResources() {
       try {
         SplashScreen.preventAutoHideAsync();
 
-        // Load fonts
+        // Load icons and fonts
         await Font.loadAsync({
-          ...FontAwesome.font,
+          ...Ionicons.font,
+          ...SimpleLineIcons.font,
           'space-mono': require('../../assets/fonts/SpaceMono-Regular.ttf'),
           'caveat-brush': require('../../assets/fonts/CaveatBrush-Regular.ttf'),
         });

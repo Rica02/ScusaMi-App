@@ -1,4 +1,4 @@
-export const THEME = {
+export const VALUES = {
   SPACING: {
     XSMALL: 4,
     SMALL: 8,
@@ -8,7 +8,7 @@ export const THEME = {
     '2XLARGE': 40,
     '3XLARGE': 48,
   },
-  FONT_SIZES: {
+  FONT_SIZE: {
     '2XSMALL': 4,
     XSMALL: 8,
     SMALL: 12,

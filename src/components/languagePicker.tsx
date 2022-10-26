@@ -19,7 +19,7 @@ const LanguagePicker = () => {
         setModalVisible(!modalVisible);
       }}
     >
-      <Text>{label}</Text>
+      <Text style={{ color: 'blue' }}>{label}</Text>
     </Pressable>
   );
 
@@ -36,7 +36,7 @@ const LanguagePicker = () => {
         <View
           style={{ justifyContent: 'center', alignItems: 'center', top: 100 }}
         >
-          <View>
+          <View style={{ backgroundColor: 'lightgrey' }}>
             {languages.map((lang) => (
               <LanguageItem {...lang} key={lang.name} />
             ))}
@@ -44,7 +44,7 @@ const LanguagePicker = () => {
         </View>
       </Modal>
       <Pressable onPress={() => setModalVisible(true)}>
-        <Text>{i18n.language}</Text>
+        <Text style={{ color: 'blue' }}>{i18n.language}</Text>
       </Pressable>
     </View>
   );
