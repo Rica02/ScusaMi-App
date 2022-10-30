@@ -1,0 +1,14 @@
+{
+  "home": {
+    "header": "Ciao!\nWe are italiano\nClasico, casuale & cultured",
+    "hungry": "Hungry?",
+    "mangia_mangia": "Mangia mangia",
+    "our_menu": "Our menu",
+    "todays_specials": "Today's specials",
+    "come_back_specials": "Come back next week for new specials!"
+  },
+  "buttons": {
+    "order_at_table": "Order at table",
+    "order_pickup": "Order pick-up"
+  }
+}
