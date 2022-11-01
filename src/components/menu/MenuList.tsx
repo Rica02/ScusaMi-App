@@ -11,25 +11,13 @@ interface MenuListProps {
 const MenuList = (props: MenuListProps) => {
   const { itemList } = props;
 
-  const Items = () => {
-    return (
-      <>
-        {itemList.map((item, index) => (
-          <View style={styles.menuItemContainer}>
-            <MenuItem
-              key={index}
-              primaryIndex={index % 2 ? false : true}
-              item={item}
-            />
-          </View>
-        ))}
-      </>
-    );
-  };
-
   return (
     <View style={styles.container}>
-      <Items />
+      {itemList.map((item, index) => (
+        <View key={index} style={styles.menuItemContainer}>
+          <MenuItem primaryIndex={index % 2 ? false : true} item={item} />
+        </View>
+      ))}
     </View>
   );
 };

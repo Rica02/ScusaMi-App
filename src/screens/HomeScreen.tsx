@@ -51,7 +51,8 @@ export default function HomeScreen({
       >
         <View style={styles.hungryTitleContainer}>
           <Text style={styles.hungryText}>{t('home.hungry')}</Text>
-          <Text style={styles.mangiaMangiaText}>{t('home.mangia_mangia')}</Text>
+          <Text style={styles.mangiaText}>{t('home.mangia')}</Text>
+          <Text style={styles.mangiaText}>{t('home.mangia')}!</Text>
         </View>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
@@ -145,10 +146,11 @@ const styles = StyleSheet.create({
   hungryTitleContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: VALUES.SPACING.MEDIUM,
+    padding: VALUES.SPACING.LARGE,
   },
   hungryText: {
     fontFamily: 'caveat-brush',
+    paddingRight: VALUES.SPACING.XSMALL,
     color: COLOURS.RED,
     fontSize: 1.3 * VALUES.FONT_SIZE['2XLARGE'],
     textShadowColor: COLOURS.WHITE,
@@ -156,14 +158,15 @@ const styles = StyleSheet.create({
     textShadowRadius: 0,
     textTransform: 'uppercase',
   },
-  mangiaMangiaText: {
+  mangiaText: {
     fontFamily: 'caveat-brush',
+    paddingLeft: VALUES.SPACING.XSMALL,
     color: COLOURS.BLACK,
     fontSize: VALUES.FONT_SIZE['2XLARGE'],
     textShadowColor: COLOURS.WHITE,
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
-    textTransform: 'uppercase',
+    transform: [{ rotate: '-15deg' }],
   },
   buttonsContainer: {
     flexDirection: 'row',
