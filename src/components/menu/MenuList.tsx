@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { VALUES } from '../../constants/Styling';
-import MenuItem from './Item';
+import MenuItem from './MenuItem';
 import { MenuItemType } from '../../typings/menuTypes';
 
 interface MenuListProps {
