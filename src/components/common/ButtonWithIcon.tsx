@@ -12,7 +12,7 @@ const ButtonWithIcon = (props: ButtonWithIconProps) => {
   const { text, icon } = props;
 
   const buttonIcon = React.cloneElement(icon, {
-    size: VALUES.FONT_SIZE.XLARGE,
+    size: VALUES.FONT_SIZE['2XLARGE'],
     color: COLOURS.WHITE,
   });
 
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     fontSize: VALUES.FONT_SIZE.MEDIUM,
     marginTop: VALUES.FONT_SIZE.XSMALL,
     textTransform: 'uppercase',
-    fontWeight: '500',
+    fontWeight: '600',
+    textAlign: 'center',
   },
 });

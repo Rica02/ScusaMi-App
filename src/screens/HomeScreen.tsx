@@ -1,12 +1,20 @@
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import { Ionicons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import ButtonWithIcon from '../components/common/ButtonWithIcon';
+import MenuList from '../components/menu/MenuList';
 
 export default function HomeScreen({
   navigation,
@@ -14,7 +22,7 @@ export default function HomeScreen({
   const { t } = useTranslation();
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} bounces={false}>
       {/* Header */}
       <View style={styles.headerContainer}>
         <View style={styles.upperHeaderContainer}>
@@ -30,13 +38,16 @@ export default function HomeScreen({
           />
         </View>
         <Image
-          style={styles.beepBeep}
-          source={require('../../assets/images/drawings/beep-beep.jpg')}
+          style={styles.beepBeepImg}
+          source={require('../../assets/images/ui-images/beep-beep.jpg')}
           resizeMode="contain"
         />
       </View>
       {/* Hungry? Mangia mangia */}
-      <View style={styles.hungryContainer}>
+      <ImageBackground
+        source={require('../../assets/images/photos/photo-pizza.png')}
+        imageStyle={{ opacity: 0.5 }}
+      >
         <View style={styles.hungryTitleContainer}>
           <Text style={styles.hungryText}>{t('home.hungry')}</Text>
           <Text style={styles.mangiaMangiaText}>{t('home.mangia_mangia')}</Text>
@@ -55,14 +66,34 @@ export default function HomeScreen({
             />
           </View>
         </View>
-      </View>
+      </ImageBackground>
       {/* Our menu */}
       <View style={styles.ourMenuContainer}>
         <HeaderTitle colour={COLOURS.BLACK}>{t('home.our_menu')}</HeaderTitle>
+        <View style={styles.ourMenuImgContainer}>
+          <Image
+            style={styles.scooterImg}
+            source={require('../../assets/images/ui-images/scooter.png')}
+            resizeMode="contain"
+          />
+          <View style={styles.seeOurMenuContainer}>
+            <Image
+              style={styles.menuImg}
+              source={require('../../assets/images/ui-images/menu-1.png')}
+              resizeMode="contain"
+            />
+            <Entypo
+              style={styles.arrow}
+              name="arrow-bold-right"
+              size={120}
+              color={COLOURS.RED}
+            />
+          </View>
+        </View>
       </View>
       {/* Today's specials */}
-      <View>
-        <HeaderTitle colour={COLOURS.BLACK}>
+      <View style={styles.todaysSpecialsContainer}>
+        <HeaderTitle colour={COLOURS.WHITE}>
           {t('home.todays_specials')}
         </HeaderTitle>
       </View>
@@ -99,14 +130,13 @@ const styles = StyleSheet.create({
     width: VALUES.SIZE['4XLARGE'],
     height: VALUES.SIZE['4XLARGE'],
   },
-  beepBeep: {
+  beepBeepImg: {
     width: '80%',
     height: 200,
     alignSelf: 'flex-end',
     marginTop: -VALUES.SIZE['3XLARGE'],
   },
 
-  hungryContainer: {},
   hungryTitleContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -115,20 +145,63 @@ const styles = StyleSheet.create({
   hungryText: {
     fontFamily: 'caveat-brush',
     color: COLOURS.RED,
-    fontSize: VALUES.FONT_SIZE['2XLARGE'],
+    fontSize: 1.3 * VALUES.FONT_SIZE['2XLARGE'],
+    textShadowColor: COLOURS.WHITE,
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 0,
+    textTransform: 'uppercase',
   },
   mangiaMangiaText: {
     fontFamily: 'caveat-brush',
     color: COLOURS.BLACK,
     fontSize: VALUES.FONT_SIZE['2XLARGE'],
+    textShadowColor: COLOURS.WHITE,
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 0,
+    textTransform: 'uppercase',
   },
-
-  ourMenuContainer: {},
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
+    paddingHorizontal: VALUES.SPACING.XLARGE,
+    paddingBottom: VALUES.SPACING.XLARGE,
   },
   buttonContainer: {
-    width: '40%',
+    width: '47%',
+  },
+
+  ourMenuContainer: {
+    flex: 1,
+    paddingVertical: VALUES.SPACING.MEDIUM,
+  },
+  ourMenuImgContainer: {
+    flexDirection: 'row',
+    marginTop: VALUES.SPACING.SMALL,
+    marginRight: VALUES.SPACING.SMALL,
+  },
+  scooterImg: {
+    width: '60%',
+    height: 200,
+    alignSelf: 'flex-end',
+  },
+  seeOurMenuContainer: {
+    width: '55%',
+    height: 200,
+    position: 'absolute',
+    right: 0,
+  },
+  menuImg: {
+    width: '100%',
+    height: 150,
+  },
+  arrow: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+
+  todaysSpecialsContainer: {
+    backgroundColor: COLOURS.RED,
+    paddingVertical: VALUES.SPACING.MEDIUM,
   },
 });
