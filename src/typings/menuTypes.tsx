@@ -3,3 +3,8 @@ export type MenuItemType = {
   image?: string;
   description: string;
 };
+
+export type MenuType = {
+  category: string;
+  items: MenuItemType[];
+};

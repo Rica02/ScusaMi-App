@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  FlatList,
-  ScrollView,
-  Pressable,
-} from 'react-native';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, View, FlatList, Pressable, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
+import { MenuType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -19,63 +13,83 @@ import { MENU } from '../DummyData';
 
 export default function MenuScreen() {
   const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const flatListRef = useRef<any | undefined>();
+  const [displayedMenu, setDisplayedMenu] = useState<MenuType[] | undefined>();
+  const [selectedCategory, setSelectedCategory] = useState<
+    { category: string; index: number } | undefined
+  >();
 
   useEffect(() => {
-    setSelectedCategory('All');
+    // Get menu and set initial category select
+    setDisplayedMenu(MENU);
+    setSelectedCategory({ category: 'All', index: 0 });
   }, []);
 
-  useEffect(() => {
-    console.log('Selected 2: ' + selectedCategory);
-  }, [selectedCategory]);
-
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-    console.log('Selected: ' + selectedCategory);
+  const handleCategorySelect = (category: string, index: number) => {
+    // Set category selection and scroll down to selected category
+    setSelectedCategory({ category, index });
+    flatListRef.current.scrollToIndex({ animated: true, index });
   };
+
+  // TODO
+  const handleSearchPress = () => {};
 
   return (
     <View style={styles.container}>
+      {/* Category sorter */}
       <View style={styles.sorterContainer}>
         <Feather
           style={styles.searchIcon}
           name="search"
-          size={VALUES.FONT_SIZE.MEDIUM}
+          size={VALUES.FONT_SIZE.LARGE}
           color={COLOURS.BLACK}
+          onPress={handleSearchPress}
         />
-        <ScrollView horizontal style={styles.categories}>
-          <Pressable
-            onPress={() => {
-              handleCategorySelect('All');
-            }}
-          >
-            <View style={selectedCategory == 'All' && styles.categoryUnderline}>
-              <Text
-                style={[
-                  styles.category,
-                  selectedCategory == 'All' && styles.categorySelected,
-                ]}
-              >
-                {t('menu.all')}
-              </Text>
-            </View>
-          </Pressable>
-          {MENU.map((item, index) => (
+        <FlatList
+          style={styles.categories}
+          data={displayedMenu}
+          horizontal
+          keyExtractor={(item) => item.category}
+          ListHeaderComponent={
             <Pressable
-              key={index}
               onPress={() => {
-                handleCategorySelect(item.category);
+                handleCategorySelect('All', 0);
               }}
             >
               <View
                 style={
-                  selectedCategory == item.category && styles.categoryUnderline
+                  selectedCategory?.category == 'All' &&
+                  styles.categoryUnderline
                 }
               >
                 <Text
                   style={[
                     styles.category,
-                    selectedCategory == item.category &&
+                    selectedCategory?.category == 'All' &&
+                      styles.categorySelected,
+                  ]}
+                >
+                  {t('menu.all')}
+                </Text>
+              </View>
+            </Pressable>
+          }
+          renderItem={({ item, index }) => (
+            <Pressable
+              onPress={() => {
+                handleCategorySelect(item.category, index);
+              }}
+            >
+              <View
+                style={
+                  selectedCategory?.category == item.category &&
+                  styles.categoryUnderline
+                }
+              >
+                <Text
+                  style={[
+                    styles.category,
+                    selectedCategory?.category == item.category &&
                       styles.categorySelected,
                   ]}
                 >
@@ -83,12 +97,13 @@ export default function MenuScreen() {
                 </Text>
               </View>
             </Pressable>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
-
+      {/* Menu items */}
       <FlatList
-        data={MENU}
+        ref={flatListRef}
+        data={displayedMenu}
         keyExtractor={(item) => item.category}
         renderItem={({ item }) => (
           <>
@@ -109,14 +124,16 @@ const styles = StyleSheet.create({
   categories: {},
   sorterContainer: {
     paddingHorizontal: VALUES.SPACING.SMALL,
-    paddingVertical: VALUES.SPACING.MEDIUM,
+    paddingVertical: VALUES.SPACING.SMALL,
     flexDirection: 'row',
   },
   searchIcon: {
     marginRight: VALUES.SPACING.SMALL,
+    paddingVertical: VALUES.SPACING.SMALL,
   },
   category: {
     paddingHorizontal: VALUES.SPACING.SMALL,
+    paddingVertical: VALUES.SPACING.SMALL,
     color: COLOURS.TEXT_PLACEHOLDER,
     fontSize: VALUES.FONT_SIZE.MEDIUM,
     textTransform: 'uppercase',

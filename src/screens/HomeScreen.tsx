@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -9,14 +10,14 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
 
-import { useEffect, useState } from 'react';
 import { RootTabScreenProps } from '../typings/navigationTypes';
+import { MenuItemType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import ButtonWithIcon from '../components/common/ButtonWithIcon';
 import MenuList from '../components/menu/MenuList';
-import { MenuItemType } from '../typings/menuTypes';
+
 import { MENU } from '../DummyData';
 
 export default function HomeScreen({
@@ -26,6 +27,7 @@ export default function HomeScreen({
   const [specials, setSpecials] = useState<MenuItemType[] | undefined>();
 
   useEffect(() => {
+    // Get specials menu
     var specialsList = MENU.find((item) => item.category == 'Specials');
     setSpecials(specialsList?.items);
   }, []);
