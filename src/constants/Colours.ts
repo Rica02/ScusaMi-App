@@ -1,6 +1,6 @@
 export const COLOURS = {
   BLACK: '#222020',
-  PLACEHOLDER_GREY: '#9FA5AA',
+  TEXT_GREY: '#575757',
   WHITE: '#FFFFFF',
   GREEN: '#006F62',
   RED: '#CD545B',

@@ -15,6 +15,7 @@ import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import ButtonWithIcon from '../components/common/ButtonWithIcon';
 import MenuList from '../components/menu/MenuList';
+import { SPECIALS } from '../DummyData';
 
 export default function HomeScreen({
   navigation,
@@ -96,6 +97,10 @@ export default function HomeScreen({
         <HeaderTitle colour={COLOURS.WHITE}>
           {t('home.todays_specials')}
         </HeaderTitle>
+        <MenuList itemList={SPECIALS} />
+        <Text style={styles.comeBackSpecialsText}>
+          {t('home.come_back_specials')}
+        </Text>
       </View>
     </ScrollView>
   );
@@ -203,5 +208,10 @@ const styles = StyleSheet.create({
   todaysSpecialsContainer: {
     backgroundColor: COLOURS.RED,
     paddingVertical: VALUES.SPACING.MEDIUM,
+  },
+  comeBackSpecialsText: {
+    color: COLOURS.BEIGE,
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
 });
