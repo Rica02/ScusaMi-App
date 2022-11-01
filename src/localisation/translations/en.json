@@ -10,5 +10,8 @@
   "buttons": {
     "order_at_table": "Order at table",
     "order_pickup": "Order pick-up"
+  },
+  "menu": {
+    "all": "All"
   }
 }

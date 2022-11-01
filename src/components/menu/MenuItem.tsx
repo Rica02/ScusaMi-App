@@ -51,6 +51,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: COLOURS.WHITE,
+    shadowColor: COLOURS.BLACK,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 2, // TODO: check android
   },
   image: {
     width: 110,

@@ -5,7 +5,7 @@ import MenuItem from './MenuItem';
 import { MenuItemType } from '../../typings/menuTypes';
 
 interface MenuListProps {
-  itemList: MenuItemType[];
+  itemList?: MenuItemType[];
 }
 
 const MenuList = (props: MenuListProps) => {
@@ -13,7 +13,7 @@ const MenuList = (props: MenuListProps) => {
 
   return (
     <View style={styles.container}>
-      {itemList.map((item, index) => (
+      {itemList?.map((item, index) => (
         <View key={index} style={styles.menuItemContainer}>
           <MenuItem primaryIndex={index % 2 ? false : true} item={item} />
         </View>

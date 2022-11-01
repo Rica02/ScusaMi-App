@@ -9,18 +9,26 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
 
+import { useEffect, useState } from 'react';
 import { RootTabScreenProps } from '../typings/navigationTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import ButtonWithIcon from '../components/common/ButtonWithIcon';
 import MenuList from '../components/menu/MenuList';
-import { SPECIALS } from '../DummyData';
+import { MenuItemType } from '../typings/menuTypes';
+import { MENU } from '../DummyData';
 
 export default function HomeScreen({
   navigation,
 }: RootTabScreenProps<'HomeScreen'>) {
   const { t } = useTranslation();
+  const [specials, setSpecials] = useState<MenuItemType[] | undefined>();
+
+  useEffect(() => {
+    var specialsList = MENU.find((item) => item.category == 'Specials');
+    setSpecials(specialsList?.items);
+  }, []);
 
   return (
     <ScrollView style={styles.container} bounces={false}>
@@ -98,7 +106,7 @@ export default function HomeScreen({
         <HeaderTitle colour={COLOURS.WHITE}>
           {t('home.todays_specials')}
         </HeaderTitle>
-        <MenuList itemList={SPECIALS} />
+        <MenuList itemList={specials} />
         <Text style={styles.comeBackSpecialsText}>
           {t('home.come_back_specials')}
         </Text>

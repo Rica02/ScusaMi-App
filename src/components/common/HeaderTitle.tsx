@@ -2,7 +2,7 @@ import { Text, StyleSheet } from 'react-native';
 import { VALUES } from '../../constants/Styling';
 
 interface HeaderTitleProps {
-  children: JSX.Element;
+  children: JSX.Element | string;
   colour: string;
 }
 
