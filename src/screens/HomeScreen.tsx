@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  Pressable,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
@@ -94,12 +95,12 @@ export default function HomeScreen({
               source={require('../../assets/images/ui-images/menu-1.png')}
               resizeMode="contain"
             />
-            <Entypo
+            <Pressable
               style={styles.arrow}
-              name="arrow-bold-right"
-              size={120}
-              color={COLOURS.RED}
-            />
+              onPress={() => navigation.navigate('MenuScreen')}
+            >
+              <Entypo name="arrow-bold-right" size={120} color={COLOURS.RED} />
+            </Pressable>
           </View>
         </View>
       </View>
@@ -108,7 +109,15 @@ export default function HomeScreen({
         <HeaderTitle colour={COLOURS.WHITE}>
           {t('home.todays_specials')}
         </HeaderTitle>
-        <MenuList itemList={specials} />
+        <MenuList
+          itemList={specials}
+          onPress={(item) =>
+            navigation.navigate('MenuItemModal', {
+              title: item.name,
+              item: item,
+            })
+          }
+        />
         <Text style={styles.comeBackSpecialsText}>
           {t('home.come_back_specials')}
         </Text>

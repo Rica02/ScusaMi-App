@@ -6,16 +6,21 @@ import { MenuItemType } from '../../typings/menuTypes';
 
 interface MenuListProps {
   itemList?: MenuItemType[];
+  onPress: (item: MenuItemType) => void;
 }
 
 const MenuList = (props: MenuListProps) => {
-  const { itemList } = props;
+  const { itemList, onPress } = props;
 
   return (
     <View style={styles.container}>
       {itemList?.map((item, index) => (
         <View key={index} style={styles.menuItemContainer}>
-          <MenuItem primaryIndex={index % 2 ? false : true} item={item} />
+          <MenuItem
+            primaryIndex={index % 2 ? false : true}
+            item={item}
+            onPress={(item) => onPress(item)}
+          />
         </View>
       ))}
     </View>

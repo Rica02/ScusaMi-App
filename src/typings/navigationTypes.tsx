@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MenuItemType } from './menuTypes';
 
 declare global {
   namespace ReactNavigation {
@@ -19,6 +20,7 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
+  MenuItemModal: { title: string; item: MenuItemType };
   NotFound: undefined;
 };
 

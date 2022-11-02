@@ -8,21 +8,23 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Pressable, Image } from 'react-native';
-
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import {
+  FontAwesome,
+  AntDesign,
+  Ionicons,
+  SimpleLineIcons,
+  Feather,
+} from '@expo/vector-icons';
 
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from '../typings/navigationTypes';
-import { COLOURS } from '../constants/Colours';
 import LinkingConfiguration from './LinkingConfiguration';
+import { COLOURS } from '../constants/Colours';
 import ModalScreen from '../screens/ModalScreen';
+import MenuItemModal from '../screens/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
@@ -58,6 +60,23 @@ function RootNavigator() {
         options={{ title: 'Oops!' }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen
+          name="MenuItemModal"
+          component={MenuItemModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: route?.params?.title,
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>

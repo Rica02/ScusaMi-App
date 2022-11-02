@@ -9,9 +9,11 @@
   },
   "buttons": {
     "order_at_table": "Order at table",
-    "order_pickup": "Order pick-up"
+    "order_pickup": "Order pick-up",
+    "start_order": "Start order"
   },
   "menu": {
-    "all": "All"
+    "all": "All",
+    "extra_charge": "extra charge"
   }
 }

@@ -1,19 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, Button } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 import { MenuItemType } from '../../typings/menuTypes';
+import { RootTabScreenProps } from '../../typings/navigationTypes';
 
 interface MenuItemProps {
   primaryIndex: boolean;
   item: MenuItemType;
+  onPress: (item: MenuItemType) => void;
 }
-
 const MenuItem = (props: MenuItemProps) => {
-  const { primaryIndex, item } = props;
+  const { primaryIndex, item, onPress } = props;
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={() => onPress(item)}>
       {primaryIndex && (
         <Image
           style={styles.image}
@@ -40,7 +41,7 @@ const MenuItem = (props: MenuItemProps) => {
           resizeMode="cover"
         />
       )}
-    </View>
+    </Pressable>
   );
 };
 

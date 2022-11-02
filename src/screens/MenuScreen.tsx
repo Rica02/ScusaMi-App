@@ -3,6 +3,7 @@ import { StyleSheet, View, FlatList, Pressable, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
+import { RootTabScreenProps } from '../typings/navigationTypes';
 import { MenuType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
@@ -11,7 +12,9 @@ import MenuList from '../components/menu/MenuList';
 
 import { MENU } from '../DummyData';
 
-export default function MenuScreen() {
+export default function MenuScreen({
+  navigation,
+}: RootTabScreenProps<'MenuScreen'>) {
   const { t } = useTranslation();
   const flatListRef = useRef<any | undefined>();
   const [displayedMenu, setDisplayedMenu] = useState<MenuType[] | undefined>();
@@ -108,7 +111,15 @@ export default function MenuScreen() {
         renderItem={({ item }) => (
           <>
             <HeaderTitle colour={COLOURS.RED}>{item.category}</HeaderTitle>
-            <MenuList itemList={item.items} />
+            <MenuList
+              itemList={item.items}
+              onPress={(item) =>
+                navigation.navigate('MenuItemModal', {
+                  title: item.name,
+                  item: item,
+                })
+              }
+            />
           </>
         )}
       />
