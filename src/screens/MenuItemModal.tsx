@@ -12,6 +12,7 @@ import {
 import { Feather } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../typings/navigationTypes';
+import { NutriInfoValue } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import CustomButton from '../components/common/CustomButton';
@@ -22,13 +23,15 @@ export default function MenuItemModal({
   const { item } = route.params;
   const { t } = useTranslation();
 
-  const data = [
-    { title: 'gluten', property: 'w' },
-    { title: 'vegetarian', property: 'n' },
-    { title: 'takeaway', property: 'y' },
-  ];
+  let nutriInfo = Object.keys(item.nutriInfo) as Array<
+    keyof {
+      'gluten free': NutriInfoValue;
+      vegetarian: NutriInfoValue;
+      takeaway: NutriInfoValue;
+    }
+  >;
 
-  const renderPropertyIcon = (value: string) => {
+  const renderPropertyIcon = (value: NutriInfoValue) => {
     switch (value) {
       case 'y':
         return (
@@ -79,33 +82,39 @@ export default function MenuItemModal({
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       <ScrollView>
+        {/* Image and price(s) */}
         <ImageBackground
           source={{ uri: item.image }}
           style={[styles.image, { height: Dimensions.get('window').width }]}
           resizeMode="cover"
         >
-          <Text style={styles.priceText}>$35.90</Text>
+          {item.price2 ? (
+            <Text style={styles.priceText}>
+              ${item.price} / ${item.price2}
+            </Text>
+          ) : (
+            <Text style={styles.priceText}>${item.price}</Text>
+          )}
         </ImageBackground>
         <View style={styles.lowerContainer}>
-          <Text style={styles.descriptionText}>
-            {item.description}
-            {item.description}
-            {item.description}
-          </Text>
+          {/* Food item description */}
+          <Text style={styles.descriptionText}>{item.description}</Text>
           <View style={styles.table}>
-            {data.map((item, index) => (
+            {/* Nutritional info table */}
+            {nutriInfo.map((key, index) => (
               <View key={index} style={styles.tableRow}>
                 <View style={[styles.tableCell, styles.tableColumnLeft]}>
-                  <Text style={styles.tableCellText}>{item.title}</Text>
+                  <Text style={styles.tableCellText}>{key}</Text>
                 </View>
                 <View style={styles.tableCell}>
-                  {renderPropertyIcon(item.property)}
+                  {renderPropertyIcon(item.nutriInfo[key])}
                 </View>
               </View>
             ))}
           </View>
         </View>
       </ScrollView>
+      {/* Start order button */}
       <CustomButton style={styles.startOrderButton}>
         {t('buttons.start_order')}
       </CustomButton>
