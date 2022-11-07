@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLOURS.GREEN,
+    justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
     borderColor: COLOURS.WHITE,

@@ -24,7 +24,7 @@ export default function MenuScreen({
 
   useEffect(() => {
     // Get menu and set initial category select
-    setDisplayedMenu(MENU);
+    setDisplayedMenu(MENU as MenuType[]);
     setSelectedCategory({ category: 'All', index: 0 });
   }, []);
 

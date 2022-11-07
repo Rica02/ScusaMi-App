@@ -9,15 +9,15 @@ import {
   Pressable,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Ionicons, SimpleLineIcons, Entypo } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
 import { MenuItemType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
-import ButtonWithIcon from '../components/common/ButtonWithIcon';
 import MenuList from '../components/menu/MenuList';
+import OrderButtons from '../components/order/OrderButtons';
 
 import { MENU } from '../DummyData';
 
@@ -30,7 +30,7 @@ export default function HomeScreen({
   useEffect(() => {
     // Get specials menu
     var specialsList = MENU.find((item) => item.category == 'Specials');
-    setSpecials(specialsList?.items);
+    setSpecials(specialsList?.items as MenuItemType[]);
   }, []);
 
   return (
@@ -65,20 +65,7 @@ export default function HomeScreen({
           <Text style={styles.mangiaText}>{t('home.mangia')}</Text>
           <Text style={styles.mangiaText}>{t('home.mangia')}!</Text>
         </View>
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <ButtonWithIcon
-              text={t('buttons.order_at_table')}
-              icon={<Ionicons name="restaurant-outline" />}
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            <ButtonWithIcon
-              text={t('buttons.order_pickup')}
-              icon={<SimpleLineIcons name="bag" />}
-            />
-          </View>
-        </View>
+        <OrderButtons />
       </ImageBackground>
       {/* Our menu */}
       <View style={styles.ourMenuContainer}>
@@ -186,15 +173,6 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 0,
     transform: [{ rotate: '-15deg' }],
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: VALUES.SPACING.XLARGE,
-    paddingBottom: VALUES.SPACING.XLARGE,
-  },
-  buttonContainer: {
-    width: '47%',
   },
 
   ourMenuContainer: {
