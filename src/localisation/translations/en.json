@@ -15,5 +15,10 @@
   "menu": {
     "all": "All",
     "extra_charge": "extra charge"
+  },
+  "order": {
+    "start_ordering": "Start ordering",
+    "your_active_orders": "Your active orders",
+    "no_active_orders": "No active orders"
   }
 }
