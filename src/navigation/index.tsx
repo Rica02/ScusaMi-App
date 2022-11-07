@@ -31,6 +31,7 @@ import MenuScreen from '../screens/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
+import ActiveOrderModal from '../screens/ActiveOrderModal';
 
 export default function Navigation() {
   return (
@@ -65,6 +66,23 @@ function RootNavigator() {
           component={MenuItemModal}
           options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: route?.params?.title,
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ActiveOrderModal"
+          component={ActiveOrderModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'Order progress',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}

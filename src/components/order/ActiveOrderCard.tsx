@@ -1,16 +1,18 @@
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 
-interface ActiveOrderCardProps {}
+interface ActiveOrderCardProps {
+  onPress: (order: any) => void;
+}
 
 const ActiveOrderCard = (props: ActiveOrderCardProps) => {
-  const {} = props;
+  const { onPress } = props;
 
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <View>
         <Text>Order placed 10 minutes ago</Text>
         <Text>Monday, 10th October 2022 at 2:19 pm</Text>
@@ -23,7 +25,7 @@ const ActiveOrderCard = (props: ActiveOrderCardProps) => {
           <Feather name="chevron-right" size={24} color="black" />
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

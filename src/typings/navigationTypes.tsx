@@ -21,6 +21,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Modal: undefined;
   MenuItemModal: { title: string; item: MenuItemType };
+  ActiveOrderModal: { order: any };
   NotFound: undefined;
 };
 

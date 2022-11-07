@@ -19,6 +19,12 @@
   "order": {
     "start_ordering": "Start ordering",
     "your_active_orders": "Your active orders",
-    "no_active_orders": "No active orders"
+    "no_active_orders": "No active orders",
+    "your_order": "Your order",
+    "current_progress": "Current progress",
+    "need_to_change_order": "If you need to change your order please let our staff know ASAP.",
+    "in_queue": "In queue",
+    "in_progress": "In progress",
+    "done": "Done"
   }
 }

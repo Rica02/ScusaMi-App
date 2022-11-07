@@ -8,13 +8,16 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
+import { RootTabScreenProps } from '../typings/navigationTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import OrderButtons from '../components/order/OrderButtons';
 import ActiveOrderCard from '../components/order/ActiveOrderCard';
 
-export default function OrderScreen() {
+export default function OrderScreen({
+  navigation,
+}: RootTabScreenProps<'OrderScreen'>) {
   const { t } = useTranslation();
   const [hasActiveOrders, setHasActiveOrders] = useState<boolean | undefined>();
 
@@ -42,10 +45,22 @@ export default function OrderScreen() {
         {hasActiveOrders ? (
           <ScrollView style={styles.activeOrderContainer}>
             <View style={styles.activeOrderCardContainer}>
-              <ActiveOrderCard />
+              <ActiveOrderCard
+                onPress={(order) =>
+                  navigation.navigate('ActiveOrderModal', {
+                    order: 'something',
+                  })
+                }
+              />
             </View>
             <View style={styles.activeOrderCardContainer}>
-              <ActiveOrderCard />
+              <ActiveOrderCard
+                onPress={(order) =>
+                  navigation.navigate('ActiveOrderModal', {
+                    order: 'something',
+                  })
+                }
+              />
             </View>
           </ScrollView>
         ) : (
