@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Checkbox from 'expo-checkbox';
+import RadioButtonGroup, { RadioButtonItem } from 'expo-radio-button';
 
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
@@ -12,18 +13,10 @@ import CustomButton from '../components/common/CustomButton';
 export default function ReserveScreen() {
   const { t } = useTranslation();
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
-  const [isChecked, setChecked] = useState(false);
-
-  const data = [
-    {
-      label: 'data 1',
-      accessibilityLabel: 'Your label',
-    },
-    {
-      label: 'data 2',
-      accessibilityLabel: 'Your label',
-    },
-  ];
+  const [isTocChecked, setIsTocChecked] = useState(false);
+  const [serviceSelection, setServiceSelection] = useState<
+    string | undefined
+  >();
 
   return (
     <ScrollView style={styles.container}>
@@ -59,11 +52,29 @@ export default function ReserveScreen() {
             <Text style={styles.questionText}>
               {t('reserve.which_service')}
             </Text>
-            <View>
-              <RadioButtonRN data={data} selectedBtn={(e) => console.log(e)} />
-              <Text>{t('reserve.lunch')}</Text>
-              <Text>{t('reserve.dinner')}</Text>
-            </View>
+            <RadioButtonGroup
+              containerStyle={{
+                flexDirection: 'row',
+                marginVertical: VALUES.SPACING.SMALL,
+              }}
+              selected={serviceSelection}
+              onSelected={(value: string) => setServiceSelection(value)}
+              radioBackground={COLOURS.RED}
+            >
+              <RadioButtonItem
+                style={{ marginRight: VALUES.SPACING.XSMALL }}
+                value="lunch"
+                label={t('reserve.lunch')}
+              />
+              <RadioButtonItem
+                style={{
+                  marginLeft: VALUES.SPACING.XLARGE,
+                  marginRight: VALUES.SPACING.XSMALL,
+                }}
+                value="dinner"
+                label={t('reserve.dinner')}
+              />
+            </RadioButtonGroup>
           </View>
           {/* Select time */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
@@ -138,9 +149,9 @@ export default function ReserveScreen() {
               />
               <View style={styles.tocContainer}>
                 <Checkbox
-                  value={isChecked}
-                  onValueChange={setChecked}
-                  color={isChecked ? COLOURS.RED : undefined}
+                  value={isTocChecked}
+                  onValueChange={setIsTocChecked}
+                  color={isTocChecked ? COLOURS.RED : undefined}
                 />
                 <Text style={styles.tocText}>
                   {t('reserve.i_agree')}{' '}
