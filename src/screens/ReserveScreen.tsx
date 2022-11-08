@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, ScrollView, TextInput } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Checkbox from 'expo-checkbox';
@@ -9,14 +9,34 @@ import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import CircleText from '../components/common/CircleText';
 import CustomButton from '../components/common/CustomButton';
+import TimeSelection from '../components/reserve/TimeSelection';
+import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirementsCheckboxes';
+
+import { BOOKING } from '../DummyData';
 
 export default function ReserveScreen() {
   const { t } = useTranslation();
-  const [nextButtonPressed, setNextButtonPressed] = useState(false);
-  const [isTocChecked, setIsTocChecked] = useState(false);
+  const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
+  const [requirementsSelections, setRequirementsSelection] = useState<
+    string[] | undefined
+  >();
   const [serviceSelection, setServiceSelection] = useState<
     string | undefined
   >();
+  const [isTocChecked, setIsTocChecked] = useState(false);
+  const [nextButtonPressed, setNextButtonPressed] = useState(false);
+
+  useEffect(() => {
+    console.log(requirementsSelections);
+  }, [requirementsSelections]);
+
+  useEffect(() => {
+    if (serviceSelection == 'lunch') {
+      setTimeSelections(BOOKING.times.lunch);
+    } else if (serviceSelection == 'dinner') {
+      setTimeSelections(BOOKING.times.dinner);
+    }
+  }, [serviceSelection]);
 
   return (
     <ScrollView style={styles.container}>
@@ -79,8 +99,20 @@ export default function ReserveScreen() {
           {/* Select time */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
             <Text style={styles.questionText}>{t('reserve.select_time')}</Text>
-            <View>
-              <Text>[times gere]</Text>
+            <View style={styles.timeSelectionContainer}>
+              {serviceSelection ? (
+                timeSelections?.map((item, index) => (
+                  <TimeSelection
+                    key={index}
+                    time={item}
+                    onPress={() => console.log('')}
+                  />
+                ))
+              ) : (
+                <Text style={styles.timesPlaceholderText}>
+                  {t('reserve.select_service_first')}
+                </Text>
+              )}
             </View>
           </View>
           {/* Special requirements */}
@@ -88,9 +120,9 @@ export default function ReserveScreen() {
             <Text style={styles.questionText}>
               {t('reserve.special_requirements')}
             </Text>
-            <View>
-              <Text>[options gere]</Text>
-            </View>
+            <SpecialRequirementsCheckboxes
+              onToggle={(items) => setRequirementsSelection(items)}
+            />
             <CustomButton
               style={styles.nextButton}
               onPress={() => setNextButtonPressed(true)}
@@ -223,6 +255,17 @@ const styles = StyleSheet.create({
   numPeopleText: {
     fontSize: VALUES.FONT_SIZE.LARGE,
     marginHorizontal: VALUES.SPACING.MEDIUM,
+  },
+
+  timeSelectionContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  timesPlaceholderText: {
+    fontStyle: 'italic',
+    color: COLOURS.GREY,
+    marginVertical: VALUES.SPACING.SMALL,
   },
 
   signInContainer: {

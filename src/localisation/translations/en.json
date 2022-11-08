@@ -38,6 +38,7 @@
     "lunch": "Lunch",
     "dinner": "Dinner",
     "select_time": "Select a time",
+    "select_service_first": "Please select a type of service first",
     "notes": "Notes",
     "special_requirements": "Special requirements",
     "birthday": "Birthday",
