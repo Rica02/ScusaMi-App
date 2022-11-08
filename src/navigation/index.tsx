@@ -82,7 +82,7 @@ function RootNavigator() {
           name="ActiveOrderModal"
           component={ActiveOrderModal}
           options={({ navigation, route }: RootTabScreenProps<any>) => ({
-            title: 'Order progress',
+            title: 'ORDER PROGRESS',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}
@@ -148,7 +148,7 @@ function BottomTabNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'HomeScreen'>) => ({
-          title: 'Home',
+          title: 'HOME',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="home"
@@ -163,7 +163,7 @@ function BottomTabNavigator() {
         name="MenuScreen"
         component={MenuScreen}
         options={({ navigation }: RootTabScreenProps<'MenuScreen'>) => ({
-          title: 'Menu',
+          title: 'MENU',
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons
               name="book-open"
@@ -178,7 +178,7 @@ function BottomTabNavigator() {
         name="OrderScreen"
         component={OrderScreen}
         options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
-          title: 'Order',
+          title: 'ORDER',
           tabBarIcon: ({ color }) => (
             <Ionicons
               name="restaurant-outline"
@@ -193,7 +193,7 @@ function BottomTabNavigator() {
         name="ReserveScreen"
         component={ReserveScreen}
         options={({ navigation }: RootTabScreenProps<'ReserveScreen'>) => ({
-          title: 'Reserve',
+          title: 'RESERVE',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="calendar"
@@ -208,7 +208,7 @@ function BottomTabNavigator() {
         name="OtherScreen"
         component={OtherScreen}
         options={{
-          title: 'Other',
+          title: 'OTHER',
           tabBarIcon: ({ color }) => (
             <Feather
               name="more-horizontal"

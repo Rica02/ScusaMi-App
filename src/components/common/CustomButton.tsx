@@ -11,14 +11,15 @@ import { VALUES } from '../../constants/Styling';
 
 interface CustomButtonProps {
   children: JSX.Element | string;
+  onPress: () => void;
   style?: StyleProp<ViewStyle>;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
-  const { children, style } = props;
+  const { children, onPress, style } = props;
 
   return (
-    <Pressable style={[styles.container, style && style]}>
+    <Pressable style={[styles.container, style && style]} onPress={onPress}>
       <Text style={styles.text}>{children}</Text>
     </Pressable>
   );

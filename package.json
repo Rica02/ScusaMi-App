@@ -21,6 +21,7 @@
     "@types/react-i18next": "^8.1.0",
     "expo": "~46.0.16",
     "expo-asset": "~8.6.1",
+    "expo-checkbox": "~2.2.0",
     "expo-constants": "~13.2.4",
     "expo-font": "~10.2.1",
     "expo-linking": "~3.2.2",

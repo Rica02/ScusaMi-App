@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 1.2 * VALUES.FONT_SIZE.XSMALL,
-    color: COLOURS.TEXT_GREY,
+    color: COLOURS.GREY,
     textTransform: 'uppercase',
     marginTop: VALUES.SPACING.XSMALL,
   },

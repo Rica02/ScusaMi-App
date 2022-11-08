@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     paddingTop: VALUES.SPACING.SMALL,
   },
   numItemsText: {
-    color: COLOURS.TEXT_GREY,
+    color: COLOURS.GREY,
   },
   viewProgressContainer: {
     flexDirection: 'row',

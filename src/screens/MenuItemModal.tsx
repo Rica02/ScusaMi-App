@@ -64,7 +64,7 @@ export default function MenuItemModal({
               style={{
                 paddingLeft: VALUES.FONT_SIZE.XSMALL,
                 fontSize: VALUES.FONT_SIZE.SMALL,
-                color: COLOURS.TEXT_GREY,
+                color: COLOURS.GREY,
               }}
             >
               ({t('menu.extra_charge')})
@@ -115,7 +115,10 @@ export default function MenuItemModal({
         </View>
       </ScrollView>
       {/* Start order button */}
-      <CustomButton style={styles.startOrderButton}>
+      <CustomButton
+        style={styles.startOrderButton}
+        onPress={() => console.log('start order pressed')}
+      >
         {t('buttons.start_order')}
       </CustomButton>
     </View>

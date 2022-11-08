@@ -10,7 +10,11 @@
   "buttons": {
     "order_at_table": "Order at table",
     "order_pickup": "Order pick-up",
-    "start_order": "Start order"
+    "start_order": "Start order",
+    "next": "Next",
+    "sign_in": "Sign in",
+    "confirm": "Confirm",
+    "back": "Back"
   },
   "menu": {
     "all": "All",
@@ -26,5 +30,29 @@
     "in_queue": "In queue",
     "in_progress": "In progress",
     "done": "Done"
+  },
+  "reserve": {
+    "booking": "Booking",
+    "how_many_people": "How many people are coming?",
+    "which_service": "Which service?",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "select_time": "Select a time",
+    "notes": "Notes",
+    "special_requirements": "Special requirements",
+    "birthday": "Birthday",
+    "bringing_pram": "Bringing a pram",
+    "allergy": "Allergy",
+    "special_access_required": "Special access required",
+    "your_details": "Your details",
+    "to_save_details": "to save your details for next time",
+    "continue_as_guest": "Alternatively, continue as a guest:",
+    "i_agree": "I agree to the",
+    "terms_and_conditions": "Terms and Conditions",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "mobile": "Mobile",
+    "email": "Email",
+    "company_name": "Company Name"
   }
 }

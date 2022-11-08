@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     fontSize: VALUES.FONT_SIZE.MEDIUM,
   },
   description: {
-    color: COLOURS.TEXT_GREY,
+    color: COLOURS.GREY,
     paddingTop: VALUES.SPACING.SMALL,
   },
 });
