@@ -23,7 +23,7 @@ import {
 } from '../typings/navigationTypes';
 import LinkingConfiguration from './LinkingConfiguration';
 import { COLOURS } from '../constants/Colours';
-import ModalScreen from '../screens/ModalScreen';
+import ProfileLoginModal from '../screens/ProfileLoginModal';
 import MenuItemModal from '../screens/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -95,7 +95,23 @@ function RootNavigator() {
             ),
           })}
         />
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="ProfileLoginModal"
+          component={ProfileLoginModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'LOGIN',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -129,7 +145,7 @@ function BottomTabNavigator() {
 
         headerRight: () => (
           <Pressable
-            onPress={() => navigation.navigate('Modal')}
+            onPress={() => navigation.navigate('ProfileLoginModal')}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}

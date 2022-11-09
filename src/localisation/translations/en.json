@@ -13,6 +13,7 @@
     "start_order": "Start order",
     "next": "Next",
     "sign_in": "Sign in",
+    "sign_up": "Sign up",
     "confirm": "Confirm",
     "back": "Back"
   },
@@ -55,5 +56,23 @@
     "mobile": "Mobile",
     "email": "Email",
     "company_name": "Company Name"
+  },
+  "other": {
+    "home": "Home",
+    "browse_menu": "Browse menu",
+    "order": "Order",
+    "reserve_table": "Reserve a table",
+    "my_profile": "My profile",
+    "leave_feedback": "Leave feedback",
+    "about_us": "About us",
+    "settings": "Settings"
+  },
+  "profile": {
+    "logged_as_guest": "Logged in as guest",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "sign_in_facebook": "Sign in with Facebook",
+    "sign_in_google": "Sign in with Google",
+    "dont_have_account": "Don't have an account?"
   }
 }
