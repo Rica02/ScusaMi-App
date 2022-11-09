@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.WHITE,
   },
   upperContainer: {
-    flex: 3,
+    flex: 2,
     justifyContent: 'center',
   },
   startOrderingText: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 
   lowerContainer: {
-    paddingVertical: VALUES.SPACING.MEDIUM,
+    paddingTop: VALUES.SPACING.MEDIUM,
     backgroundColor: COLOURS.RED,
     flex: 1,
   },

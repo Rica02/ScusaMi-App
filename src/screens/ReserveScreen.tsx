@@ -115,6 +115,17 @@ export default function ReserveScreen() {
               )}
             </View>
           </View>
+          {/* Notes */}
+          <View style={[styles.sectionContainer, styles.bottomBorder]}>
+            <Text style={styles.questionText}>{t('reserve.notes')}</Text>
+            <View style={styles.timeSelectionContainer}>
+              <TextInput
+                style={styles.notesTextInput}
+                multiline
+                textAlignVertical="top"
+              />
+            </View>
+          </View>
           {/* Special requirements */}
           <View style={styles.sectionContainer}>
             <Text style={styles.questionText}>
@@ -143,69 +154,77 @@ export default function ReserveScreen() {
                 </HeaderTitle>
               </View>
             </View>
-            {/* Sign in */}
-            <View style={styles.signInContainer}>
-              <CustomButton onPress={() => console.log('sign in pressed')}>
-                {t('buttons.sign_in')}
-              </CustomButton>
-              <Text style={styles.saveDetailsText}>
-                {t('reserve.to_save_details')}
-              </Text>
-            </View>
-            {/* Guest details */}
-            <View style={styles.guestDetailsContainer}>
-              <Text style={{ fontSize: VALUES.SPACING.MEDIUM }}>
-                {t('reserve.continue_as_guest')}
-              </Text>
-              <TextInput
-                style={styles.textInput}
-                placeholder={t('reserve.first_name') + '*'}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder={t('reserve.last_name') + '*'}
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder={t('reserve.mobile') + '*'}
-                keyboardType="phone-pad"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder={t('reserve.email') + '*'}
-                keyboardType="email-address"
-              />
-              <TextInput
-                style={styles.textInput}
-                placeholder={t('reserve.company_name')}
-              />
-              <View style={styles.tocContainer}>
-                <Checkbox
-                  value={isTocChecked}
-                  onValueChange={setIsTocChecked}
-                  color={isTocChecked ? COLOURS.RED : undefined}
-                />
-                <Text style={styles.tocText}>
-                  {t('reserve.i_agree')}{' '}
-                  <Text style={styles.tocHyperlink}>
-                    {t('reserve.terms_and_conditions')}
-                  </Text>
+            <View
+              style={{
+                flex: 1,
+                width: '100%',
+                justifyContent: 'space-between',
+              }}
+            >
+              {/* Sign in */}
+              <View style={styles.signInContainer}>
+                <CustomButton onPress={() => console.log('sign in pressed')}>
+                  {t('buttons.sign_in')}
+                </CustomButton>
+                <Text style={styles.saveDetailsText}>
+                  {t('reserve.to_save_details')}
                 </Text>
               </View>
-            </View>
-            <View style={styles.buttonsContainer}>
-              <CustomButton
-                style={styles.nextButton}
-                onPress={() => setNextButtonPressed(false)}
-              >
-                {t('buttons.back')}
-              </CustomButton>
-              <CustomButton
-                style={styles.nextButton}
-                onPress={() => console.log('confirm pressed')}
-              >
-                {t('buttons.confirm')}
-              </CustomButton>
+              {/* Guest details */}
+              <View style={styles.guestDetailsContainer}>
+                <Text style={{ fontSize: VALUES.SPACING.MEDIUM }}>
+                  {t('reserve.continue_as_guest')}
+                </Text>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder={t('reserve.first_name') + '*'}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder={t('reserve.last_name') + '*'}
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder={t('reserve.mobile') + '*'}
+                  keyboardType="phone-pad"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder={t('reserve.email') + '*'}
+                  keyboardType="email-address"
+                />
+                <TextInput
+                  style={styles.textInput}
+                  placeholder={t('reserve.company_name')}
+                />
+                <View style={styles.tocContainer}>
+                  <Checkbox
+                    value={isTocChecked}
+                    onValueChange={setIsTocChecked}
+                    color={isTocChecked ? COLOURS.RED : undefined}
+                  />
+                  <Text style={styles.tocText}>
+                    {t('reserve.i_agree')}{' '}
+                    <Text style={styles.tocHyperlink}>
+                      {t('reserve.terms_and_conditions')}
+                    </Text>
+                  </Text>
+                </View>
+              </View>
+              <View style={styles.buttonsContainer}>
+                <CustomButton
+                  style={styles.nextButton}
+                  onPress={() => setNextButtonPressed(false)}
+                >
+                  {t('buttons.back')}
+                </CustomButton>
+                <CustomButton
+                  style={styles.nextButton}
+                  onPress={() => console.log('confirm pressed')}
+                >
+                  {t('buttons.confirm')}
+                </CustomButton>
+              </View>
             </View>
           </View>
         </>
@@ -220,6 +239,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOURS.WHITE,
   },
   sectionContainer: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: VALUES.SPACING.MEDIUM,
@@ -266,6 +286,15 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: COLOURS.GREY,
     marginVertical: VALUES.SPACING.SMALL,
+  },
+
+  notesTextInput: {
+    borderWidth: 0.5,
+    padding: VALUES.SPACING.MEDIUM,
+    borderColor: COLOURS.TEXT_PLACEHOLDER,
+    width: '100%',
+    height: VALUES.SIZE['5XLARGE'],
+    backgroundColor: COLOURS.BEIGE,
   },
 
   signInContainer: {
