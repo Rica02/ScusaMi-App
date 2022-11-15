@@ -1,0 +1,40 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { VALUES } from '../../constants/Styling';
+import MenuItem from './MenuItem';
+import { MenuItemType } from '../../typings/menuTypes';
+
+interface MenuListProps {
+  itemList?: MenuItemType[];
+  onPress: (item: MenuItemType) => void;
+}
+
+const MenuList = (props: MenuListProps) => {
+  const { itemList, onPress } = props;
+
+  return (
+    <View style={styles.container}>
+      {itemList?.map((item, index) => (
+        <View key={index} style={styles.menuItemContainer}>
+          <MenuItem
+            primaryIndex={index % 2 ? false : true}
+            item={item}
+            onPress={(item) => onPress(item)}
+          />
+        </View>
+      ))}
+    </View>
+  );
+};
+
+export default MenuList;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingVertical: VALUES.SPACING.SMALL,
+  },
+  menuItemContainer: {
+    paddingHorizontal: VALUES.SPACING.SMALL,
+    paddingVertical: 1.5 * VALUES.SPACING.XSMALL,
+  },
+});

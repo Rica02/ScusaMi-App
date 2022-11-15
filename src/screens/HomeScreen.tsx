@@ -1,20 +1,40 @@
-import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Image,
+  ScrollView,
+  ImageBackground,
+  Pressable,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
+import { MenuItemType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
-import ButtonWithIcon from '../components/common/ButtonWithIcon';
+import MenuList from '../components/menu/MenuList';
+import OrderButtons from '../components/order/OrderButtons';
+
+import { MENU } from '../DummyData';
 
 export default function HomeScreen({
   navigation,
 }: RootTabScreenProps<'HomeScreen'>) {
   const { t } = useTranslation();
+  const [specials, setSpecials] = useState<MenuItemType[] | undefined>();
+
+  useEffect(() => {
+    // Get specials menu
+    var specialsList = MENU.find((item) => item.category == 'Specials');
+    setSpecials(specialsList?.items as MenuItemType[]);
+  }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} bounces={false}>
       {/* Header */}
       <View style={styles.headerContainer}>
         <View style={styles.upperHeaderContainer}>
@@ -30,41 +50,64 @@ export default function HomeScreen({
           />
         </View>
         <Image
-          style={styles.beepBeep}
-          source={require('../../assets/images/drawings/beep-beep.jpg')}
+          style={styles.beepBeepImg}
+          source={require('../../assets/images/ui-images/beep-beep.jpg')}
           resizeMode="contain"
         />
       </View>
       {/* Hungry? Mangia mangia */}
-      <View style={styles.hungryContainer}>
+      <ImageBackground
+        source={require('../../assets/images/photos/photo-pizza.png')}
+        imageStyle={{ opacity: 0.5 }}
+      >
         <View style={styles.hungryTitleContainer}>
           <Text style={styles.hungryText}>{t('home.hungry')}</Text>
-          <Text style={styles.mangiaMangiaText}>{t('home.mangia_mangia')}</Text>
+          <Text style={styles.mangiaText}>{t('home.mangia')}</Text>
+          <Text style={styles.mangiaText}>{t('home.mangia')}!</Text>
         </View>
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <ButtonWithIcon
-              text={t('buttons.order_at_table')}
-              icon={<Ionicons name="restaurant-outline" />}
-            />
-          </View>
-          <View style={styles.buttonContainer}>
-            <ButtonWithIcon
-              text={t('buttons.order_pickup')}
-              icon={<SimpleLineIcons name="bag" />}
-            />
-          </View>
-        </View>
-      </View>
+        <OrderButtons />
+      </ImageBackground>
       {/* Our menu */}
       <View style={styles.ourMenuContainer}>
         <HeaderTitle colour={COLOURS.BLACK}>{t('home.our_menu')}</HeaderTitle>
+        <View style={styles.ourMenuImgContainer}>
+          <Image
+            style={styles.scooterImg}
+            source={require('../../assets/images/ui-images/scooter.png')}
+            resizeMode="contain"
+          />
+          <View style={styles.seeOurMenuContainer}>
+            <Image
+              style={styles.menuImg}
+              source={require('../../assets/images/ui-images/menu-1.png')}
+              resizeMode="contain"
+            />
+            <Pressable
+              style={styles.arrow}
+              onPress={() => navigation.navigate('MenuScreen')}
+            >
+              <Entypo name="arrow-bold-right" size={120} color={COLOURS.RED} />
+            </Pressable>
+          </View>
+        </View>
       </View>
       {/* Today's specials */}
-      <View>
-        <HeaderTitle colour={COLOURS.BLACK}>
+      <View style={styles.todaysSpecialsContainer}>
+        <HeaderTitle colour={COLOURS.WHITE}>
           {t('home.todays_specials')}
         </HeaderTitle>
+        <MenuList
+          itemList={specials}
+          onPress={(item) =>
+            navigation.navigate('MenuItemModal', {
+              title: item.name,
+              item: item,
+            })
+          }
+        />
+        <Text style={styles.comeBackSpecialsText}>
+          {t('home.come_back_specials')}
+        </Text>
       </View>
     </ScrollView>
   );
@@ -99,36 +142,76 @@ const styles = StyleSheet.create({
     width: VALUES.SIZE['4XLARGE'],
     height: VALUES.SIZE['4XLARGE'],
   },
-  beepBeep: {
+  beepBeepImg: {
     width: '80%',
     height: 200,
     alignSelf: 'flex-end',
     marginTop: -VALUES.SIZE['3XLARGE'],
   },
 
-  hungryContainer: {},
   hungryTitleContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: VALUES.SPACING.MEDIUM,
+    padding: VALUES.SPACING.LARGE,
   },
   hungryText: {
     fontFamily: 'caveat-brush',
+    paddingRight: VALUES.SPACING.XSMALL,
     color: COLOURS.RED,
-    fontSize: VALUES.FONT_SIZE['2XLARGE'],
+    fontSize: 1.3 * VALUES.FONT_SIZE['2XLARGE'],
+    textShadowColor: COLOURS.WHITE,
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 0,
+    textTransform: 'uppercase',
   },
-  mangiaMangiaText: {
+  mangiaText: {
     fontFamily: 'caveat-brush',
+    paddingLeft: VALUES.SPACING.XSMALL,
     color: COLOURS.BLACK,
     fontSize: VALUES.FONT_SIZE['2XLARGE'],
+    textShadowColor: COLOURS.WHITE,
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 0,
+    transform: [{ rotate: '-15deg' }],
   },
 
-  ourMenuContainer: {},
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
+  ourMenuContainer: {
+    flex: 1,
+    paddingVertical: VALUES.SPACING.MEDIUM,
   },
-  buttonContainer: {
-    width: '40%',
+  ourMenuImgContainer: {
+    flexDirection: 'row',
+    marginTop: VALUES.SPACING.SMALL,
+    marginRight: VALUES.SPACING.SMALL,
+  },
+  scooterImg: {
+    width: '60%',
+    height: 200,
+    alignSelf: 'flex-end',
+  },
+  seeOurMenuContainer: {
+    width: '55%',
+    height: 200,
+    position: 'absolute',
+    right: 0,
+  },
+  menuImg: {
+    width: '100%',
+    height: 150,
+  },
+  arrow: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+
+  todaysSpecialsContainer: {
+    backgroundColor: COLOURS.RED,
+    paddingVertical: VALUES.SPACING.MEDIUM,
+  },
+  comeBackSpecialsText: {
+    color: COLOURS.BEIGE,
+    fontStyle: 'italic',
+    textAlign: 'center',
   },
 });

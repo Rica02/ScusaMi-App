@@ -8,27 +8,30 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Pressable, Image } from 'react-native';
-
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import {
+  FontAwesome,
+  AntDesign,
+  Ionicons,
+  SimpleLineIcons,
+  Feather,
+} from '@expo/vector-icons';
 
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from '../typings/navigationTypes';
-import { COLOURS } from '../constants/Colours';
 import LinkingConfiguration from './LinkingConfiguration';
-import ModalScreen from '../screens/ModalScreen';
+import { COLOURS } from '../constants/Colours';
+import ProfileLoginModal from '../screens/ProfileLoginModal';
+import MenuItemModal from '../screens/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
+import ActiveOrderModal from '../screens/ActiveOrderModal';
 
 export default function Navigation() {
   return (
@@ -58,7 +61,57 @@ function RootNavigator() {
         options={{ title: 'Oops!' }}
       />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="MenuItemModal"
+          component={MenuItemModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: route?.params?.title,
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ActiveOrderModal"
+          component={ActiveOrderModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'ORDER PROGRESS',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ProfileLoginModal"
+          component={ProfileLoginModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'LOGIN',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
@@ -92,7 +145,7 @@ function BottomTabNavigator() {
 
         headerRight: () => (
           <Pressable
-            onPress={() => navigation.navigate('Modal')}
+            onPress={() => navigation.navigate('ProfileLoginModal')}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}
@@ -111,7 +164,7 @@ function BottomTabNavigator() {
         name="HomeScreen"
         component={HomeScreen}
         options={({ navigation }: RootTabScreenProps<'HomeScreen'>) => ({
-          title: 'Home',
+          title: 'HOME',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="home"
@@ -126,7 +179,7 @@ function BottomTabNavigator() {
         name="MenuScreen"
         component={MenuScreen}
         options={({ navigation }: RootTabScreenProps<'MenuScreen'>) => ({
-          title: 'Menu',
+          title: 'MENU',
           tabBarIcon: ({ color }) => (
             <SimpleLineIcons
               name="book-open"
@@ -141,7 +194,7 @@ function BottomTabNavigator() {
         name="OrderScreen"
         component={OrderScreen}
         options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
-          title: 'Order',
+          title: 'ORDER',
           tabBarIcon: ({ color }) => (
             <Ionicons
               name="restaurant-outline"
@@ -156,7 +209,7 @@ function BottomTabNavigator() {
         name="ReserveScreen"
         component={ReserveScreen}
         options={({ navigation }: RootTabScreenProps<'ReserveScreen'>) => ({
-          title: 'Reserve',
+          title: 'RESERVE',
           tabBarIcon: ({ color }) => (
             <AntDesign
               name="calendar"
@@ -171,7 +224,7 @@ function BottomTabNavigator() {
         name="OtherScreen"
         component={OtherScreen}
         options={{
-          title: 'Other',
+          title: 'OTHER',
           tabBarIcon: ({ color }) => (
             <Feather
               name="more-horizontal"
