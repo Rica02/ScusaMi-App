@@ -17,33 +17,36 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           HomeScreen: {
             screens: {
-              HomeScreen: 'one',
+              HomeScreen: 'home',
             },
           },
           MenuScreen: {
             screens: {
-              MenuScreen: 'two',
+              MenuScreen: 'menu',
             },
           },
           OrderScreen: {
             screens: {
-              OrderScreen: 'three',
+              OrderScreen: 'order',
             },
           },
           ReserveScreen: {
             screens: {
-              ReserveScreen: 'four',
+              ReserveScreen: 'reserve',
             },
           },
-          OtherScreen: {
+          Other: {
             screens: {
-              OtherScreen: 'five',
+              OtherScreen: 'other',
+              ProfileScreen: 'profile',
             },
           },
         },
       },
-      Modal: 'modal',
       NotFound: '*',
+      ActiveOrderModal: 'modal',
+      MenuItemModal: 'modal',
+      ProfileLoginModal: 'modal',
     },
   },
 };

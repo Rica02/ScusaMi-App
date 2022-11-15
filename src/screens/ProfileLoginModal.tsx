@@ -15,8 +15,11 @@ import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import CustomButton from '../components/common/CustomButton';
 import { FontAwesome } from '@expo/vector-icons';
+import { RootStackScreenProps } from '../typings/navigationTypes';
 
-export default function ProfileLoginModal() {
+export default function ProfileLoginModal({
+  navigation,
+}: RootStackScreenProps<'ProfileLoginModal'>) {
   const { t } = useTranslation();
   return (
     <View style={styles.container}>
@@ -41,7 +44,9 @@ export default function ProfileLoginModal() {
             {t('profile.forgot_password')}
           </Text>
         </Pressable>
-        <CustomButton onPress={() => console.log()}>
+        <CustomButton
+          onPress={() => navigation.navigate('Root', { screen: 'Other' })}
+        >
           {t('buttons.sign_in')}
         </CustomButton>
       </View>

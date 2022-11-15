@@ -15,7 +15,9 @@
     "sign_in": "Sign in",
     "sign_up": "Sign up",
     "confirm": "Confirm",
-    "back": "Back"
+    "back": "Back",
+    "edit": "Edit",
+    "delete_account": "Delete account"
   },
   "menu": {
     "all": "All",
@@ -50,12 +52,7 @@
     "to_save_details": "to save your details for next time",
     "continue_as_guest": "Alternatively, continue as a guest:",
     "i_agree": "I agree to the",
-    "terms_and_conditions": "Terms and Conditions",
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "mobile": "Mobile",
-    "email": "Email",
-    "company_name": "Company Name"
+    "terms_and_conditions": "Terms and Conditions"
   },
   "other": {
     "home": "Home",
@@ -73,6 +70,15 @@
     "forgot_password": "Forgot password?",
     "sign_in_facebook": "Sign in with Facebook",
     "sign_in_google": "Sign in with Google",
-    "dont_have_account": "Don't have an account?"
+    "dont_have_account": "Don't have an account?",
+    "logged_in_as": "Logged in as "
+  },
+  "user_details": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "mobile": "Mobile",
+    "email": "Email",
+    "company": "Company",
+    "company_name": "Company Name"
   }
 }

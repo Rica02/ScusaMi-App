@@ -177,25 +177,25 @@ export default function ReserveScreen() {
                 </Text>
                 <TextInput
                   style={styles.textInput}
-                  placeholder={t('reserve.first_name') + '*'}
+                  placeholder={t('user_details.first_name') + '*'}
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder={t('reserve.last_name') + '*'}
+                  placeholder={t('user_details.last_name') + '*'}
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder={t('reserve.mobile') + '*'}
+                  placeholder={t('user_details.mobile') + '*'}
                   keyboardType="phone-pad"
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder={t('reserve.email') + '*'}
+                  placeholder={t('user_details.email') + '*'}
                   keyboardType="email-address"
                 />
                 <TextInput
                   style={styles.textInput}
-                  placeholder={t('reserve.company_name')}
+                  placeholder={t('user_details.company_name')}
                 />
                 <View style={styles.tocContainer}>
                   <Checkbox
