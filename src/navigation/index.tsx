@@ -17,9 +17,7 @@ import {
 } from '@expo/vector-icons';
 
 import {
-  NestedParamList,
   RootStackParamList,
-  RootStackScreenProps,
   RootTabParamList,
   RootTabScreenProps,
 } from '../typings/navigationTypes';
@@ -59,6 +57,11 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ title: 'PROFILE' }}
+      />
+      <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: 'Oops!' }}
@@ -67,10 +70,7 @@ function RootNavigator() {
         <Stack.Screen
           name="MenuItemModal"
           component={MenuItemModal}
-          options={({
-            navigation,
-            route,
-          }: RootStackScreenProps<'MenuItemModal'>) => ({
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: route?.params?.title,
             headerLeft: () => (
               <Pressable
@@ -87,10 +87,7 @@ function RootNavigator() {
         <Stack.Screen
           name="ActiveOrderModal"
           component={ActiveOrderModal}
-          options={({
-            navigation,
-            route,
-          }: RootStackScreenProps<'ActiveOrderModal'>) => ({
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: 'ORDER PROGRESS',
             headerLeft: () => (
               <Pressable
@@ -107,10 +104,7 @@ function RootNavigator() {
         <Stack.Screen
           name="ProfileLoginModal"
           component={ProfileLoginModal}
-          options={({
-            navigation,
-            route,
-          }: RootStackScreenProps<'ProfileLoginModal'>) => ({
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: 'LOGIN',
             headerLeft: () => (
               <Pressable
@@ -233,8 +227,8 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="Other"
-        component={Other}
+        name="OtherScreen"
+        component={OtherScreen}
         options={{
           title: 'OTHER',
           tabBarIcon: ({ color }) => (
@@ -248,24 +242,5 @@ function BottomTabNavigator() {
         }}
       />
     </BottomTab.Navigator>
-  );
-}
-
-const OtherStack = createNativeStackNavigator<NestedParamList>();
-
-function Other() {
-  return (
-    <OtherStack.Navigator initialRouteName="OtherScreen">
-      <OtherStack.Screen
-        name="OtherScreen"
-        component={OtherScreen}
-        options={{ headerShown: false }}
-      />
-      <OtherStack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{ headerShown: false }}
-      />
-    </OtherStack.Navigator>
   );
 }

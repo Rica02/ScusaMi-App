@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, Text } from 'react-native';
+
+import { RootStackScreenProps } from '../typings/navigationTypes';
 import CustomButton from '../components/common/CustomButton';
 import HeaderTitle from '../components/common/HeaderTitle';
 import { COLOURS } from '../constants/Colours';
-import { NestedScreenProps } from '../typings/navigationTypes';
 
 interface ProfileScreenProps {
-  navigation: NestedScreenProps<'ProfileScreen'>;
+  navigation: RootStackScreenProps<'ProfileScreen'>;
 }
 
 const ProfileScreen = (props: ProfileScreenProps) => {
@@ -26,6 +27,10 @@ const ProfileScreen = (props: ProfileScreenProps) => {
       <View style={styles.profileDetailsContainer}>
         <View>
           <Text>{t('user_details.first_name')}</Text>
+          <Text>{t('user_details.last_name')}</Text>
+          <Text>{t('user_details.mobile')}</Text>
+          <Text>{t('user_details.email')}</Text>
+          <Text>{t('user_details.company')}</Text>
         </View>
         <View></View>
       </View>
