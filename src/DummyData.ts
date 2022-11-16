@@ -149,3 +149,12 @@ export const BOOKING = {
     ],
   },
 };
+
+export const USER = {
+  fName: 'Rica',
+  lName: 'Beepboop',
+  mobile: 123456789,
+  email: 'email@email.com',
+  company: '',
+  password: '******',
+};

@@ -14,6 +14,7 @@
     "next": "Next",
     "sign_in": "Sign in",
     "sign_up": "Sign up",
+    "sign_out": "Sign out",
     "confirm": "Confirm",
     "back": "Back",
     "edit": "Edit",
@@ -79,6 +80,7 @@
     "mobile": "Mobile",
     "email": "Email",
     "company": "Company",
-    "company_name": "Company Name"
+    "company_name": "Company Name",
+    "password": "Password"
   }
 }
