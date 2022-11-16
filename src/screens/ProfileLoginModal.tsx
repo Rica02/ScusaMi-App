@@ -44,7 +44,14 @@ export default function ProfileLoginModal({
             {t('profile.forgot_password')}
           </Text>
         </Pressable>
-        <CustomButton onPress={() => navigation.navigate('ProfileScreen')}>
+        <CustomButton
+          onPress={() =>
+            navigation.navigate('Root', {
+              screen: 'Other',
+              params: { screen: 'ProfileScreen', initial: false },
+            })
+          }
+        >
           {t('buttons.sign_in')}
         </CustomButton>
       </View>

@@ -35,15 +35,21 @@ const linking: LinkingOptions<RootStackParamList> = {
               ReserveScreen: 'reserve',
             },
           },
-          OtherScreen: {
+          // OtherScreen: {
+          //   screens: {
+          //     OtherScreen: 'other',
+          //   },
+          // },
+          Other: {
             screens: {
               OtherScreen: 'other',
+              ProfileScreen: 'profile',
             },
           },
         },
       },
       NotFound: '*',
-      ProfileScreen: 'profile',
+      //ProfileScreen: 'profile',
       ActiveOrderModal: 'modal',
       MenuItemModal: 'modal',
       ProfileLoginModal: 'modal',

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, Text } from 'react-native';
 
-import { RootStackScreenProps } from '../typings/navigationTypes';
+import {
+  NestedScreenProps,
+  RootStackScreenProps,
+} from '../typings/navigationTypes';
 import CustomButton from '../components/common/CustomButton';
 import HeaderTitle from '../components/common/HeaderTitle';
 import { COLOURS } from '../constants/Colours';
 
 interface ProfileScreenProps {
-  navigation: RootStackScreenProps<'ProfileScreen'>;
+  navigation: NestedScreenProps<'ProfileScreen'>;
 }
 
 const ProfileScreen = (props: ProfileScreenProps) => {

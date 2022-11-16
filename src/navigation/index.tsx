@@ -17,6 +17,7 @@ import {
 } from '@expo/vector-icons';
 
 import {
+  NestedParamList,
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
@@ -56,11 +57,11 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
         options={{ title: 'PROFILE' }}
-      />
+      /> */}
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
@@ -227,9 +228,12 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="OtherScreen"
-        component={OtherScreen}
+        // name="OtherScreen"
+        // component={OtherScreen}
+        name="Other"
+        component={Other}
         options={{
+          headerTitle: '',
           title: 'OTHER',
           tabBarIcon: ({ color }) => (
             <Feather
@@ -242,5 +246,24 @@ function BottomTabNavigator() {
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+const NestedOther = createNativeStackNavigator<NestedParamList>();
+
+function Other() {
+  return (
+    <NestedOther.Navigator initialRouteName="OtherScreen">
+      <NestedOther.Screen
+        name="OtherScreen"
+        component={OtherScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+    </NestedOther.Navigator>
   );
 }
