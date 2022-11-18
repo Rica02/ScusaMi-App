@@ -104,5 +104,11 @@
     "tell_us_everything": "Tell us everything",
     "grazie": "Grazie!",
     "message_sent": "Your message has been sent."
+  },
+  "settings": {
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "bug_or_suggestion": "Report a bug or make an app suggestion",
+    "view": "View"
   }
 }

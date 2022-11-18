@@ -39,6 +39,7 @@ const linking: LinkingOptions<RootStackParamList> = {
             screens: {
               OtherScreen: 'other',
               ProfileScreen: 'profile',
+              SettingsScreen: 'settings',
             },
           },
         },

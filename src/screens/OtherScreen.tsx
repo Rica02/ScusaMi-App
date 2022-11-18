@@ -63,7 +63,7 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.settings'),
       func: function () {
-        navigation.navigate('');
+        navigation.navigate('Other', { screen: 'SettingsScreen' });
       },
     },
   ];

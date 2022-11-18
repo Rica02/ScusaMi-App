@@ -47,6 +47,7 @@ export type NestedParamList = {
   OtherScreen: undefined;
   ProfileScreen: undefined;
   AboutUsScreen: undefined;
+  SettingsScreen: undefined;
 };
 
 export type NestedScreenProps<Screen extends keyof NestedParamList> =

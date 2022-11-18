@@ -36,6 +36,7 @@ import ActiveOrderModal from '../screens/ActiveOrderModal';
 import ProfileScreen from '../screens/ProfileScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
+import SettingsScreen from '../screens/SettingsScreen';
 
 export default function Navigation() {
   return (
@@ -279,6 +280,11 @@ function Other() {
       <NestedOther.Screen
         name="AboutUsScreen"
         component={AboutUsScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
         options={{ headerShown: false }}
       />
     </NestedOther.Navigator>
