@@ -24,7 +24,7 @@ import {
 } from '../typings/navigationTypes';
 import LinkingConfiguration from './LinkingConfiguration';
 import { COLOURS } from '../constants/Colours';
-import ProfileLoginModal from '../screens/ProfileLoginModal';
+import ProfileLoginModal from '../screens/profile/ProfileLoginModal';
 import MenuItemModal from '../screens/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -33,7 +33,7 @@ import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
 import ActiveOrderModal from '../screens/ActiveOrderModal';
-import ProfileScreen from '../screens/ProfileScreen';
+import ProfileScreen from '../screens/profile/ProfileScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';

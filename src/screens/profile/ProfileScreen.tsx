@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
 
-import { NestedScreenProps } from '../typings/navigationTypes';
-import { UserType } from '../typings/userTypes';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
-import CustomButton from '../components/common/CustomButton';
-import HeaderTitle from '../components/common/HeaderTitle';
+import { NestedScreenProps } from '../../typings/navigationTypes';
+import { UserType } from '../../typings/userTypes';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
+import CustomButton from '../../components/common/CustomButton';
+import HeaderTitle from '../../components/common/HeaderTitle';
 
-import { USER } from '../DummyData';
+import { USER } from '../../DummyData';
 
 interface ProfileScreenProps {
   navigation: NestedScreenProps<'ProfileScreen'>;

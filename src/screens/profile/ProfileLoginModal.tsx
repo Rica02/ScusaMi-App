@@ -10,11 +10,11 @@ import {
   Pressable,
 } from 'react-native';
 
-import { RootStackScreenProps } from '../typings/navigationTypes';
-import HeaderTitle from '../components/common/HeaderTitle';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
-import CustomButton from '../components/common/CustomButton';
+import { RootStackScreenProps } from '../../typings/navigationTypes';
+import HeaderTitle from '../../components/common/HeaderTitle';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
+import CustomButton from '../../components/common/CustomButton';
 import { FontAwesome } from '@expo/vector-icons';
 
 export default function ProfileLoginModal({
