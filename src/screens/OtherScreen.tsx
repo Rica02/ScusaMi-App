@@ -51,7 +51,7 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.leave_feedback'),
       func: function () {
-        navigation.navigate('');
+        navigation.navigate('ContactUsModal');
       },
     },
     {

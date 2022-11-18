@@ -20,7 +20,9 @@
     "edit": "Edit",
     "delete_account": "Delete account",
     "view_in_maps": "View in Maps",
-    "contact_us": "Contact us"
+    "contact_us": "Contact us",
+    "send": "Send",
+    "return_to_home": "Return to home"
   },
   "menu": {
     "all": "All",
@@ -77,6 +79,7 @@
     "logged_in_as": "Logged in as "
   },
   "user_details": {
+    "name": "Name",
     "first_name": "First Name",
     "last_name": "Last Name",
     "mobile": "Mobile",
@@ -96,5 +99,10 @@
     "phone": "Phone",
     "queries": "Do you have any queries or want to leave us some feedback?",
     "copyright": "Copyright @ 2022 SCUSA MI! Italiano - All Rights Reserved."
+  },
+  "contact_us": {
+    "tell_us_everything": "Tell us everything",
+    "grazie": "Grazie!",
+    "message_sent": "Your message has been sent."
   }
 }

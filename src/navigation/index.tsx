@@ -35,6 +35,7 @@ import OtherScreen from '../screens/OtherScreen';
 import ActiveOrderModal from '../screens/ActiveOrderModal';
 import ProfileScreen from '../screens/ProfileScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
+import ContactUsModal from '../screens/ContactUsModal';
 
 export default function Navigation() {
   return (
@@ -103,6 +104,23 @@ function RootNavigator() {
           component={ProfileLoginModal}
           options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: 'LOGIN',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ContactUsModal"
+          component={ContactUsModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'CONTACT US',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}

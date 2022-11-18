@@ -6,12 +6,15 @@ import HeaderTitle from '../components/common/HeaderTitle';
 import { useTranslation } from 'react-i18next';
 import { VALUES } from '../constants/Styling';
 import CustomButton from '../components/common/CustomButton';
+import { NestedScreenProps } from '../typings/navigationTypes';
 
-interface AboutUsScreenProps {}
+interface AboutUsScreenProps {
+  navigation: any;
+}
 
 const AboutUsScreen = (props: AboutUsScreenProps) => {
   const { t } = useTranslation();
-  const {} = props;
+  const { navigation } = props;
 
   return (
     <ScrollView style={styles.container}>
@@ -75,7 +78,7 @@ const AboutUsScreen = (props: AboutUsScreenProps) => {
       <View style={styles.lowerContainer}>
         <Text style={styles.queriesText}>{t('about_us.queries')}</Text>
         <CustomButton
-          onPress={() => console.log('')}
+          onPress={() => console.log(navigation.navigate('ContactUsModal'))}
           style={styles.contactButton}
           textStyle={styles.textBold}
         >

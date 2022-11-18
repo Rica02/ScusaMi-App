@@ -22,6 +22,7 @@ export type RootStackParamList = {
   ProfileLoginModal: undefined;
   MenuItemModal: { title: string; item: MenuItemType };
   ActiveOrderModal: { order: any };
+  ContactUsModal: undefined;
   NotFound: undefined;
 };
 
