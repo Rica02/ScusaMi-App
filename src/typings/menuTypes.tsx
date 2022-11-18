@@ -17,3 +17,10 @@ export type MenuType = {
   category: string;
   items: MenuItemType[];
 };
+
+export type OrderType = {
+  mode: 1 | 2; // 1 = Dine in | 2 = Takeaway
+  table?: number;
+  pickup?: string;
+  items: { num: number; item: MenuItemType }[];
+};

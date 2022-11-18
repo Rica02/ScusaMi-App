@@ -9,7 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MenuItemType } from './menuTypes';
+import { MenuItemType, OrderType } from './menuTypes';
 
 declare global {
   namespace ReactNavigation {
@@ -23,6 +23,7 @@ export type RootStackParamList = {
   MenuItemModal: { title: string; item: MenuItemType };
   ActiveOrderModal: { order: any };
   ContactUsModal: undefined;
+  OrderCartModal: { order: OrderType };
   NotFound: undefined;
 };
 

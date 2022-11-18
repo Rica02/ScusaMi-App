@@ -32,11 +32,12 @@ import MenuScreen from '../screens/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
-import ActiveOrderModal from '../screens/ActiveOrderModal';
+import ActiveOrderModal from '../screens/order/ActiveOrderModal';
 import ProfileScreen from '../screens/profile/ProfileScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
+import OrderCartModal from '../screens/order/OrderCartModal';
 
 export default function Navigation() {
   return (
@@ -122,6 +123,23 @@ function RootNavigator() {
           component={ContactUsModal}
           options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: 'CONTACT US',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="OrderCartModal"
+          component={OrderCartModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'YOUR ORDER',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}

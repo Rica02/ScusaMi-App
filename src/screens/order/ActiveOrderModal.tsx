@@ -8,9 +8,9 @@ import {
   SimpleLineIcons,
 } from '@expo/vector-icons';
 
-import { RootStackScreenProps } from '../typings/navigationTypes';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
+import { RootStackScreenProps } from '../../typings/navigationTypes';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
 
 export default function ActiveOrderModal({
   route,

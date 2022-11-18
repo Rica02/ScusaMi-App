@@ -22,7 +22,13 @@
     "view_in_maps": "View in Maps",
     "contact_us": "Contact us",
     "send": "Send",
-    "return_to_home": "Return to home"
+    "return_to_home": "Return to home",
+    "your_order": "Your order",
+    "view_cart": "View cart",
+    "remove": "Remove",
+    "cancel_order": "Cancel order",
+    "pay_now": "Pay NOW from the app",
+    "pay_later": "Pay LATER at the front"
   },
   "menu": {
     "all": "All",
@@ -110,5 +116,10 @@
     "notifications": "Notifications",
     "bug_or_suggestion": "Report a bug or make an app suggestion",
     "view": "View"
+  },
+  "cart": {
+    "dine_in": "Dine in at Table ",
+    "pickup": "Pick-up today at ",
+    "total": "Total"
   }
 }
