@@ -130,6 +130,32 @@ export const MENU = [
           takeaway: 'y',
         },
       },
+      {
+        name: 'Takeaway test',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+        price: 26,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Not takeaway test',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+        price: 26,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'n',
+        },
+      },
     ],
   },
 ];

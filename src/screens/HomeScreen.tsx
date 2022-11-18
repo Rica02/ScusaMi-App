@@ -20,6 +20,7 @@ import MenuList from '../components/menu/MenuList';
 import OrderButtons from '../components/order/OrderButtons';
 
 import { MENU } from '../DummyData';
+import { MENU_MODE } from '../constants/AppConstants';
 
 export default function HomeScreen({
   navigation,
@@ -65,7 +66,14 @@ export default function HomeScreen({
           <Text style={styles.mangiaText}>{t('home.mangia')}</Text>
           <Text style={styles.mangiaText}>{t('home.mangia')}!</Text>
         </View>
-        <OrderButtons />
+        <OrderButtons
+          onPressDineIn={() =>
+            navigation.navigate('MenuScreen', { mode: MENU_MODE.DINEIN })
+          }
+          onPressTakeAway={() =>
+            navigation.navigate('MenuScreen', { mode: MENU_MODE.TAKEAWAY })
+          }
+        />
       </ImageBackground>
       {/* Our menu */}
       <View style={styles.ourMenuContainer}>
@@ -84,7 +92,9 @@ export default function HomeScreen({
             />
             <Pressable
               style={styles.arrow}
-              onPress={() => navigation.navigate('MenuScreen')}
+              onPress={() =>
+                navigation.navigate('MenuScreen', { mode: MENU_MODE.BROWSE })
+              }
             >
               <Entypo name="arrow-bold-right" size={120} color={COLOURS.RED} />
             </Pressable>

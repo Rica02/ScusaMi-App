@@ -6,10 +6,11 @@ import { VALUES } from '../../constants/Styling';
 interface ButtonWithIconProps {
   text: string;
   icon: React.ReactElement;
+  onPress: () => void;
 }
 
 const ButtonWithIcon = (props: ButtonWithIconProps) => {
-  const { text, icon } = props;
+  const { text, icon, onPress } = props;
 
   const buttonIcon = React.cloneElement(icon, {
     size: VALUES.FONT_SIZE['2XLARGE'],
@@ -17,7 +18,7 @@ const ButtonWithIcon = (props: ButtonWithIconProps) => {
   });
 
   return (
-    <Pressable style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       {buttonIcon}
       <Text style={styles.text}>{text}</Text>
     </Pressable>

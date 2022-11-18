@@ -11,22 +11,47 @@ import HeaderTitle from '../components/common/HeaderTitle';
 import MenuList from '../components/menu/MenuList';
 
 import { MENU } from '../DummyData';
+import { MENU_MODE } from '../constants/AppConstants';
 
 export default function MenuScreen({
   navigation,
+  route,
 }: RootTabScreenProps<'MenuScreen'>) {
+  const { mode } = route.params;
   const { t } = useTranslation();
   const flatListRef = useRef<any | undefined>();
-  const [displayedMenu, setDisplayedMenu] = useState<MenuType[] | undefined>();
+  const [displayedMenu, setDisplayedMenu] = useState<MenuType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<
     { category: string; index: number } | undefined
   >();
 
   useEffect(() => {
     // Get menu and set initial category select
-    setDisplayedMenu(MENU as MenuType[]);
+    getMenu(mode);
     setSelectedCategory({ category: 'All', index: 0 });
   }, []);
+
+  useEffect(() => {
+    getMenu(mode);
+  }, [mode]);
+
+  // Get menu items based on mode (browse/dine-in/takeaway)
+  const getMenu = (mode: number) => {
+    // If in takeaway mode, only show items that can be takeaway
+    if (mode == MENU_MODE.TAKEAWAY) {
+      let newMenu: MenuType[] = [];
+      MENU.forEach((category) => {
+        let newItems = category.items.filter(
+          (item) => item.nutriInfo.takeaway == 'y'
+        );
+        let newCategory = { ...category, items: newItems } as MenuType;
+        newMenu?.push(newCategory);
+      });
+      setDisplayedMenu(newMenu as MenuType[]);
+    } else {
+      setDisplayedMenu(MENU as MenuType[]);
+    }
+  };
 
   const handleCategorySelect = (category: string, index: number) => {
     // Set category selection and scroll down to selected category

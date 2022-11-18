@@ -31,7 +31,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   HomeScreen: undefined;
-  MenuScreen: undefined;
+  MenuScreen: { mode: number };
   OrderScreen: undefined;
   ReserveScreen: undefined;
   Other: NavigatorScreenParams<NestedParamList> | undefined;
