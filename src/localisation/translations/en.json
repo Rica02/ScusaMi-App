@@ -18,7 +18,9 @@
     "confirm": "Confirm",
     "back": "Back",
     "edit": "Edit",
-    "delete_account": "Delete account"
+    "delete_account": "Delete account",
+    "view_in_maps": "View in Maps",
+    "contact_us": "Contact us"
   },
   "menu": {
     "all": "All",
@@ -82,5 +84,17 @@
     "company": "Company",
     "company_name": "Company Name",
     "password": "Password"
+  },
+  "about_us": {
+    "piacere": "Piacere!",
+    "description": "Like our tiny fast cars, SCUSA MI! is BIG on the inside, filled with plenty of Italian bravata & designed to be enjoyed!\n\nWith retro styles and flavours from the North to the South, we are a ‘Little Italy’ under un tetto. We can and will fill your day with abbondanza di food, drink, caffé & musica.",
+    "dolce_vita": "Dolce vita!",
+    "ore_di_trading": "Ore di trading",
+    "monday_thursday": "Monday to Thursday",
+    "fri_sat_sun": "Friday, Saturday & Sunday",
+    "address": "Address",
+    "phone": "Phone",
+    "queries": "Do you have any queries or want to leave us some feedback?",
+    "copyright": "Copyright @ 2022 SCUSA MI! Italiano - All Rights Reserved."
   }
 }

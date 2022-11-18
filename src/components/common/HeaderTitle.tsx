@@ -1,15 +1,20 @@
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, StyleProp, TextStyle } from 'react-native';
 import { VALUES } from '../../constants/Styling';
 
 interface HeaderTitleProps {
   children: JSX.Element | string;
   colour: string;
+  style?: StyleProp<TextStyle>;
 }
 
 const HeaderTitle = (props: HeaderTitleProps) => {
-  const { children, colour } = props;
+  const { children, colour, style } = props;
 
-  return <Text style={[styles.text, { color: colour }]}>{children}</Text>;
+  return (
+    <Text style={[styles.text, { color: colour }, style && style]}>
+      {children}
+    </Text>
+  );
 };
 
 export default HeaderTitle;

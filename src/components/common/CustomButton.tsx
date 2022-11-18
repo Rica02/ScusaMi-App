@@ -4,6 +4,7 @@ import {
   StyleProp,
   StyleSheet,
   Text,
+  TextStyle,
   ViewStyle,
 } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
@@ -13,14 +14,15 @@ interface CustomButtonProps {
   children: JSX.Element | string;
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
-  const { children, onPress, style } = props;
+  const { children, onPress, style, textStyle } = props;
 
   return (
     <Pressable style={[styles.container, style && style]} onPress={onPress}>
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, textStyle && textStyle]}>{children}</Text>
     </Pressable>
   );
 };

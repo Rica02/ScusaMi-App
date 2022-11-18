@@ -19,7 +19,6 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  //ProfileScreen: undefined;
   ProfileLoginModal: undefined;
   MenuItemModal: { title: string; item: MenuItemType };
   ActiveOrderModal: { order: any };
@@ -35,7 +34,6 @@ export type RootTabParamList = {
   OrderScreen: undefined;
   ReserveScreen: undefined;
   Other: NavigatorScreenParams<NestedParamList> | undefined;
-  //OtherScreen: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
@@ -47,6 +45,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 export type NestedParamList = {
   OtherScreen: undefined;
   ProfileScreen: undefined;
+  AboutUsScreen: undefined;
 };
 
 export type NestedScreenProps<Screen extends keyof NestedParamList> =

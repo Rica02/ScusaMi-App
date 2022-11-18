@@ -6,18 +6,66 @@ import { useTranslation } from 'react-i18next';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
+import { NestedScreenProps } from '../typings/navigationTypes';
 
-export default function OtherScreen() {
+interface OtherScreenProps {
+  //navigation: NestedScreenProps<'OtherScreen'>;
+  navigation: any;
+}
+
+export default function OtherScreen(props: OtherScreenProps) {
+  const { navigation } = props;
   const { t } = useTranslation();
-  const buttonLabels = [
-    t('other.home'),
-    t('other.browse_menu'),
-    t('other.order'),
-    t('other.reserve_table'),
-    t('other.my_profile'),
-    t('other.leave_feedback'),
-    t('other.about_us'),
-    t('other.settings'),
+
+  const buttons = [
+    {
+      desc: t('other.home'),
+      func: function () {
+        navigation.navigate('Root', { screen: 'HomeScreen' });
+      },
+    },
+    {
+      desc: t('other.browse_menu'),
+      func: function () {
+        navigation.navigate('Root', { screen: 'MenuScreen' });
+      },
+    },
+    {
+      desc: t('other.order'),
+      func: function () {
+        navigation.navigate('Root', { screen: 'OrderScreen' });
+      },
+    },
+    {
+      desc: t('other.reserve_table'),
+      func: function () {
+        navigation.navigate('Root', { screen: 'ReserveScreen' });
+      },
+    },
+    {
+      desc: t('other.my_profile'),
+      func: function () {
+        navigation.navigate('Other', { screen: 'ProfileScreen' });
+      },
+    },
+    {
+      desc: t('other.leave_feedback'),
+      func: function () {
+        navigation.navigate('');
+      },
+    },
+    {
+      desc: t('other.about_us'),
+      func: function () {
+        navigation.navigate('Other', { screen: 'AboutUsScreen' });
+      },
+    },
+    {
+      desc: t('other.settings'),
+      func: function () {
+        navigation.navigate('');
+      },
+    },
   ];
 
   return (
@@ -26,9 +74,13 @@ export default function OtherScreen() {
         <AntDesign name="close" size={30} color="COLOURS.BLACK" />
       </View>
       <View style={styles.buttonsContainer}>
-        {buttonLabels.map((label, index) => (
-          <Pressable key={index} style={styles.buttonContainer}>
-            <Text style={styles.label}>{label}</Text>
+        {buttons.map((button, index) => (
+          <Pressable
+            key={index}
+            style={styles.buttonContainer}
+            onPress={button.func}
+          >
+            <Text style={styles.label}>{button.desc}</Text>
           </Pressable>
         ))}
       </View>

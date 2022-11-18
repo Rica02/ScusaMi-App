@@ -34,6 +34,7 @@ import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
 import ActiveOrderModal from '../screens/ActiveOrderModal';
 import ProfileScreen from '../screens/ProfileScreen';
+import AboutUsScreen from '../screens/AboutUsScreen';
 
 export default function Navigation() {
   return (
@@ -57,11 +58,6 @@ function RootNavigator() {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
-        options={{ title: 'PROFILE' }}
-      /> */}
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
@@ -228,8 +224,6 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        // name="OtherScreen"
-        // component={OtherScreen}
         name="Other"
         component={Other}
         options={{
@@ -262,6 +256,11 @@ function Other() {
       <NestedOther.Screen
         name="ProfileScreen"
         component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="AboutUsScreen"
+        component={AboutUsScreen}
         options={{ headerShown: false }}
       />
     </NestedOther.Navigator>
