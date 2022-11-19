@@ -8,16 +8,15 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { RootTabScreenProps } from '../typings/navigationTypes';
+import { NestedScreenProps } from '../typings/navigationTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
+import { MENU_MODE } from '../constants/AppConstants';
 import HeaderTitle from '../components/common/HeaderTitle';
 import OrderButtons from '../components/order/OrderButtons';
 import ActiveOrderCard from '../components/order/ActiveOrderCard';
 
-export default function OrderScreen({
-  navigation,
-}: RootTabScreenProps<'OrderScreen'>) {
+export default function OrderScreen({ navigation }: NestedScreenProps<any>) {
   const { t } = useTranslation();
   const [hasActiveOrders, setHasActiveOrders] = useState<boolean | undefined>();
 
@@ -36,7 +35,14 @@ export default function OrderScreen({
         <Text style={styles.startOrderingText}>
           {t('order.start_ordering')}
         </Text>
-        <OrderButtons />
+        <OrderButtons
+          onPressDineIn={() =>
+            navigation.navigate('MenuScreen', { mode: MENU_MODE.DINEIN })
+          }
+          onPressTakeAway={() =>
+            navigation.navigate('MenuScreen', { mode: MENU_MODE.TAKEAWAY })
+          }
+        />
       </ImageBackground>
       <View style={styles.lowerContainer}>
         <HeaderTitle colour={COLOURS.WHITE}>

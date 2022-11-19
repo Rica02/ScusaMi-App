@@ -10,13 +10,16 @@ import {
   Pressable,
 } from 'react-native';
 
-import HeaderTitle from '../components/common/HeaderTitle';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
-import CustomButton from '../components/common/CustomButton';
+import { RootStackScreenProps } from '../../typings/navigationTypes';
+import HeaderTitle from '../../components/common/HeaderTitle';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
+import CustomButton from '../../components/common/CustomButton';
 import { FontAwesome } from '@expo/vector-icons';
 
-export default function ProfileLoginModal() {
+export default function ProfileLoginModal({
+  navigation,
+}: RootStackScreenProps<'ProfileLoginModal'>) {
   const { t } = useTranslation();
   return (
     <View style={styles.container}>
@@ -41,7 +44,14 @@ export default function ProfileLoginModal() {
             {t('profile.forgot_password')}
           </Text>
         </Pressable>
-        <CustomButton onPress={() => console.log()}>
+        <CustomButton
+          onPress={() =>
+            navigation.navigate('Root', {
+              screen: 'Other',
+              params: { screen: 'ProfileScreen', initial: false },
+            })
+          }
+        >
           {t('buttons.sign_in')}
         </CustomButton>
       </View>

@@ -1,16 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { useTranslation } from 'react-i18next';
-import { Platform, StyleSheet, View, Text, ScrollView } from 'react-native';
-
-import { RootStackScreenProps } from '../typings/navigationTypes';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
 import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { Platform, StyleSheet, View, Text, ScrollView } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   Ionicons,
   MaterialCommunityIcons,
   SimpleLineIcons,
 } from '@expo/vector-icons';
+
+import { RootStackScreenProps } from '../../typings/navigationTypes';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
 
 export default function ActiveOrderModal({
   route,
@@ -50,7 +50,10 @@ export default function ActiveOrderModal({
         <View style={styles.yourOrderContainer}>
           <Text style={styles.yourOrderTitle}>{t('order.your_order')}</Text>
           <View style={styles.orderContainer}>
-            <Text>1x Calamari fritti</Text>
+            <Text>2x Calamari fritti</Text>
+            <Text>1x Margherita pizza</Text>
+            <Text>2x Spaghetti carbonara</Text>
+            <Text>1x Apple sour</Text>
           </View>
         </View>
         {/* Current progress */}

@@ -17,13 +17,14 @@ import {
 } from '@expo/vector-icons';
 
 import {
+  NestedParamList,
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from '../typings/navigationTypes';
 import LinkingConfiguration from './LinkingConfiguration';
 import { COLOURS } from '../constants/Colours';
-import ProfileLoginModal from '../screens/ProfileLoginModal';
+import ProfileLoginModal from '../screens/profile/ProfileLoginModal';
 import MenuItemModal from '../screens/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
@@ -31,7 +32,15 @@ import MenuScreen from '../screens/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
-import ActiveOrderModal from '../screens/ActiveOrderModal';
+import ActiveOrderModal from '../screens/order/ActiveOrderModal';
+import ProfileScreen from '../screens/profile/ProfileScreen';
+import AboutUsScreen from '../screens/AboutUsScreen';
+import ContactUsModal from '../screens/ContactUsModal';
+import SettingsScreen from '../screens/SettingsScreen';
+import OrderCartModal from '../screens/order/OrderCartModal';
+import OrderConfirmationScreen from '../screens/order/OrderConfirmationScreen';
+import { MENU_MODE } from '../constants/AppConstants';
+import { BrowseType } from '../typings/menuTypes';
 
 export default function Navigation() {
   return (
@@ -100,6 +109,40 @@ function RootNavigator() {
           component={ProfileLoginModal}
           options={({ navigation, route }: RootTabScreenProps<any>) => ({
             title: 'LOGIN',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="ContactUsModal"
+          component={ContactUsModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'CONTACT US',
+            headerLeft: () => (
+              <Pressable
+                onPress={() => navigation.goBack()}
+                style={({ pressed }) => ({
+                  opacity: pressed ? 0.5 : 1,
+                })}
+              >
+                <AntDesign name="close" size={30} color="COLOURS.BLACK" />
+              </Pressable>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="OrderCartModal"
+          component={OrderCartModal}
+          options={({ navigation, route }: RootTabScreenProps<any>) => ({
+            title: 'YOUR ORDER',
             headerLeft: () => (
               <Pressable
                 onPress={() => navigation.goBack()}
@@ -189,11 +232,13 @@ function BottomTabNavigator() {
             />
           ),
         })}
+        initialParams={{ mode: MENU_MODE.BROWSE as BrowseType }}
       />
       <BottomTab.Screen
-        name="OrderScreen"
-        component={OrderScreen}
-        options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
+        name="Order"
+        component={Order}
+        options={{
+          headerTitle: '',
           title: 'ORDER',
           tabBarIcon: ({ color }) => (
             <Ionicons
@@ -203,7 +248,7 @@ function BottomTabNavigator() {
               style={{ marginBottom: -3 }}
             />
           ),
-        })}
+        }}
       />
       <BottomTab.Screen
         name="ReserveScreen"
@@ -221,9 +266,10 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="OtherScreen"
-        component={OtherScreen}
+        name="Other"
+        component={Other}
         options={{
+          headerTitle: '',
           title: 'OTHER',
           tabBarIcon: ({ color }) => (
             <Feather
@@ -236,5 +282,53 @@ function BottomTabNavigator() {
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+const NestedOrder = createNativeStackNavigator<NestedParamList>();
+
+function Order() {
+  return (
+    <NestedOrder.Navigator initialRouteName="OrderScreen">
+      <NestedOrder.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOrder.Screen
+        name="OrderConfirmationScreen"
+        component={OrderConfirmationScreen}
+        options={{ headerShown: false }}
+      />
+    </NestedOrder.Navigator>
+  );
+}
+
+const NestedOther = createNativeStackNavigator<NestedParamList>();
+
+function Other() {
+  return (
+    <NestedOther.Navigator initialRouteName="OtherScreen">
+      <NestedOther.Screen
+        name="OtherScreen"
+        component={OtherScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="AboutUsScreen"
+        component={AboutUsScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{ headerShown: false }}
+      />
+    </NestedOther.Navigator>
   );
 }

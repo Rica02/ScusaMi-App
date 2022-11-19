@@ -14,12 +14,33 @@
     "next": "Next",
     "sign_in": "Sign in",
     "sign_up": "Sign up",
+    "sign_out": "Sign out",
     "confirm": "Confirm",
-    "back": "Back"
+    "back": "Back",
+    "edit": "Edit",
+    "delete_account": "Delete account",
+    "view_in_maps": "View in Maps",
+    "contact_us": "Contact us",
+    "send": "Send",
+    "return_to_home": "Return to home",
+    "your_order": "Your order",
+    "view_cart": "View cart",
+    "remove": "Remove",
+    "cancel_order": "Cancel order",
+    "pay_now": "Pay NOW from the app",
+    "pay_later": "Pay LATER at the front",
+    "okay": "Okay",
+    "order_again": "Order again",
+    "add_to_order": "Add to order"
   },
   "menu": {
     "all": "All",
-    "extra_charge": "extra charge"
+    "extra_charge": "extra charge",
+    "remove": "Remove",
+    "add_extras": "Add extras",
+    "max_3": "Max 3",
+    "add_notes": "Add notes",
+    "extras_charge": "You may be charged for extras"
   },
   "order": {
     "start_ordering": "Start ordering",
@@ -50,12 +71,7 @@
     "to_save_details": "to save your details for next time",
     "continue_as_guest": "Alternatively, continue as a guest:",
     "i_agree": "I agree to the",
-    "terms_and_conditions": "Terms and Conditions",
-    "first_name": "First Name",
-    "last_name": "Last Name",
-    "mobile": "Mobile",
-    "email": "Email",
-    "company_name": "Company Name"
+    "terms_and_conditions": "Terms and Conditions"
   },
   "other": {
     "home": "Home",
@@ -73,6 +89,48 @@
     "forgot_password": "Forgot password?",
     "sign_in_facebook": "Sign in with Facebook",
     "sign_in_google": "Sign in with Google",
-    "dont_have_account": "Don't have an account?"
+    "dont_have_account": "Don't have an account?",
+    "logged_in_as": "Logged in as "
+  },
+  "user_details": {
+    "name": "Name",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "mobile": "Mobile",
+    "email": "Email",
+    "company": "Company",
+    "company_name": "Company Name",
+    "password": "Password"
+  },
+  "about_us": {
+    "piacere": "Piacere!",
+    "description": "Like our tiny fast cars, SCUSA MI! is BIG on the inside, filled with plenty of Italian bravata & designed to be enjoyed!\n\nWith retro styles and flavours from the North to the South, we are a ‘Little Italy’ under un tetto. We can and will fill your day with abbondanza di food, drink, caffé & musica.",
+    "dolce_vita": "Dolce vita!",
+    "ore_di_trading": "Ore di trading",
+    "monday_thursday": "Monday to Thursday",
+    "fri_sat_sun": "Friday, Saturday & Sunday",
+    "address": "Address",
+    "phone": "Phone",
+    "queries": "Do you have any queries or want to leave us some feedback?",
+    "copyright": "Copyright @ 2022 SCUSA MI! Italiano - All Rights Reserved."
+  },
+  "contact_us": {
+    "tell_us_everything": "Tell us everything",
+    "grazie": "Grazie!",
+    "message_sent": "Your message has been sent."
+  },
+  "settings": {
+    "settings": "Settings",
+    "notifications": "Notifications",
+    "bug_or_suggestion": "Report a bug or make an app suggestion",
+    "view": "View"
+  },
+  "cart": {
+    "dine_in": "Dine in at Table ",
+    "pickup": "Pick-up today at ",
+    "total": "Total",
+    "order_confirmed": "Order confirmed.",
+    "grazie_mille": "Grazie mille!",
+    "order_progress_or_change": "You can view the progress of your order from the ORDER screen.\n\nIf you need to change your order please let our staff know ASAP."
   }
 }

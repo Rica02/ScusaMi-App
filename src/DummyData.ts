@@ -1,3 +1,5 @@
+import { MENU_MODE } from './constants/AppConstants';
+
 export const MENU = [
   {
     category: 'Specials',
@@ -130,6 +132,32 @@ export const MENU = [
           takeaway: 'y',
         },
       },
+      {
+        name: 'Takeaway test',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+        price: 26,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Not takeaway test',
+        image:
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+        price: 26,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'n',
+        },
+      },
     ],
   },
 ];
@@ -149,3 +177,53 @@ export const BOOKING = {
     ],
   },
 };
+
+export const USER = {
+  fName: 'Rica',
+  lName: 'Beepboop',
+  mobile: 123456789,
+  email: 'email@email.com',
+  company: '',
+  password: '******',
+};
+
+export const ORDERS = [
+  {
+    mode: MENU_MODE.DINEIN,
+    table: 2,
+    items: [
+      {
+        num: 1,
+        item: {
+          name: 'Buffalino',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+          price: 26,
+          nutriInfo: {
+            'gluten free': 'w',
+            vegetarian: 'n',
+            takeaway: 'y',
+          },
+        },
+      },
+      {
+        num: 2,
+        item: {
+          name: 'Calamari fritti',
+          image:
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+          description:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+          price: 19,
+          nutriInfo: {
+            'gluten free': 'w',
+            vegetarian: 'n',
+            takeaway: 'y',
+          },
+        },
+      },
+    ],
+  },
+];

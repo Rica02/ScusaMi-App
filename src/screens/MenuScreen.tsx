@@ -4,29 +4,54 @@ import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
-import { MenuType } from '../typings/menuTypes';
+import { MenuType, OrderType } from '../typings/menuTypes';
+import { MENU_MODE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import MenuList from '../components/menu/MenuList';
 
-import { MENU } from '../DummyData';
+import { MENU, ORDERS } from '../DummyData';
 
 export default function MenuScreen({
   navigation,
+  route,
 }: RootTabScreenProps<'MenuScreen'>) {
+  const { mode } = route.params;
   const { t } = useTranslation();
   const flatListRef = useRef<any | undefined>();
-  const [displayedMenu, setDisplayedMenu] = useState<MenuType[] | undefined>();
+  const [displayedMenu, setDisplayedMenu] = useState<MenuType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<
     { category: string; index: number } | undefined
   >();
 
   useEffect(() => {
     // Get menu and set initial category select
-    setDisplayedMenu(MENU as MenuType[]);
+    getMenu(mode);
     setSelectedCategory({ category: 'All', index: 0 });
   }, []);
+
+  useEffect(() => {
+    getMenu(mode);
+  }, [mode]);
+
+  // Get menu items based on mode (browse/dine-in/takeaway)
+  const getMenu = (mode: number) => {
+    // If in takeaway mode, only show items that can be takeaway
+    if (mode == MENU_MODE.TAKEAWAY) {
+      let newMenu: MenuType[] = [];
+      MENU.forEach((category) => {
+        let newItems = category.items.filter(
+          (item) => item.nutriInfo.takeaway == 'y'
+        );
+        let newCategory = { ...category, items: newItems } as MenuType;
+        newMenu?.push(newCategory);
+      });
+      setDisplayedMenu(newMenu as MenuType[]);
+    } else {
+      setDisplayedMenu(MENU as MenuType[]);
+    }
+  };
 
   const handleCategorySelect = (category: string, index: number) => {
     // Set category selection and scroll down to selected category
@@ -49,7 +74,6 @@ export default function MenuScreen({
           onPress={handleSearchPress}
         />
         <FlatList
-          style={styles.categories}
           data={displayedMenu}
           horizontal
           keyExtractor={(item) => item.category}
@@ -107,6 +131,16 @@ export default function MenuScreen({
       <FlatList
         ref={flatListRef}
         data={displayedMenu}
+        ListFooterComponent={
+          // Add padding at bottom of items for cart button
+          <View
+            style={
+              mode !== MENU_MODE.BROWSE && {
+                paddingBottom: 2 * VALUES.SPACING.XLARGE,
+              }
+            }
+          />
+        }
         keyExtractor={(item) => item.category}
         renderItem={({ item }) => (
           <>
@@ -117,12 +151,39 @@ export default function MenuScreen({
                 navigation.navigate('MenuItemModal', {
                   title: item.name,
                   item: item,
+                  mode: mode,
                 })
               }
             />
           </>
         )}
       />
+      {/* Show cart button if ordering dine-in / takeaway */}
+      {mode !== MENU_MODE.BROWSE && (
+        <Pressable
+          style={styles.cartButton}
+          onPress={() =>
+            navigation.navigate('OrderCartModal', {
+              order: ORDERS[0] as OrderType,
+            })
+          }
+        >
+          <View style={[styles.flexRowCenter, { flex: 1 }]}>
+            <Text style={[styles.yourOrderText, styles.whiteText]}>
+              {t('buttons.your_order')}
+            </Text>
+            <Text style={styles.whiteText}>0 item(s)</Text>
+          </View>
+          <View style={styles.flexRowCenter}>
+            <Text style={styles.whiteText}>{t('buttons.view_cart')}</Text>
+            <Feather
+              name="chevron-right"
+              size={VALUES.SPACING.LARGE}
+              color={COLOURS.WHITE}
+            />
+          </View>
+        </Pressable>
+      )}
     </View>
   );
 }
@@ -132,7 +193,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLOURS.WHITE,
   },
-  categories: {},
   sorterContainer: {
     paddingHorizontal: VALUES.SPACING.SMALL,
     paddingVertical: VALUES.SPACING.SMALL,
@@ -155,5 +215,28 @@ const styles = StyleSheet.create({
   categoryUnderline: {
     borderBottomWidth: 2,
     borderBottomColor: COLOURS.RED,
+  },
+
+  cartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    backgroundColor: COLOURS.GREEN,
+    padding: VALUES.SPACING.MEDIUM,
+    bottom: VALUES.SPACING.SMALL,
+    right: VALUES.SPACING.SMALL,
+    left: VALUES.SPACING.SMALL,
+  },
+  flexRowCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  whiteText: {
+    color: COLOURS.WHITE,
+  },
+  yourOrderText: {
+    textTransform: 'uppercase',
+    marginRight: VALUES.SPACING.MEDIUM,
+    fontWeight: '600',
   },
 });

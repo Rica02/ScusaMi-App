@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { Entypo } from '@expo/vector-icons';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
-import { MenuItemType } from '../typings/menuTypes';
+import { BrowseType, MenuItemType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -20,6 +20,7 @@ import MenuList from '../components/menu/MenuList';
 import OrderButtons from '../components/order/OrderButtons';
 
 import { MENU } from '../DummyData';
+import { MENU_MODE } from '../constants/AppConstants';
 
 export default function HomeScreen({
   navigation,
@@ -65,7 +66,18 @@ export default function HomeScreen({
           <Text style={styles.mangiaText}>{t('home.mangia')}</Text>
           <Text style={styles.mangiaText}>{t('home.mangia')}!</Text>
         </View>
-        <OrderButtons />
+        <OrderButtons
+          onPressDineIn={() =>
+            navigation.navigate('MenuScreen', {
+              mode: MENU_MODE.DINEIN as BrowseType,
+            })
+          }
+          onPressTakeAway={() =>
+            navigation.navigate('MenuScreen', {
+              mode: MENU_MODE.TAKEAWAY as BrowseType,
+            })
+          }
+        />
       </ImageBackground>
       {/* Our menu */}
       <View style={styles.ourMenuContainer}>
@@ -84,7 +96,11 @@ export default function HomeScreen({
             />
             <Pressable
               style={styles.arrow}
-              onPress={() => navigation.navigate('MenuScreen')}
+              onPress={() =>
+                navigation.navigate('MenuScreen', {
+                  mode: MENU_MODE.BROWSE as BrowseType,
+                })
+              }
             >
               <Entypo name="arrow-bold-right" size={120} color={COLOURS.RED} />
             </Pressable>
@@ -102,6 +118,7 @@ export default function HomeScreen({
             navigation.navigate('MenuItemModal', {
               title: item.name,
               item: item,
+              mode: MENU_MODE.BROWSE as BrowseType,
             })
           }
         />

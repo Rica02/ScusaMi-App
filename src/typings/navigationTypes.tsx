@@ -9,7 +9,7 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MenuItemType } from './menuTypes';
+import { BrowseType, MenuItemType, OrderType } from './menuTypes';
 
 declare global {
   namespace ReactNavigation {
@@ -20,8 +20,10 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   ProfileLoginModal: undefined;
-  MenuItemModal: { title: string; item: MenuItemType };
+  MenuItemModal: { title: string; item: MenuItemType; mode: BrowseType };
   ActiveOrderModal: { order: any };
+  ContactUsModal: undefined;
+  OrderCartModal: { order: OrderType };
   NotFound: undefined;
 };
 
@@ -30,14 +32,29 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 
 export type RootTabParamList = {
   HomeScreen: undefined;
-  MenuScreen: undefined;
-  OrderScreen: undefined;
+  MenuScreen: { mode: BrowseType };
+  Order: NavigatorScreenParams<NestedParamList> | undefined;
   ReserveScreen: undefined;
-  OtherScreen: undefined;
+  Other: NavigatorScreenParams<NestedParamList> | undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<RootTabParamList, Screen>,
     NativeStackScreenProps<RootStackParamList>
+  >;
+
+export type NestedParamList = {
+  OtherScreen: undefined;
+  ProfileScreen: undefined;
+  AboutUsScreen: undefined;
+  SettingsScreen: undefined;
+  OrderScreen: undefined;
+  OrderConfirmationScreen: undefined;
+};
+
+export type NestedScreenProps<Screen extends keyof NestedParamList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<NestedParamList, Screen>,
+    NativeStackScreenProps<RootTabParamList>
   >;

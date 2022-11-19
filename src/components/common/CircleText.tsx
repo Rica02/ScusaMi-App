@@ -1,19 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextStyle, View } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 
 interface CircleTextProps {
   children: JSX.Element | string;
   disabled?: boolean;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const CircleText = (props: CircleTextProps) => {
-  const { children, disabled = false } = props;
+  const { children, disabled = false, textStyle } = props;
 
   return (
     <View style={[styles.container, disabled && { opacity: 0.5 }]}>
-      <Text style={styles.text}>{children}</Text>
+      <Text style={[styles.text, textStyle && textStyle]}>{children}</Text>
     </View>
   );
 };
@@ -31,7 +32,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLOURS.BLACK,
-    fontFamily: 'caveat-brush',
-    fontSize: VALUES.FONT_SIZE['XLARGE'],
+    //fontFamily: 'caveat-brush',
+    fontSize: VALUES.FONT_SIZE.LARGE,
   },
 });
