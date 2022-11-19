@@ -33,7 +33,8 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   HomeScreen: undefined;
   MenuScreen: { mode: number };
-  OrderScreen: undefined;
+  //OrderScreen: undefined;
+  Order: NavigatorScreenParams<NestedParamList> | undefined;
   ReserveScreen: undefined;
   Other: NavigatorScreenParams<NestedParamList> | undefined;
 };
@@ -49,6 +50,8 @@ export type NestedParamList = {
   ProfileScreen: undefined;
   AboutUsScreen: undefined;
   SettingsScreen: undefined;
+  OrderScreen: undefined;
+  OrderConfirmationScreen: undefined;
 };
 
 export type NestedScreenProps<Screen extends keyof NestedParamList> =

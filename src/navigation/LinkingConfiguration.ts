@@ -25,9 +25,10 @@ const linking: LinkingOptions<RootStackParamList> = {
               MenuScreen: 'menu',
             },
           },
-          OrderScreen: {
+          Order: {
             screens: {
               OrderScreen: 'order',
+              OrderConfirmationScreen: 'orderconfirmation',
             },
           },
           ReserveScreen: {

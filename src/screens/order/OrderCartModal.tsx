@@ -73,13 +73,23 @@ const OrderCartModal = ({
         </Pressable>
         <View>
           <CustomButton
-            onPress={() => console.log('')}
+            onPress={() =>
+              navigation.navigate('Root', {
+                screen: 'Order',
+                params: { screen: 'OrderConfirmationScreen' },
+              })
+            }
             textStyle={{ textTransform: 'none', fontWeight: '500' }}
           >
             {t('buttons.pay_now')}
           </CustomButton>
           <CustomButton
-            onPress={() => console.log('')}
+            onPress={() =>
+              navigation.navigate('Root', {
+                screen: 'Order',
+                params: { screen: 'OrderConfirmationScreen' },
+              })
+            }
             style={{
               paddingHorizontal: VALUES.SPACING.MEDIUM,
               marginTop: VALUES.SPACING.SMALL,

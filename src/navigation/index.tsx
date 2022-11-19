@@ -38,6 +38,7 @@ import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrderCartModal from '../screens/order/OrderCartModal';
+import OrderConfirmationScreen from '../screens/order/OrderConfirmationScreen';
 
 export default function Navigation() {
   return (
@@ -230,7 +231,7 @@ function BottomTabNavigator() {
           ),
         })}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="OrderScreen"
         component={OrderScreen}
         options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
@@ -244,6 +245,22 @@ function BottomTabNavigator() {
             />
           ),
         })}
+      /> */}
+      <BottomTab.Screen
+        name="Order"
+        component={Order}
+        options={{
+          headerTitle: '',
+          title: 'ORDER',
+          tabBarIcon: ({ color }) => (
+            <Ionicons
+              name="restaurant-outline"
+              size={30}
+              color={color}
+              style={{ marginBottom: -3 }}
+            />
+          ),
+        }}
       />
       <BottomTab.Screen
         name="ReserveScreen"
@@ -277,6 +294,25 @@ function BottomTabNavigator() {
         }}
       />
     </BottomTab.Navigator>
+  );
+}
+
+const NestedOrder = createNativeStackNavigator<NestedParamList>();
+
+function Order() {
+  return (
+    <NestedOrder.Navigator initialRouteName="OrderScreen">
+      <NestedOrder.Screen
+        name="OrderScreen"
+        component={OrderScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOrder.Screen
+        name="OrderConfirmationScreen"
+        component={OrderConfirmationScreen}
+        options={{ headerShown: false }}
+      />
+    </NestedOrder.Navigator>
   );
 }
 
