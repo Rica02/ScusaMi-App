@@ -76,7 +76,7 @@ const OrderCartModal = ({
             onPress={() =>
               navigation.navigate('Root', {
                 screen: 'Order',
-                params: { screen: 'OrderConfirmationScreen' },
+                params: { screen: 'OrderConfirmationScreen', initial: false },
               })
             }
             textStyle={{ textTransform: 'none', fontWeight: '500' }}
@@ -87,7 +87,7 @@ const OrderCartModal = ({
             onPress={() =>
               navigation.navigate('Root', {
                 screen: 'Order',
-                params: { screen: 'OrderConfirmationScreen' },
+                params: { screen: 'OrderConfirmationScreen', initial: false },
               })
             }
             style={{

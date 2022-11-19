@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Feather } from '@expo/vector-icons';
 
@@ -33,10 +33,18 @@ const OrderConfirmationScreen = ({
       <Text style={styles.orderText}>{t('cart.order_progress_or_change')}</Text>
       <CustomButton
         style={{ width: '100%', maxWidth: 200 }}
+        textStyle={{ fontWeight: '600' }}
         onPress={() => navigation.navigate('HomeScreen')}
       >
         {t('buttons.okay')}
       </CustomButton>
+      <Pressable
+        style={styles.orderAgain}
+        onPress={() => navigation.navigate('Order', { screen: 'OrderScreen' })}
+      >
+        <Text style={styles.orderAgainText}>{t('buttons.order_again')}</Text>
+        <Feather name="chevron-right" size={24} color={COLOURS.GREEN} />
+      </Pressable>
     </View>
   );
 };
@@ -62,5 +70,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: VALUES.SPACING.MEDIUM,
     maxWidth: 250,
+  },
+  orderAgain: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  orderAgainText: {
+    color: COLOURS.GREEN,
+    fontSize: VALUES.FONT_SIZE.MEDIUM,
+    fontWeight: '600',
   },
 });

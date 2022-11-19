@@ -29,7 +29,8 @@
     "cancel_order": "Cancel order",
     "pay_now": "Pay NOW from the app",
     "pay_later": "Pay LATER at the front",
-    "okay": "Okay"
+    "okay": "Okay",
+    "order_again": "Order again"
   },
   "menu": {
     "all": "All",
