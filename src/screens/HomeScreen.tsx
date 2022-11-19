@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { Entypo } from '@expo/vector-icons';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
-import { MenuItemType } from '../typings/menuTypes';
+import { BrowseType, MenuItemType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -68,10 +68,14 @@ export default function HomeScreen({
         </View>
         <OrderButtons
           onPressDineIn={() =>
-            navigation.navigate('MenuScreen', { mode: MENU_MODE.DINEIN })
+            navigation.navigate('MenuScreen', {
+              mode: MENU_MODE.DINEIN as BrowseType,
+            })
           }
           onPressTakeAway={() =>
-            navigation.navigate('MenuScreen', { mode: MENU_MODE.TAKEAWAY })
+            navigation.navigate('MenuScreen', {
+              mode: MENU_MODE.TAKEAWAY as BrowseType,
+            })
           }
         />
       </ImageBackground>
@@ -93,7 +97,9 @@ export default function HomeScreen({
             <Pressable
               style={styles.arrow}
               onPress={() =>
-                navigation.navigate('MenuScreen', { mode: MENU_MODE.BROWSE })
+                navigation.navigate('MenuScreen', {
+                  mode: MENU_MODE.BROWSE as BrowseType,
+                })
               }
             >
               <Entypo name="arrow-bold-right" size={120} color={COLOURS.RED} />
@@ -112,6 +118,7 @@ export default function HomeScreen({
             navigation.navigate('MenuItemModal', {
               title: item.name,
               item: item,
+              mode: MENU_MODE.BROWSE as BrowseType,
             })
           }
         />

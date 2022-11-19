@@ -30,11 +30,17 @@
     "pay_now": "Pay NOW from the app",
     "pay_later": "Pay LATER at the front",
     "okay": "Okay",
-    "order_again": "Order again"
+    "order_again": "Order again",
+    "add_to_order": "Add to order"
   },
   "menu": {
     "all": "All",
-    "extra_charge": "extra charge"
+    "extra_charge": "extra charge",
+    "remove": "Remove",
+    "add_extras": "Add extras",
+    "max_3": "Max 3",
+    "add_notes": "Add notes",
+    "extras_charge": "You may be charged for extras"
   },
   "order": {
     "start_ordering": "Start ordering",

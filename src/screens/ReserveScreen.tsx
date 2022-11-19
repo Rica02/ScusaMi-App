@@ -11,6 +11,7 @@ import CircleText from '../components/common/CircleText';
 import CustomButton from '../components/common/CustomButton';
 import TimeSelection from '../components/reserve/TimeSelection';
 import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirementsCheckboxes';
+import NumberModifier from '../components/common/NumberModifier';
 
 import { BOOKING } from '../DummyData';
 
@@ -45,7 +46,14 @@ export default function ReserveScreen() {
           {/* Booking calendar */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
             <View style={styles.titleContainer}>
-              <CircleText>1</CircleText>
+              <CircleText
+                textStyle={{
+                  fontFamily: 'caveat-brush',
+                  fontSize: VALUES.FONT_SIZE['XLARGE'],
+                }}
+              >
+                1
+              </CircleText>
               <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
                 <HeaderTitle colour={COLOURS.RED}>
                   {t('reserve.booking')}
@@ -61,11 +69,7 @@ export default function ReserveScreen() {
             <Text style={styles.questionText}>
               {t('reserve.how_many_people')}
             </Text>
-            <View style={styles.selectNumPeopleContainer}>
-              <CircleText disabled={true}>-</CircleText>
-              <Text style={styles.numPeopleText}>1</Text>
-              <CircleText disabled={false}>+</CircleText>
-            </View>
+            <NumberModifier num={1} />
           </View>
           {/* Which service */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
@@ -147,7 +151,14 @@ export default function ReserveScreen() {
           {/* Your details */}
           <View style={styles.sectionContainer}>
             <View style={styles.titleContainer}>
-              <CircleText>2</CircleText>
+              <CircleText
+                textStyle={{
+                  fontFamily: 'caveat-brush',
+                  fontSize: VALUES.FONT_SIZE['XLARGE'],
+                }}
+              >
+                2
+              </CircleText>
               <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
                 <HeaderTitle colour={COLOURS.RED}>
                   {t('reserve.your_details')}
@@ -265,16 +276,6 @@ const styles = StyleSheet.create({
     height: 250,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  selectNumPeopleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: VALUES.SPACING.SMALL,
-  },
-  numPeopleText: {
-    fontSize: VALUES.FONT_SIZE.LARGE,
-    marginHorizontal: VALUES.SPACING.MEDIUM,
   },
 
   timeSelectionContainer: {

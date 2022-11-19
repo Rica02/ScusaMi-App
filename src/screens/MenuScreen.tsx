@@ -151,6 +151,7 @@ export default function MenuScreen({
                 navigation.navigate('MenuItemModal', {
                   title: item.name,
                   item: item,
+                  mode: mode,
                 })
               }
             />

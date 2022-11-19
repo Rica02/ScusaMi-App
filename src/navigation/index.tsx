@@ -39,6 +39,8 @@ import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrderCartModal from '../screens/order/OrderCartModal';
 import OrderConfirmationScreen from '../screens/order/OrderConfirmationScreen';
+import { MENU_MODE } from '../constants/AppConstants';
+import { BrowseType } from '../typings/menuTypes';
 
 export default function Navigation() {
   return (
@@ -230,22 +232,8 @@ function BottomTabNavigator() {
             />
           ),
         })}
+        initialParams={{ mode: MENU_MODE.BROWSE as BrowseType }}
       />
-      {/* <BottomTab.Screen
-        name="OrderScreen"
-        component={OrderScreen}
-        options={({ navigation }: RootTabScreenProps<'OrderScreen'>) => ({
-          title: 'ORDER',
-          tabBarIcon: ({ color }) => (
-            <Ionicons
-              name="restaurant-outline"
-              size={30}
-              color={color}
-              style={{ marginBottom: -3 }}
-            />
-          ),
-        })}
-      /> */}
       <BottomTab.Screen
         name="Order"
         component={Order}
