@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 
 interface TimeSelectionProps {
   time: string;
-  onPress: () => void;
+  onPress: (time: string) => void;
+  selected: boolean;
 }
 
 const TimeSelection = (props: TimeSelectionProps) => {
-  const { time, onPress } = props;
+  const { time, onPress, selected } = props;
 
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={[
+        styles.container,
+        selected && { backgroundColor: COLOURS.LIGHT_GREY },
+      ]}
+      onPress={() => onPress(time)}
+    >
       <Text>{time}</Text>
     </Pressable>
   );

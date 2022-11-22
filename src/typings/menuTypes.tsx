@@ -1,3 +1,5 @@
+import { UserType } from './userTypes';
+
 export type NutriInfoValue = 'w' | 'y' | 'n'; // w = with extra charge
 export type BrowseType = 0 | 1 | 2; // 0 = Browse | 1 = Dine in | 2 = Takeaway
 
@@ -28,4 +30,14 @@ export type OrderType = {
   table?: number;
   pickup?: string;
   items: { num: number; item: MenuItemType }[];
+};
+
+export type ReserveType = {
+  date: string;
+  numPeople: number;
+  service: 'lunch' | 'dinner';
+  time: string;
+  notes?: string;
+  specialRequirements?: string[];
+  user: UserType;
 };

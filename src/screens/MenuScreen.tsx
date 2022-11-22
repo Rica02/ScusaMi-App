@@ -11,7 +11,7 @@ import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
 import MenuList from '../components/menu/MenuList';
 
-import { MENU, ORDERS } from '../DummyData';
+import { MENU } from '../DummyData';
 
 export default function MenuScreen({
   navigation,

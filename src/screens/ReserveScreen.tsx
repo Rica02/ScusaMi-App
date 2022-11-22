@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import Checkbox from 'expo-checkbox';
 import RadioButtonGroup, { RadioButtonItem } from 'expo-radio-button';
 
+import { ReserveType } from '../typings/menuTypes';
+import { UserType } from '../typings/userTypes';
+import { SERVICE_TYPE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -18,26 +21,59 @@ import { BOOKING } from '../DummyData';
 export default function ReserveScreen() {
   const { t } = useTranslation();
   const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
-  const [requirementsSelections, setRequirementsSelection] = useState<
-    string[] | undefined
-  >();
-  const [serviceSelection, setServiceSelection] = useState<
-    string | undefined
-  >();
   const [isTocChecked, setIsTocChecked] = useState(false);
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
 
-  useEffect(() => {
-    console.log(requirementsSelections);
-  }, [requirementsSelections]);
+  const [currentReservation, setCurrentReservation] = useState<
+    ReserveType | undefined
+  >();
+
+  const [date, setDate] = useState<string | undefined>('date example');
+  const [numPeople, setNumPeople] = useState(1);
+  const [serviceType, setServiceType] = useState<string | undefined>();
+  const [time, setTime] = useState<string | undefined>();
+  const [notes, setNotes] = useState('');
+  const [specialRequirements, setSpecialRequirements] = useState<string[]>([]);
+
+  const [user, setUser] = useState<UserType | undefined>({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    mobile: 123456789,
+    email: 'janedoe@email.com',
+  });
 
   useEffect(() => {
-    if (serviceSelection == 'lunch') {
+    // Update reservation times shown based on service type selected
+    if (serviceType == SERVICE_TYPE.LUNCH) {
       setTimeSelections(BOOKING.times.lunch);
-    } else if (serviceSelection == 'dinner') {
+    } else if (serviceType == SERVICE_TYPE.DINNER) {
       setTimeSelections(BOOKING.times.dinner);
     }
-  }, [serviceSelection]);
+  }, [serviceType]);
+
+  // Handle Next button pressed
+  const onNextButtonPressed = () => {
+    // Check if all required fields have been selected
+    if (date && numPeople && serviceType && time) {
+      setCurrentReservation({
+        date: date,
+        numPeople: numPeople,
+        service: serviceType as 'lunch' | 'dinner',
+        time: time,
+        notes: notes,
+        specialRequirements: specialRequirements,
+        user: user as UserType,
+      });
+      setNextButtonPressed(true);
+    } else {
+      // alert user
+      console.log('complete all fields');
+    }
+  };
+
+  useEffect(() => {
+    console.log('currentReservation ' + JSON.stringify(currentReservation));
+  }, [currentReservation]);
 
   return (
     <ScrollView style={styles.container}>
@@ -69,7 +105,7 @@ export default function ReserveScreen() {
             <Text style={styles.questionText}>
               {t('reserve.how_many_people')}
             </Text>
-            <NumberModifier num={1} />
+            <NumberModifier onPress={(num) => setNumPeople(num)} />
           </View>
           {/* Which service */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
@@ -81,8 +117,8 @@ export default function ReserveScreen() {
                 flexDirection: 'row',
                 marginVertical: VALUES.SPACING.SMALL,
               }}
-              selected={serviceSelection}
-              onSelected={(value: string) => setServiceSelection(value)}
+              selected={serviceType}
+              onSelected={(value: string) => setServiceType(value)}
               radioBackground={COLOURS.RED}
             >
               <RadioButtonItem
@@ -104,12 +140,13 @@ export default function ReserveScreen() {
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
             <Text style={styles.questionText}>{t('reserve.select_time')}</Text>
             <View style={styles.timeSelectionContainer}>
-              {serviceSelection ? (
+              {serviceType ? (
                 timeSelections?.map((item, index) => (
                   <TimeSelection
                     key={index}
                     time={item}
-                    onPress={() => console.log('')}
+                    onPress={(time) => setTime(time)}
+                    selected={time == item}
                   />
                 ))
               ) : (
@@ -136,11 +173,11 @@ export default function ReserveScreen() {
               {t('reserve.special_requirements')}
             </Text>
             <SpecialRequirementsCheckboxes
-              onToggle={(items) => setRequirementsSelection(items)}
+              onToggle={(items) => setSpecialRequirements(items)}
             />
             <CustomButton
               style={styles.nextButton}
-              onPress={() => setNextButtonPressed(true)}
+              onPress={onNextButtonPressed}
             >
               {t('buttons.next')}
             </CustomButton>
