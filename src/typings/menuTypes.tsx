@@ -4,10 +4,10 @@ export type BrowseType = 0 | 1 | 2; // 0 = Browse | 1 = Dine in | 2 = Takeaway
 export type MenuItemType = {
   name: string;
   image?: string;
-  description: string;
-  price: number;
+  description?: string;
+  price?: number;
   price2?: number;
-  nutriInfo: {
+  nutriInfo?: {
     'gluten free': NutriInfoValue;
     vegetarian: NutriInfoValue;
     takeaway: NutriInfoValue;

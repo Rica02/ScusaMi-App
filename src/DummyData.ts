@@ -5,41 +5,38 @@ export const MENU = [
     category: 'Specials',
     items: [
       {
-        name: 'Fish of the Day',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/0/07/Thyme_and_Garlic_Grilled_Salmon_with_Mango_Salsa%2C_Rosemary_Potatoes_and_Snow_Peas_%28297986190%29.jpg',
+        name: 'Gnocchi alla Lamb Ragù',
+        image: '',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 35.9,
+          'Gnocchi tossed with slow braised lamb shoulder with a medley of vegetables in a rich red wine gravy.',
+        price: 30.9,
         nutriInfo: {
-          'gluten free': 'w',
+          'gluten free': 'n',
           vegetarian: 'n',
           takeaway: 'y',
         },
       },
       {
-        name: 'Pasta Special',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/1200px-Aglio_e_olio.jpg',
+        name: 'Grilled Gold Snapper',
+        image: '',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet.',
-        price: 28.9,
+          'Chargrilled snapper fillet served with garlic prawns and buttered broccolini, drizzled with a zesty lemon mustard glaze.',
+        price: 35.9,
         nutriInfo: {
-          'gluten free': 'w',
-          vegetarian: 'y',
+          'gluten free': 'y',
+          vegetarian: 'n',
           takeaway: 'y',
         },
       },
       {
         name: 'Pizza Special',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: '',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
+          'Pumpkin purée base, pork belly, pork sausage, Stracciatella and pistachio paste.',
         price: 28.9,
         nutriInfo: {
           'gluten free': 'w',
-          vegetarian: 'y',
+          vegetarian: 'n',
           takeaway: 'y',
         },
       },
@@ -49,13 +46,12 @@ export const MENU = [
     category: 'Antipasti',
     items: [
       {
-        name: 'Antipasto misto',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/0/07/Thyme_and_Garlic_Grilled_Salmon_with_Mango_Salsa%2C_Rosemary_Potatoes_and_Snow_Peas_%28297986190%29.jpg',
+        name: 'Antipasto Misto',
+        image: 'https://i.imgur.com/78lP6ah.jpg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 29,
-        price2: 55,
+          'A share plate of Italian cured meats, olives, buffalo mozzarella, pickled vegetables & casalinga bread (2 people $32 / 6 people $59).',
+        price: 32,
+        price2: 59,
         nutriInfo: {
           'gluten free': 'n',
           vegetarian: 'n',
@@ -64,11 +60,10 @@ export const MENU = [
       },
       {
         name: 'Prosciutto e burrata',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/1200px-Aglio_e_olio.jpg',
+        image: '',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet.',
-        price: 25,
+          'San Daniele prosciutto served with fresh burrata cheese & casalinga bread.',
+        price: 27,
         nutriInfo: {
           'gluten free': 'n',
           vegetarian: 'n',
@@ -77,13 +72,22 @@ export const MENU = [
       },
       {
         name: 'Calamari fritti',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
-        description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 19,
+        image: 'https://i.imgur.com/N0nUlAL.jpg',
+        description: 'Lightly fried calamari with roquette & aioli.',
+        price: 19.5,
         nutriInfo: {
           'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Polpette al Sugo',
+        image: 'https://i.imgur.com/FnSY92o.jpg',
+        description: 'Aalted cod croquettes with garlic confit aioli.',
+        price: 19,
+        nutriInfo: {
+          'gluten free': 'n',
           vegetarian: 'n',
           takeaway: 'y',
         },
@@ -95,11 +99,21 @@ export const MENU = [
     items: [
       {
         name: 'Margherita',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/0/07/Thyme_and_Garlic_Grilled_Salmon_with_Mango_Salsa%2C_Rosemary_Potatoes_and_Snow_Peas_%28297986190%29.jpg',
+        image: 'https://i.imgur.com/JmLzvBV.jpg',
+        description: 'San Marzano sugo, basil & fior di latte.',
+        price: 24,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Prosciutto Crudo',
+        image: 'https://i.imgur.com/UXIHFgt.jpg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 22,
+          'San Marzano sugo, aged san daniele prosciutto, buffalo mozzarella, basil, roquette & parmigiano.',
+        price: 32,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
@@ -107,12 +121,52 @@ export const MENU = [
         },
       },
       {
-        name: 'Capricciosa',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aglio_e_olio.jpg/1200px-Aglio_e_olio.jpg',
+        name: 'Quattro Formaggi',
+        image: 'https://i.imgur.com/s0t0UtR.jpgg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet.',
-        price: 26,
+          'BIANCA - buffalo mozzarella, gorgonzola, smoked scamorza & grana padano.',
+        price: 29,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Scilla',
+        image: 'https://i.imgur.com/LHPgD2R.jpg',
+        description:
+          'San Marzano sugo, sauté mussels, calamari, prauns, scallops, clams, chilli, garlic & fior di latte.',
+        price: 34,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+    ],
+  },
+  {
+    category: 'Pasta & Risotti',
+    items: [
+      {
+        name: 'Lasagne',
+        image: 'https://i.imgur.com/wYtfaI7.jpg',
+        description:
+          'Pasta sheets, pomodoro sugo, beef bolognese, ham, egg & besciamella.',
+        price: 27,
+        nutriInfo: {
+          'gluten free': 'n',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Paccheri Vesuviana',
+        image: 'https://i.imgur.com/xtTwZUz.png',
+        description:
+          'Large tube pasta with porcini mushrooms, pork & fennel sausage, pomodoro sugo & smoked scamorza.',
+        price: 29,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
@@ -120,12 +174,11 @@ export const MENU = [
         },
       },
       {
-        name: 'Buffalino',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        name: 'Spaghetti al Granchio',
+        image: 'https://i.imgur.com/g3CCSUp.jpg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 26,
+          'Squid ink spaghettini with fresh crab meat & cherry tomatoes in garlic, parsley, lemon zest & extra virgin olive oil.',
+        price: 42,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
@@ -133,12 +186,28 @@ export const MENU = [
         },
       },
       {
-        name: 'Takeaway test',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        name: 'Casarecce Polpette',
+        image: 'https://i.imgur.com/LHPgD2R.jpg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 26,
+          'Short twists of pasta with pomodoro sugo, braised meatballs & parmigiano.',
+        price: 29,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+    ],
+  },
+  {
+    category: 'Secondi',
+    items: [
+      {
+        name: 'Calamari Fritti',
+        image: 'https://i.imgur.com/l5YY9jW.jpg',
+        description:
+          'Lightly fried calamari served with Italian slaw & herb fries.',
+        price: 29,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
@@ -146,15 +215,110 @@ export const MENU = [
         },
       },
       {
-        name: 'Not takeaway test',
-        image:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        name: 'Porchetta',
+        image: 'https://i.imgur.com/WDM34Es.jpg',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sodales, elit sed molestie ullamcorper, ex ex tincidunt elit.',
-        price: 26,
+          'Rolled pork belly in mediterranean herbs, slow roasted served with Italian slaw & roast potato.',
+        price: 36,
+        nutriInfo: {
+          'gluten free': 'y',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+    ],
+  },
+  {
+    category: 'Contorni',
+    items: [
+      {
+        name: 'Burrata Caprese',
+        image: 'https://i.imgur.com/LvS0BaM.jpg',
+        description:
+          'Burrata cheese, truss tomato, ligurian olives, croutons & basil with balsamic glaze & extra virgin olive oil.',
+        price: 18,
+        nutriInfo: {
+          'gluten free': 'n',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Insalata Scusa Mi!',
+        image: 'https://i.imgur.com/PP7dT1Z.jpg',
+        description:
+          'Roasted pumpkin & beetroot with spinach, kale, quinoa, pomegranate & bocconcini (prawns optional).',
+        price: 19,
+        nutriInfo: {
+          'gluten free': 'y',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+    ],
+  },
+  {
+    category: 'Bimbi',
+    items: [
+      {
+        name: 'Pasta Piccola',
+        image: '',
+        description: 'Kids pasta and sugo (vegetarian) OR beef bolognese.',
+        price: 15,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Piccola Pizza',
+        image: '',
+        description: 'Margherita (vegetarian) OR Dolce Salato.',
+        price: 15,
+        nutriInfo: {
+          'gluten free': 'w',
+          vegetarian: 'n',
+          takeaway: 'y',
+        },
+      },
+    ],
+  },
+  {
+    category: 'Dolci',
+    items: [
+      {
+        name: 'Zeppoli',
+        image: 'https://i.imgur.com/lClsdOI.jpg',
+        description:
+          'Italian doughnuts dusted in sugar & drizzled with nutella.',
+        price: 16,
+        nutriInfo: {
+          'gluten free': 'n',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Tiramisu',
+        image: 'https://i.imgur.com/TS207MQ.jpg',
+        description:
+          'Italian trifle of coffee & liqueur soaked sponge biscuits, mascarpone & cream.',
+        price: 14,
+        nutriInfo: {
+          'gluten free': 'n',
+          vegetarian: 'y',
+          takeaway: 'y',
+        },
+      },
+      {
+        name: 'Tre Gelati',
+        image: 'https://i.imgur.com/AJ1vCgm.jpg',
+        description: 'Three scoops of gelati - ask for the selection.',
+        price: 12,
+        nutriInfo: {
+          'gluten free': 'n',
+          vegetarian: 'y',
           takeaway: 'n',
         },
       },

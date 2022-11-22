@@ -18,7 +18,7 @@ import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import CustomButton from '../components/common/CustomButton';
 import { MENU_MODE } from '../constants/AppConstants';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NumberModifier from '../components/common/NumberModifier';
 
 export default function MenuItemModal({
@@ -27,14 +27,21 @@ export default function MenuItemModal({
 }: RootStackScreenProps<'MenuItemModal'>) {
   const { item, mode } = route.params;
   const { t } = useTranslation();
+  const [nutriInfo, setNutriInfo] = useState<string[]>([]);
 
-  let nutriInfo = Object.keys(item.nutriInfo) as Array<
-    keyof {
-      'gluten free': NutriInfoValue;
-      vegetarian: NutriInfoValue;
-      takeaway: NutriInfoValue;
+  useEffect(() => {
+    if (item.nutriInfo) {
+      setNutriInfo(
+        Object.keys(item.nutriInfo) as Array<
+          keyof {
+            'gluten free': NutriInfoValue;
+            vegetarian: NutriInfoValue;
+            takeaway: NutriInfoValue;
+          }
+        >
+      );
     }
-  >;
+  }, []);
 
   const renderPropertyIcon = (value: NutriInfoValue) => {
     switch (value) {
@@ -88,19 +95,39 @@ export default function MenuItemModal({
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       <ScrollView>
         {/* Image and price(s) */}
-        <ImageBackground
-          source={{ uri: item.image }}
-          style={[styles.image, { height: Dimensions.get('window').width }]}
-          resizeMode="cover"
-        >
-          {item.price2 ? (
-            <Text style={styles.priceText}>
-              ${item.price} / ${item.price2}
-            </Text>
-          ) : (
-            <Text style={styles.priceText}>${item.price}</Text>
-          )}
-        </ImageBackground>
+        {item.image ? (
+          <ImageBackground
+            source={{ uri: item.image }}
+            style={[styles.image, { height: Dimensions.get('window').width }]}
+            resizeMode="cover"
+          >
+            {item.price2 ? (
+              <Text style={styles.priceTextOnImage}>
+                ${Number(item.price).toFixed(2)} / $
+                {Number(item.price2).toFixed(2)}
+              </Text>
+            ) : (
+              <Text style={styles.priceTextOnImage}>
+                ${Number(item.price).toFixed(2)}
+              </Text>
+            )}
+          </ImageBackground>
+        ) : (
+          // Price without image
+          <View>
+            {item.price2 ? (
+              <Text style={styles.priceText}>
+                ${Number(item.price).toFixed(2)} / $
+                {Number(item.price2).toFixed(2)}
+              </Text>
+            ) : (
+              <Text style={styles.priceText}>
+                ${Number(item.price).toFixed(2)}
+              </Text>
+            )}
+          </View>
+        )}
+
         <View style={styles.lowerContainer}>
           {/* Food item description */}
           <Text style={styles.descriptionText}>{item.description}</Text>
@@ -111,9 +138,13 @@ export default function MenuItemModal({
                 <View style={[styles.tableCell, styles.tableColumnLeft]}>
                   <Text style={styles.tableCellText}>{key}</Text>
                 </View>
-                <View style={styles.tableCell}>
-                  {renderPropertyIcon(item.nutriInfo[key])}
-                </View>
+                {item.nutriInfo && (
+                  <View style={styles.tableCell}>
+                    {renderPropertyIcon(
+                      item.nutriInfo[key as keyof typeof item.nutriInfo]
+                    )}
+                  </View>
+                )}
               </View>
             ))}
           </View>
@@ -194,7 +225,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
   },
-  priceText: {
+  priceTextOnImage: {
     padding: VALUES.SPACING.SMALL,
     fontSize: VALUES.FONT_SIZE['2XLARGE'],
     fontWeight: '700',
@@ -202,6 +233,13 @@ const styles = StyleSheet.create({
     textShadowColor: COLOURS.BLACK,
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 3,
+  },
+  priceText: {
+    paddingHorizontal: VALUES.SPACING.MEDIUM,
+    paddingTop: VALUES.SPACING.MEDIUM,
+    fontSize: VALUES.FONT_SIZE.XLARGE,
+    color: COLOURS.BLACK,
+    textAlign: 'center',
   },
   lowerContainer: {
     padding: VALUES.SPACING.MEDIUM,

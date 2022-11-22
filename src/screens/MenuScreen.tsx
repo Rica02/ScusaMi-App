@@ -42,7 +42,7 @@ export default function MenuScreen({
       let newMenu: MenuType[] = [];
       MENU.forEach((category) => {
         let newItems = category.items.filter(
-          (item) => item.nutriInfo.takeaway == 'y'
+          (item) => item.nutriInfo?.takeaway == 'y'
         );
         let newCategory = { ...category, items: newItems } as MenuType;
         newMenu?.push(newCategory);
