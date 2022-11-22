@@ -20,6 +20,7 @@ import CustomButton from '../components/common/CustomButton';
 import { MENU_MODE } from '../constants/AppConstants';
 import React, { useEffect, useState } from 'react';
 import NumberModifier from '../components/common/NumberModifier';
+import Checkbox from 'expo-checkbox';
 
 export default function MenuItemModal({
   navigation,
@@ -148,30 +149,71 @@ export default function MenuItemModal({
               </View>
             ))}
           </View>
+
+          {/* For order mode (dine-in / takeaway) */}
           {mode != MENU_MODE.BROWSE && (
             <View>
-              <View>
-                <Text style={[styles.modifierTitle, { color: COLOURS.RED }]}>
-                  {t('menu.remove')}
-                </Text>
-              </View>
-              <View>
-                <Text>
-                  <Text
-                    style={[styles.modifierTitle, { color: COLOURS.GREEN }]}
-                  >
-                    {t('menu.add_extras')}
-                  </Text>
-                  <Text
-                    style={{
-                      color: COLOURS.GREY,
-                    }}
-                  >
-                    {'  '}
-                    {t('menu.max_3')}
-                  </Text>
-                </Text>
-              </View>
+              {item.modifiers && (
+                <View>
+                  {/* Remove ingredients */}
+                  {item.modifiers.remove && (
+                    <View>
+                      <Text
+                        style={[styles.modifierTitle, { color: COLOURS.RED }]}
+                      >
+                        {t('menu.remove')}
+                      </Text>
+                      {item.modifiers.remove.map((item, index) => (
+                        <View style={styles.modifierCheckbox}>
+                          <Checkbox
+                          // value={}
+                          // onValueChange={}
+                          // color={}
+                          />
+                          <Text style={styles.checkboxLabel}>{item}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                  {/* Add ingredients */}
+                  {item.modifiers.add && (
+                    <View>
+                      <Text
+                        style={[styles.modifierTitle, { color: COLOURS.GREEN }]}
+                      >
+                        <Text>{t('menu.add_extras')}</Text>
+                        <Text
+                          style={{
+                            color: COLOURS.GREY,
+                            textTransform: 'none',
+                            fontWeight: 'normal',
+                          }}
+                        >
+                          {'  '}
+                          {t('menu.max_3')}
+                        </Text>
+                      </Text>
+                      {item.modifiers.add.map((item, index) => (
+                        <View style={styles.modifierCheckbox}>
+                          <Checkbox
+                          // value={}
+                          // onValueChange={}
+                          // color={}
+                          />
+                          <Text style={styles.checkboxLabel}>
+                            {item.addOnName}{' '}
+                            <Text style={{ color: COLOURS.GREY }}>
+                              +${item.addOnPrice}
+                            </Text>
+                          </Text>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              )}
+
+              {/* Add notes */}
               <View>
                 <Text style={[styles.modifierTitle, { color: COLOURS.BLACK }]}>
                   {t('menu.add_notes')}
@@ -183,6 +225,8 @@ export default function MenuItemModal({
                   placeholder={t('menu.extras_charge')}
                 />
               </View>
+
+              {/* Add to order */}
               <View style={styles.addToOrderContainer}>
                 <NumberModifier num={1} />
                 <CustomButton
@@ -196,7 +240,8 @@ export default function MenuItemModal({
           )}
         </View>
       </ScrollView>
-      {/* Start order button */}
+
+      {/* Start order button for browse menu mode */}
       {mode == MENU_MODE.BROWSE && (
         <CustomButton
           style={styles.startOrderButton}
@@ -243,7 +288,7 @@ const styles = StyleSheet.create({
   },
   lowerContainer: {
     padding: VALUES.SPACING.MEDIUM,
-    marginBottom: VALUES.SPACING['3XLARGE'],
+    marginBottom: VALUES.SPACING['2XLARGE'],
   },
   descriptionText: {
     fontSize: VALUES.FONT_SIZE.MEDIUM,
@@ -282,6 +327,20 @@ const styles = StyleSheet.create({
     bottom: VALUES.FONT_SIZE['2XLARGE'],
   },
 
+  modifierTitle: {
+    textTransform: 'uppercase',
+    fontWeight: '600',
+    fontSize: VALUES.FONT_SIZE.MEDIUM,
+    paddingVertical: VALUES.SPACING.SMALL,
+  },
+  modifierCheckbox: {
+    flexDirection: 'row',
+    paddingBottom: VALUES.SPACING.SMALL,
+  },
+  checkboxLabel: {
+    fontSize: VALUES.FONT_SIZE.MEDIUM,
+    paddingLeft: VALUES.SPACING.SMALL,
+  },
   textArea: {
     flex: 1,
     borderWidth: 0.5,
@@ -289,11 +348,7 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     backgroundColor: COLOURS.BEIGE,
     height: 120,
-  },
-  modifierTitle: {
-    textTransform: 'uppercase',
-    fontWeight: '600',
-    fontSize: VALUES.FONT_SIZE.MEDIUM,
+    marginBottom: VALUES.SPACING.MEDIUM,
   },
   addToOrderContainer: {
     flexDirection: 'row',

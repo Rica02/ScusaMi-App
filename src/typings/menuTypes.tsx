@@ -12,6 +12,10 @@ export type MenuItemType = {
     vegetarian: NutriInfoValue;
     takeaway: NutriInfoValue;
   };
+  modifiers?: {
+    remove?: string[];
+    add?: { addOnName: string; addOnPrice: number }[];
+  };
 };
 
 export type MenuType = {

@@ -69,6 +69,9 @@ export const MENU = [
           vegetarian: 'n',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: ['Prosciutto', 'Burrata cheese', 'Casalinga bread'],
+        },
       },
       {
         name: 'Calamari fritti',
@@ -80,7 +83,12 @@ export const MENU = [
           vegetarian: 'n',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: ['Roquette', 'Aioli'],
+          add: [{ addOnName: 'Gluten free (grilled calamari)', addOnPrice: 5 }],
+        },
       },
+
       {
         name: 'Polpette al Sugo',
         image: 'https://i.imgur.com/FnSY92o.jpg',
@@ -90,6 +98,9 @@ export const MENU = [
           'gluten free': 'n',
           vegetarian: 'n',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: ['Parsley', 'Casalinga Bread'],
         },
       },
     ],
@@ -107,6 +118,18 @@ export const MENU = [
           vegetarian: 'y',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: ['Basil', 'Fior di latte'],
+          add: [
+            { addOnName: 'Gluten free base', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Fior di latte', addOnPrice: 2 },
+            { addOnName: 'Olives', addOnPrice: 2 },
+            { addOnName: 'Salami', addOnPrice: 2 },
+            { addOnName: 'Ham', addOnPrice: 2 },
+            { addOnName: 'Pineapple', addOnPrice: 2 },
+          ],
+        },
       },
       {
         name: 'Prosciutto Crudo',
@@ -118,6 +141,25 @@ export const MENU = [
           'gluten free': 'w',
           vegetarian: 'n',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: [
+            'Prosciutto',
+            'Buffalo mozzarella',
+            'Basil',
+            'Roquette',
+            'Parmigiano',
+          ],
+          add: [
+            { addOnName: 'Gluten free base', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Prosciutto', addOnPrice: 2 },
+            { addOnName: 'Buffalo mozzarella', addOnPrice: 2 },
+            { addOnName: 'Olives', addOnPrice: 2 },
+            { addOnName: 'Salami', addOnPrice: 2 },
+            { addOnName: 'Ham', addOnPrice: 2 },
+            { addOnName: 'Pineapple', addOnPrice: 2 },
+          ],
         },
       },
       {
@@ -131,17 +173,53 @@ export const MENU = [
           vegetarian: 'y',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: [
+            'Buffalo mozzarella',
+            'Gorgonzola',
+            'Smoked scamorza',
+            'Grana padano',
+          ],
+          add: [
+            { addOnName: 'Gluten free base', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Olives', addOnPrice: 2 },
+            { addOnName: 'Salami', addOnPrice: 2 },
+            { addOnName: 'Ham', addOnPrice: 2 },
+            { addOnName: 'Pineapple', addOnPrice: 2 },
+          ],
+        },
       },
       {
         name: 'Scilla',
         image: 'https://i.imgur.com/LHPgD2R.jpg',
         description:
-          'San Marzano sugo, sauté mussels, calamari, prauns, scallops, clams, chilli, garlic & fior di latte.',
+          'San Marzano sugo, sauté mussels, calamari, prawns, scallops, clams, chilli, garlic & fior di latte.',
         price: 34,
         nutriInfo: {
           'gluten free': 'w',
           vegetarian: 'n',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: [
+            'Mussels',
+            'Calamari',
+            'Prawns',
+            'Clams',
+            'Chilli',
+            'Garlic',
+            'Fior di latte',
+          ],
+          add: [
+            { addOnName: 'Gluten free base', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Fior di latte', addOnPrice: 2 },
+            { addOnName: 'Olives', addOnPrice: 2 },
+            { addOnName: 'Salami', addOnPrice: 2 },
+            { addOnName: 'Ham', addOnPrice: 2 },
+            { addOnName: 'Pineapple', addOnPrice: 2 },
+          ],
         },
       },
     ],
@@ -172,6 +250,22 @@ export const MENU = [
           vegetarian: 'n',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: [
+            'Porcini mushrooms',
+            'Pork & fennel sausage',
+            'Pomodoro sugo',
+            'Smoked scamorza',
+          ],
+          add: [
+            { addOnName: 'Gluten free pasta (spaghetti only)', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Parmigiano', addOnPrice: 0 },
+            { addOnName: 'Smoked scamorza', addOnPrice: 2 },
+            { addOnName: 'Porcini mushrooms', addOnPrice: 2 },
+            { addOnName: 'Pork & fennel sausage', addOnPrice: 2 },
+          ],
+        },
       },
       {
         name: 'Spaghetti al Granchio',
@@ -184,10 +278,27 @@ export const MENU = [
           vegetarian: 'n',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: [
+            'Squid ink spaghetti (replace with regular spaghetti)',
+            'Fresh crab meat',
+            'Cherry tomatoes',
+            'Garlic',
+            'Parsley',
+            'Lemon zest',
+          ],
+          add: [
+            { addOnName: 'Gluten free pasta (spaghetti only)', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Parmigiano', addOnPrice: 0 },
+            { addOnName: 'Fresh crab meat', addOnPrice: 5 },
+            { addOnName: 'Cherry tomatoes', addOnPrice: 2 },
+          ],
+        },
       },
       {
         name: 'Casarecce Polpette',
-        image: 'https://i.imgur.com/LHPgD2R.jpg',
+        image: 'https://i.imgur.com/aa35zlw.jpg',
         description:
           'Short twists of pasta with pomodoro sugo, braised meatballs & parmigiano.',
         price: 29,
@@ -195,6 +306,15 @@ export const MENU = [
           'gluten free': 'w',
           vegetarian: 'n',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: ['Pomodoro sugo', 'Braised meatballs', 'Parmigiano', 'Basil'],
+          add: [
+            { addOnName: 'Gluten free pasta (spaghetti only)', addOnPrice: 5 },
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Parmigiano', addOnPrice: 0 },
+            { addOnName: 'Braised meatballs', addOnPrice: 5 },
+          ],
         },
       },
     ],
@@ -213,6 +333,9 @@ export const MENU = [
           vegetarian: 'n',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: ['Italian slaw', 'Herb fries', 'Aioli'],
+        },
       },
       {
         name: 'Porchetta',
@@ -224,6 +347,9 @@ export const MENU = [
           'gluten free': 'y',
           vegetarian: 'n',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: ['Mediterranean herbs', 'Roasted potato', 'Italian slaw'],
         },
       },
     ],
@@ -242,6 +368,16 @@ export const MENU = [
           vegetarian: 'y',
           takeaway: 'y',
         },
+        modifiers: {
+          remove: [
+            'Burrata cheese',
+            'Tomato',
+            'Olives',
+            'Croutons',
+            'Basil',
+            'Balsamic glaze',
+          ],
+        },
       },
       {
         name: 'Insalata Scusa Mi!',
@@ -253,6 +389,22 @@ export const MENU = [
           'gluten free': 'y',
           vegetarian: 'y',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: [
+            'Roasted pumpkin',
+            'Beetroot',
+            'Spinach',
+            'Kale',
+            'Quinoa',
+            'Pomegranate',
+            'Bocconcini',
+          ],
+          add: [
+            { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+            { addOnName: 'Prawns', addOnPrice: 9 },
+            { addOnName: 'Chicken', addOnPrice: 7 },
+          ],
         },
       },
     ],
@@ -297,6 +449,9 @@ export const MENU = [
           'gluten free': 'n',
           vegetarian: 'y',
           takeaway: 'y',
+        },
+        modifiers: {
+          remove: ['Sugar', 'Nutella', 'Parmigiano', 'Basil'],
         },
       },
       {
