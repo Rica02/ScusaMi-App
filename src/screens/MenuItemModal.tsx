@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,27 +11,28 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
+import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../typings/navigationTypes';
 import { NutriInfoValue } from '../typings/menuTypes';
+import { MENU_MODE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import CustomButton from '../components/common/CustomButton';
-import { MENU_MODE } from '../constants/AppConstants';
-import React, { useEffect, useState } from 'react';
 import NumberModifier from '../components/common/NumberModifier';
-import Checkbox from 'expo-checkbox';
 
 export default function MenuItemModal({
   navigation,
   route,
 }: RootStackScreenProps<'MenuItemModal'>) {
-  const { item, mode } = route.params;
+  const { item, mode, onAddToOrderPress } = route.params;
   const { t } = useTranslation();
   const [nutriInfo, setNutriInfo] = useState<string[]>([]);
+  const [numItem, setNumItem] = useState(1);
 
   useEffect(() => {
+    // Set array for nutritional info table
     if (item.nutriInfo) {
       setNutriInfo(
         Object.keys(item.nutriInfo) as Array<
@@ -44,6 +46,7 @@ export default function MenuItemModal({
     }
   }, []);
 
+  // Render nutritional info icon (w = with charge | y = yes | n = no)
   const renderPropertyIcon = (value: NutriInfoValue) => {
     switch (value) {
       case 'y':
@@ -164,7 +167,7 @@ export default function MenuItemModal({
                         {t('menu.remove')}
                       </Text>
                       {item.modifiers.remove.map((item, index) => (
-                        <View style={styles.modifierCheckbox}>
+                        <View key={index} style={styles.modifierCheckbox}>
                           <Checkbox
                           // value={}
                           // onValueChange={}
@@ -228,12 +231,18 @@ export default function MenuItemModal({
 
               {/* Add to order */}
               <View style={styles.addToOrderContainer}>
-                <NumberModifier num={1} />
+                <NumberModifier onPress={(num) => setNumItem(num)} />
                 <CustomButton
                   style={styles.addToOrderButton}
-                  onPress={() => navigation.goBack()}
+                  onPress={() => {
+                    console.log('added ' + numItem + ' ' + item.name);
+                    onAddToOrderPress(numItem, item);
+                    navigation.goBack();
+                  }}
                 >
-                  {`${t('buttons.add_to_order')}   $12`}
+                  {`${t('buttons.add_to_order')} $${Number(item.price).toFixed(
+                    2
+                  )}`}
                 </CustomButton>
               </View>
             </View>
@@ -246,12 +255,10 @@ export default function MenuItemModal({
         <CustomButton
           style={styles.startOrderButton}
           onPress={() =>
-            console.log(
-              navigation.navigate('Root', {
-                screen: 'Order',
-                params: { screen: 'OrderScreen' },
-              })
-            )
+            navigation.navigate('Root', {
+              screen: 'Order',
+              params: { screen: 'OrderScreen' },
+            })
           }
         >
           {t('buttons.start_order')}
@@ -352,6 +359,7 @@ const styles = StyleSheet.create({
   },
   addToOrderContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   addToOrderButton: {

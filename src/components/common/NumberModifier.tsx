@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { VALUES } from '../../constants/Styling';
 import CircleText from './CircleText';
 
 interface NumberModifierProps {
-  num: number;
+  onPress: (num: number) => void;
 }
 
 const NumberModifier = (props: NumberModifierProps) => {
-  const { num } = props;
-  const [displayedNum, setDisplayedNum] = useState(num);
+  const { onPress } = props;
+  const [displayedNum, setDisplayedNum] = useState(1);
+
+  const onMinusPress = () => {
+    if (displayedNum > 1) {
+      setDisplayedNum(displayedNum - 1);
+    }
+  };
+
+  const onPlusPress = () => {
+    setDisplayedNum(displayedNum + 1);
+  };
+
+  useEffect(() => {
+    onPress(displayedNum);
+  }, [displayedNum]);
 
   return (
     <View style={styles.container}>
-      <CircleText disabled={true}>-</CircleText>
+      <Pressable onPress={onMinusPress}>
+        <CircleText disabled={displayedNum < 2 ? true : false}>-</CircleText>
+      </Pressable>
       <Text style={styles.number}>{displayedNum}</Text>
-      <CircleText disabled={false}>+</CircleText>
+      <Pressable onPress={onPlusPress}>
+        <CircleText disabled={false}>+</CircleText>
+      </Pressable>
     </View>
   );
 };

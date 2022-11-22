@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
 import { RootTabScreenProps } from '../typings/navigationTypes';
-import { MenuType, OrderType } from '../typings/menuTypes';
+import { MenuItemType, MenuType, OrderType } from '../typings/menuTypes';
 import { MENU_MODE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
@@ -25,15 +25,38 @@ export default function MenuScreen({
     { category: string; index: number } | undefined
   >();
 
+  const [currentOrder, setCurrentOrder] = useState<OrderType | undefined>();
+
   useEffect(() => {
     // Get menu and set initial category select
     getMenu(mode);
     setSelectedCategory({ category: 'All', index: 0 });
+
+    if (mode != MENU_MODE.BROWSE) {
+      let startOrder: OrderType;
+      startOrder = {
+        mode: mode as 1 | 2,
+        table: mode == MENU_MODE.DINEIN ? 1 : undefined,
+        pickup: mode == MENU_MODE.TAKEAWAY ? 'Today' : undefined,
+        items: [],
+      };
+      setCurrentOrder(startOrder);
+    }
   }, []);
 
   useEffect(() => {
+    // Update menu shown everytime browse mode changes
     getMenu(mode);
   }, [mode]);
+
+  // Handle Add To Order
+  const onAddToOrderPress = (num: number, item: MenuItemType) => {
+    if (currentOrder?.items) {
+      let newItems = currentOrder?.items;
+      newItems?.push({ num: num, item: item });
+      setCurrentOrder({ ...currentOrder, items: newItems });
+    }
+  };
 
   // Get menu items based on mode (browse/dine-in/takeaway)
   const getMenu = (mode: number) => {
@@ -153,6 +176,7 @@ export default function MenuScreen({
                   title: item.name,
                   item: item,
                   mode: mode,
+                  onAddToOrderPress: onAddToOrderPress,
                 })
               }
             />
@@ -165,7 +189,7 @@ export default function MenuScreen({
           style={styles.cartButton}
           onPress={() =>
             navigation.navigate('OrderCartModal', {
-              order: ORDERS[0] as OrderType,
+              order: currentOrder as OrderType,
             })
           }
         >
@@ -173,7 +197,9 @@ export default function MenuScreen({
             <Text style={[styles.yourOrderText, styles.whiteText]}>
               {t('buttons.your_order')}
             </Text>
-            <Text style={styles.whiteText}>0 item(s)</Text>
+            <Text style={styles.whiteText}>
+              {currentOrder?.items.length} item(s)
+            </Text>
           </View>
           <View style={styles.flexRowCenter}>
             <Text style={styles.whiteText}>{t('buttons.view_cart')}</Text>
