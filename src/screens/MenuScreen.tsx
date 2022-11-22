@@ -75,6 +75,7 @@ export default function MenuScreen({
         />
         <FlatList
           data={displayedMenu}
+          showsHorizontalScrollIndicator={false}
           horizontal
           keyExtractor={(item) => item.category}
           ListHeaderComponent={
