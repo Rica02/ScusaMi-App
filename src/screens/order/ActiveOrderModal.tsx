@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet, View, Text, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -11,17 +11,13 @@ import {
 import { RootStackScreenProps } from '../../typings/navigationTypes';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
+import { MENU_MODE } from '../../constants/AppConstants';
 
 export default function ActiveOrderModal({
   route,
 }: RootStackScreenProps<'ActiveOrderModal'>) {
   const { order } = route.params;
   const { t } = useTranslation();
-  const [isDineIn, setIsDineIn] = useState<boolean | undefined>();
-
-  useEffect(() => {
-    setIsDineIn(true);
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -29,31 +25,40 @@ export default function ActiveOrderModal({
       <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
       <ScrollView style={styles.content}>
         {/* Title */}
-        <View style={styles.titleContainer}>
-          {isDineIn ? (
+        {order.mode == MENU_MODE.DINEIN && (
+          <View style={styles.titleContainer}>
             <Ionicons
               name="restaurant-outline"
               size={VALUES.FONT_SIZE['2XLARGE']}
               color={COLOURS.BLACK}
             />
-          ) : (
+            <Text style={styles.titleText}>
+              {t('order.dine_in_table')} {order.table}
+            </Text>
+          </View>
+        )}
+        {order.mode == MENU_MODE.TAKEAWAY && (
+          <View style={styles.titleContainer}>
             <SimpleLineIcons
               name="bag"
               size={VALUES.FONT_SIZE['2XLARGE']}
               color={COLOURS.BLACK}
             />
-          )}
+            <Text style={styles.titleText}>
+              {t('order.pickup')} {order.pickup}
+            </Text>
+          </View>
+        )}
 
-          <Text style={styles.titleText}>Dine-in at Table 1</Text>
-        </View>
         {/* Order summary */}
         <View style={styles.yourOrderContainer}>
           <Text style={styles.yourOrderTitle}>{t('order.your_order')}</Text>
           <View style={styles.orderContainer}>
-            <Text>2x Calamari fritti</Text>
-            <Text>1x Margherita pizza</Text>
-            <Text>2x Spaghetti carbonara</Text>
-            <Text>1x Apple sour</Text>
+            {order.items.map((item, index) => (
+              <Text key={index}>
+                {item.num}x {item.item.name}
+              </Text>
+            ))}
           </View>
         </View>
         {/* Current progress */}
@@ -62,7 +67,7 @@ export default function ActiveOrderModal({
             {t('order.current_progress')}
           </Text>
           <Text style={styles.statusText}>
-            STATUS: estimated{' '}
+            {t('order.status_estimate')}{' '}
             <Text style={{ fontWeight: '600' }}>10 minutes</Text>
           </Text>
           <View style={styles.iconsContainer}>

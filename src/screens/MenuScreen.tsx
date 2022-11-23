@@ -36,6 +36,8 @@ export default function MenuScreen({
       let startOrder: OrderType;
       startOrder = {
         mode: mode as 1 | 2,
+        statusActive: true,
+        dateTime: 'Wednesday, 23 November 2022 at 2:19 pm',
         table: mode == MENU_MODE.DINEIN ? 1 : undefined,
         pickup: mode == MENU_MODE.TAKEAWAY ? 'Today' : undefined,
         items: [],
@@ -198,7 +200,7 @@ export default function MenuScreen({
               {t('buttons.your_order')}
             </Text>
             <Text style={styles.whiteText}>
-              {currentOrder?.items.length} item(s)
+              {currentOrder?.items.length} {t('order.num_items')}
             </Text>
           </View>
           <View style={styles.flexRowCenter}>

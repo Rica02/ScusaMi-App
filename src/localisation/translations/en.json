@@ -51,7 +51,13 @@
     "need_to_change_order": "If you need to change your order please let our staff know ASAP.",
     "in_queue": "In queue",
     "in_progress": "In progress",
-    "done": "Done"
+    "done": "Done",
+    "order_placed": "Order placed",
+    "dine_in_table": "Dine-in at Table",
+    "pickup": "Pickup",
+    "num_items": "item(s)",
+    "view_progress": "View progress",
+    "status_estimate": "STATUS ESTIMATE:"
   },
   "reserve": {
     "booking": "Booking",

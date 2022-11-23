@@ -1,5 +1,3 @@
-import { MENU_MODE } from './constants/AppConstants';
-
 export const MENU = [
   {
     category: 'Specials',
@@ -505,3 +503,138 @@ export const USER = {
   company: '',
   password: '******',
 };
+
+export const ORDERS = [
+  {
+    mode: 1,
+    statusActive: true,
+    dateTime: 'Wednesday, 23 Novemeber at 2:19 pm',
+    table: 2,
+    items: [
+      {
+        num: 1,
+        item: {
+          name: 'Margherita',
+          image: 'https://i.imgur.com/JmLzvBV.jpg',
+          description: 'San Marzano sugo, basil & fior di latte.',
+          price: 24,
+          nutriInfo: {
+            'gluten free': 'w',
+            vegetarian: 'y',
+            takeaway: 'y',
+          },
+          modifiers: {
+            remove: ['Basil', 'Fior di latte'],
+            add: [
+              { addOnName: 'Gluten free base', addOnPrice: 5 },
+              { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+              { addOnName: 'Fior di latte', addOnPrice: 2 },
+              { addOnName: 'Olives', addOnPrice: 2 },
+              { addOnName: 'Salami', addOnPrice: 2 },
+              { addOnName: 'Ham', addOnPrice: 2 },
+              { addOnName: 'Pineapple', addOnPrice: 2 },
+            ],
+          },
+        },
+      },
+      {
+        num: 2,
+        item: {
+          name: 'Prosciutto Crudo',
+          image: 'https://i.imgur.com/UXIHFgt.jpg',
+          description:
+            'San Marzano sugo, aged san daniele prosciutto, buffalo mozzarella, basil, roquette & parmigiano.',
+          price: 32,
+          nutriInfo: {
+            'gluten free': 'w',
+            vegetarian: 'n',
+            takeaway: 'y',
+          },
+          modifiers: {
+            remove: [
+              'Prosciutto',
+              'Buffalo mozzarella',
+              'Basil',
+              'Roquette',
+              'Parmigiano',
+            ],
+            add: [
+              { addOnName: 'Gluten free base', addOnPrice: 5 },
+              { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+              { addOnName: 'Prosciutto', addOnPrice: 2 },
+              { addOnName: 'Buffalo mozzarella', addOnPrice: 2 },
+              { addOnName: 'Olives', addOnPrice: 2 },
+              { addOnName: 'Salami', addOnPrice: 2 },
+              { addOnName: 'Ham', addOnPrice: 2 },
+              { addOnName: 'Pineapple', addOnPrice: 2 },
+            ],
+          },
+        },
+      },
+    ],
+  },
+  {
+    mode: 2,
+    statusActive: true,
+    dateTime: 'Wednesday, 23 Novemeber at 3:05 pm',
+    pickup: 'Today',
+    items: [
+      {
+        num: 1,
+        item: {
+          name: 'Burrata Caprese',
+          image: 'https://i.imgur.com/LvS0BaM.jpg',
+          description:
+            'Burrata cheese, truss tomato, ligurian olives, croutons & basil with balsamic glaze & extra virgin olive oil.',
+          price: 18,
+          nutriInfo: {
+            'gluten free': 'n',
+            vegetarian: 'y',
+            takeaway: 'y',
+          },
+          modifiers: {
+            remove: [
+              'Burrata cheese',
+              'Tomato',
+              'Olives',
+              'Croutons',
+              'Basil',
+              'Balsamic glaze',
+            ],
+          },
+        },
+      },
+      {
+        num: 2,
+        item: {
+          name: 'Insalata Scusa Mi!',
+          image: 'https://i.imgur.com/PP7dT1Z.jpg',
+          description:
+            'Roasted pumpkin & beetroot with spinach, kale, quinoa, pomegranate & bocconcini (prawns optional).',
+          price: 19,
+          nutriInfo: {
+            'gluten free': 'y',
+            vegetarian: 'y',
+            takeaway: 'y',
+          },
+          modifiers: {
+            remove: [
+              'Roasted pumpkin',
+              'Beetroot',
+              'Spinach',
+              'Kale',
+              'Quinoa',
+              'Pomegranate',
+              'Bocconcini',
+            ],
+            add: [
+              { addOnName: 'Vegan/lactose free cheese', addOnPrice: 5 },
+              { addOnName: 'Prawns', addOnPrice: 9 },
+              { addOnName: 'Chicken', addOnPrice: 7 },
+            ],
+          },
+        },
+      },
+    ],
+  },
+];

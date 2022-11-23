@@ -235,9 +235,10 @@ export default function MenuItemModal({
                 <CustomButton
                   style={styles.addToOrderButton}
                   onPress={() => {
-                    console.log('added ' + numItem + ' ' + item.name);
-                    onAddToOrderPress(numItem, item);
-                    navigation.goBack();
+                    if (onAddToOrderPress) {
+                      onAddToOrderPress(numItem, item);
+                      navigation.goBack();
+                    }
                   }}
                 >
                   {`${t('buttons.add_to_order')} $${Number(item.price).toFixed(

@@ -24,9 +24,9 @@ export type RootStackParamList = {
     title: string;
     item: MenuItemType;
     mode: BrowseType;
-    onAddToOrderPress: (num: number, item: MenuItemType) => void;
+    onAddToOrderPress?: (num: number, item: MenuItemType) => void;
   };
-  ActiveOrderModal: { order: any };
+  ActiveOrderModal: { order: OrderType };
   ContactUsModal: undefined;
   OrderCartModal: { order: OrderType };
   NotFound: undefined;

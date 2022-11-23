@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
-import { NestedScreenProps } from '../typings/navigationTypes';
+import { RootStackScreenProps } from '../typings/navigationTypes';
+import { BrowseType, OrderType } from '../typings/menuTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import { MENU_MODE } from '../constants/AppConstants';
@@ -16,16 +17,22 @@ import HeaderTitle from '../components/common/HeaderTitle';
 import OrderButtons from '../components/order/OrderButtons';
 import ActiveOrderCard from '../components/order/ActiveOrderCard';
 
-export default function OrderScreen({ navigation }: NestedScreenProps<any>) {
+import { ORDERS } from '../DummyData';
+
+export default function OrderScreen({ navigation }: RootStackScreenProps<any>) {
   const { t } = useTranslation();
-  const [hasActiveOrders, setHasActiveOrders] = useState<boolean | undefined>();
+  const [activeOrders, setActiveOrders] = useState<OrderType[]>([]);
 
   useEffect(() => {
-    setHasActiveOrders(true);
+    // Get active orders
+    let orders = ORDERS.filter((order) => order.statusActive == true);
+    setActiveOrders(orders as OrderType[]);
+    //console.log('activeOrders: ' + JSON.stringify(activeOrders));
   }, []);
 
   return (
     <View style={styles.container}>
+      {/* Start ordering */}
       <ImageBackground
         style={styles.upperContainer}
         source={require('../../assets/images//ui-images/menu-1.png')}
@@ -37,39 +44,40 @@ export default function OrderScreen({ navigation }: NestedScreenProps<any>) {
         </Text>
         <OrderButtons
           onPressDineIn={() =>
-            navigation.navigate('MenuScreen', { mode: MENU_MODE.DINEIN })
+            navigation.navigate('Root', {
+              screen: 'MenuScreen',
+              params: { mode: MENU_MODE.DINEIN as BrowseType },
+            })
           }
           onPressTakeAway={() =>
-            navigation.navigate('MenuScreen', { mode: MENU_MODE.TAKEAWAY })
+            navigation.navigate('Root', {
+              screen: 'MenuScreen',
+              params: { mode: MENU_MODE.TAKEAWAY as BrowseType },
+            })
           }
         />
       </ImageBackground>
+
+      {/* Active orders */}
       <View style={styles.lowerContainer}>
         <HeaderTitle colour={COLOURS.WHITE}>
           {t('order.your_active_orders')}
         </HeaderTitle>
-        {hasActiveOrders ? (
+        {activeOrders.length > 0 ? (
           <ScrollView style={styles.activeOrderContainer}>
-            <View style={styles.activeOrderCardContainer}>
-              <ActiveOrderCard
-                onPress={(order) =>
-                  navigation.navigate('ActiveOrderModal', {
-                    order: 'something',
-                  })
-                }
-              />
-            </View>
-            <View style={styles.activeOrderCardContainer}>
-              <ActiveOrderCard
-                onPress={(order) =>
-                  navigation.navigate('ActiveOrderModal', {
-                    order: 'something',
-                  })
-                }
-              />
-            </View>
+            {activeOrders.map((order, index) => (
+              <View key={index} style={styles.activeOrderCardContainer}>
+                <ActiveOrderCard
+                  order={order}
+                  onPress={() =>
+                    navigation.navigate('ActiveOrderModal', { order: order })
+                  }
+                />
+              </View>
+            ))}
           </ScrollView>
         ) : (
+          // No active orders
           <View style={styles.noActiveOrdersContainer}>
             <Text style={styles.noActiveOrdersText}>
               {t('order.no_active_orders')}
