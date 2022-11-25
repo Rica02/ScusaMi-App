@@ -141,6 +141,8 @@
     "order_progress_or_change": "You can view the progress of your order from the ORDER screen.\n\nIf you need to change your order please let our staff know ASAP."
   },
   "error_alerts": {
-    "complete_fields": "You must complete all compulsory fields."
+    "error": "Error",
+    "complete_fields": "You must complete all compulsory fields.",
+    "accept_toc": "You must accept the Terms and Conditions to complete your reservation."
   }
 }

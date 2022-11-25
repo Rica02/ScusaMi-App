@@ -25,10 +25,10 @@ import {
 import LinkingConfiguration from './LinkingConfiguration';
 import { COLOURS } from '../constants/Colours';
 import ProfileLoginModal from '../screens/profile/ProfileLoginModal';
-import MenuItemModal from '../screens/MenuItemModal';
+import MenuItemModal from '../screens/menu/MenuItemModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
-import MenuScreen from '../screens/MenuScreen';
+import MenuScreen from '../screens/menu/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
 import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';

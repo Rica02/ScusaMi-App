@@ -412,25 +412,16 @@ export const MENU = [
     items: [
       {
         name: 'Pasta Piccola',
-        image: '',
-        description: 'Kids pasta and sugo (vegetarian) OR beef bolognese.',
+        image: 'https://i.imgur.com/VlWaDVa.png',
+        description:
+          'Kids pasta and sugo (vegetarian) OR beef bolognese (shown in picture).',
         price: 15,
-        nutriInfo: {
-          'gluten free': 'w',
-          vegetarian: 'n',
-          takeaway: 'y',
-        },
       },
       {
         name: 'Piccola Pizza',
         image: '',
         description: 'Margherita (vegetarian) OR Dolce Salato.',
         price: 15,
-        nutriInfo: {
-          'gluten free': 'w',
-          vegetarian: 'n',
-          takeaway: 'y',
-        },
       },
     ],
   },

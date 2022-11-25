@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     paddingVertical: VALUES.SPACING.SMALL,
     paddingHorizontal: VALUES.SPACING.LARGE,
     marginVertical: VALUES.SPACING.XSMALL,
-    marginHorizontal: VALUES.SPACING.SMALL,
+    marginHorizontal: VALUES.SPACING.XSMALL,
     borderWidth: 0.5,
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     borderRadius: 15,

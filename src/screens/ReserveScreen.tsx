@@ -15,7 +15,7 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 
-import { RootStackScreenProps } from '../typings/navigationTypes';
+import { RootTabScreenProps } from '../typings/navigationTypes';
 import { ReserveType } from '../typings/menuTypes';
 import { UserType } from '../typings/userTypes';
 import { SERVICE_TYPE } from '../constants/AppConstants';
@@ -33,7 +33,7 @@ import { BOOKING } from '../DummyData';
 
 export default function ReserveScreen({
   navigation,
-}: RootStackScreenProps<'Root'>) {
+}: RootTabScreenProps<'ReserveScreen'>) {
   const { t } = useTranslation();
   const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
@@ -85,8 +85,8 @@ export default function ReserveScreen({
       setNextButtonPressed(true);
     } else {
       // If not, alert user
-      Alert.alert('Warning', t('error_alerts.complete_fields'), [
-        { text: 'OK' },
+      Alert.alert(t('error_alerts.error'), t('error_alerts.complete_fields'), [
+        { text: t('buttons.okay') },
       ]);
     }
   };
@@ -257,15 +257,32 @@ export default function ReserveScreen({
           </View>
         </>
       ) : (
-        <ReserveUserDetails
-          onSignInPress={() =>
-            // TODO: login logic
-            //navigation.navigate('ProfileLoginModal')
-            console.log('Sign in pressed')
-          }
-          onBackPress={() => setNextButtonPressed(false)}
-          onConfirmPress={() => console.log('confim press')}
-        />
+        <View style={styles.sectionContainer}>
+          <View style={styles.titleContainer}>
+            <CircleText
+              textStyle={{
+                fontFamily: 'caveat-brush',
+                fontSize: VALUES.FONT_SIZE['XLARGE'],
+              }}
+            >
+              2
+            </CircleText>
+            <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
+              <HeaderTitle colour={COLOURS.RED}>
+                {t('reserve.your_details')}
+              </HeaderTitle>
+            </View>
+          </View>
+          <ReserveUserDetails
+            onSignInPress={() =>
+              // TODO: login logic
+              //navigation.navigate('ProfileLoginModal')
+              console.log('Sign in pressed')
+            }
+            onBackPress={() => setNextButtonPressed(false)}
+            onConfirmPress={() => console.log('confim press')}
+          />
+        </View>
       )}
     </ScrollView>
   );

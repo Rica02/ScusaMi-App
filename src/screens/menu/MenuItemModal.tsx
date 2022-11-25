@@ -14,13 +14,13 @@ import {
 import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 
-import { RootStackScreenProps } from '../typings/navigationTypes';
-import { NutriInfoValue } from '../typings/menuTypes';
-import { MENU_MODE } from '../constants/AppConstants';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
-import CustomButton from '../components/common/CustomButton';
-import NumberModifier from '../components/common/NumberModifier';
+import { RootStackScreenProps } from '../../typings/navigationTypes';
+import { NutriInfoValue } from '../../typings/menuTypes';
+import { MENU_MODE } from '../../constants/AppConstants';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
+import CustomButton from '../../components/common/CustomButton';
+import NumberModifier from '../../components/common/NumberModifier';
 
 export default function MenuItemModal({
   navigation,
@@ -135,23 +135,26 @@ export default function MenuItemModal({
         <View style={styles.lowerContainer}>
           {/* Food item description */}
           <Text style={styles.descriptionText}>{item.description}</Text>
-          <View style={styles.table}>
-            {/* Nutritional info table */}
-            {nutriInfo.map((key, index) => (
-              <View key={index} style={styles.tableRow}>
-                <View style={[styles.tableCell, styles.tableColumnLeft]}>
-                  <Text style={styles.tableCellText}>{key}</Text>
-                </View>
-                {item.nutriInfo && (
-                  <View style={styles.tableCell}>
-                    {renderPropertyIcon(
-                      item.nutriInfo[key as keyof typeof item.nutriInfo]
-                    )}
+
+          {item.nutriInfo && (
+            <View style={styles.table}>
+              {/* Nutritional info table */}
+              {nutriInfo.map((key, index) => (
+                <View key={index} style={styles.tableRow}>
+                  <View style={[styles.tableCell, styles.tableColumnLeft]}>
+                    <Text style={styles.tableCellText}>{key}</Text>
                   </View>
-                )}
-              </View>
-            ))}
-          </View>
+                  {item.nutriInfo && (
+                    <View style={styles.tableCell}>
+                      {renderPropertyIcon(
+                        item.nutriInfo[key as keyof typeof item.nutriInfo]
+                      )}
+                    </View>
+                  )}
+                </View>
+              ))}
+            </View>
+          )}
 
           {/* For order mode (dine-in / takeaway) */}
           {mode != MENU_MODE.BROWSE && (

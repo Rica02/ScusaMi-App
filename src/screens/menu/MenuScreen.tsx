@@ -3,15 +3,15 @@ import { StyleSheet, View, FlatList, Pressable, Text } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
-import { RootTabScreenProps } from '../typings/navigationTypes';
-import { MenuItemType, MenuType, OrderType } from '../typings/menuTypes';
-import { MENU_MODE } from '../constants/AppConstants';
-import { COLOURS } from '../constants/Colours';
-import { VALUES } from '../constants/Styling';
-import HeaderTitle from '../components/common/HeaderTitle';
-import MenuList from '../components/menu/MenuList';
+import { RootTabScreenProps } from '../../typings/navigationTypes';
+import { MenuItemType, MenuType, OrderType } from '../../typings/menuTypes';
+import { MENU_MODE } from '../../constants/AppConstants';
+import { COLOURS } from '../../constants/Colours';
+import { VALUES } from '../../constants/Styling';
+import HeaderTitle from '../../components/common/HeaderTitle';
+import MenuList from '../../components/menu/MenuList';
 
-import { MENU } from '../DummyData';
+import { MENU } from '../../DummyData';
 
 export default function MenuScreen({
   navigation,
