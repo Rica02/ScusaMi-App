@@ -16,7 +16,10 @@ const TimeSelection = (props: TimeSelectionProps) => {
     <Pressable
       style={[
         styles.container,
-        selected && { backgroundColor: COLOURS.LIGHT_GREY },
+        selected && {
+          borderColor: COLOURS.TEAL,
+          backgroundColor: COLOURS.TEAL,
+        },
       ]}
       onPress={() => onPress(time)}
     >
@@ -30,7 +33,7 @@ export default TimeSelection;
 const styles = StyleSheet.create({
   container: {
     paddingVertical: VALUES.SPACING.SMALL,
-    paddingHorizontal: VALUES.SPACING.MEDIUM,
+    paddingHorizontal: VALUES.SPACING.LARGE,
     marginVertical: VALUES.SPACING.XSMALL,
     marginHorizontal: VALUES.SPACING.SMALL,
     borderWidth: 0.5,

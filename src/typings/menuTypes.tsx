@@ -35,7 +35,7 @@ export type OrderType = {
 };
 
 export type ReserveType = {
-  date: string;
+  date: Date;
   numPeople: number;
   service: 'lunch' | 'dinner';
   time: string;
