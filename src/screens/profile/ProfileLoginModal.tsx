@@ -31,7 +31,7 @@ export default function ProfileLoginModal({
       <View style={styles.loginInputContainer}>
         <TextInput
           style={styles.textInput}
-          placeholder={t('reserve.email') + '*'}
+          placeholder={t('user_details.email') + '*'}
           keyboardType="email-address"
         />
         <TextInput

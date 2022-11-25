@@ -10,12 +10,12 @@ import {
   Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Checkbox from 'expo-checkbox';
 import RadioButtonGroup, { RadioButtonItem } from 'expo-radio-button';
 import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 
+import { RootStackScreenProps } from '../typings/navigationTypes';
 import { ReserveType } from '../typings/menuTypes';
 import { UserType } from '../typings/userTypes';
 import { SERVICE_TYPE } from '../constants/AppConstants';
@@ -27,19 +27,19 @@ import CustomButton from '../components/common/CustomButton';
 import TimeSelection from '../components/reserve/TimeSelection';
 import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirementsCheckboxes';
 import NumberModifier from '../components/common/NumberModifier';
+import ReserveUserDetails from '../components/reserve/ReserveUserDetails';
 
 import { BOOKING } from '../DummyData';
 
-export default function ReserveScreen() {
+export default function ReserveScreen({
+  navigation,
+}: RootStackScreenProps<'Root'>) {
   const { t } = useTranslation();
   const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
-  const [isTocChecked, setIsTocChecked] = useState(false);
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
-
   const [currentReservation, setCurrentReservation] = useState<
     ReserveType | undefined
   >();
-
   const [androidShowDate, setAndroidShowDate] = useState(false);
 
   const [date, setDate] = useState(new Date());
@@ -65,6 +65,10 @@ export default function ReserveScreen() {
     }
   }, [serviceType]);
 
+  // useEffect(() => {
+  //   console.log('currentReservation ' + JSON.stringify(currentReservation));
+  // }, [currentReservation]);
+
   // Handle Next button pressed
   const onNextButtonPressed = () => {
     // Check if all required fields have been selected
@@ -81,15 +85,11 @@ export default function ReserveScreen() {
       setNextButtonPressed(true);
     } else {
       // If not, alert user
-      Alert.alert('Alert Title', t('error_alerts.complete_fields'), [
+      Alert.alert('Warning', t('error_alerts.complete_fields'), [
         { text: 'OK' },
       ]);
     }
   };
-
-  useEffect(() => {
-    console.log('currentReservation ' + JSON.stringify(currentReservation));
-  }, [currentReservation]);
 
   const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
     if (selectedDate) {
@@ -209,6 +209,7 @@ export default function ReserveScreen() {
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
             <Text style={styles.questionText}>{t('reserve.select_time')}</Text>
             <View style={styles.timeSelectionContainer}>
+              {/* TODO: only show times more than 5 hours ahead of current time */}
               {serviceType ? (
                 timeSelections?.map((item, index) => (
                   <TimeSelection
@@ -232,10 +233,13 @@ export default function ReserveScreen() {
               <TextInput
                 style={styles.notesTextInput}
                 multiline
+                onChangeText={(text) => setNotes(text)}
+                value={notes}
                 textAlignVertical="top"
               />
             </View>
           </View>
+          {/* TODO: retain checkmarks when pressing "back" */}
           {/* Special requirements */}
           <View style={styles.sectionContainer}>
             <Text style={styles.questionText}>
@@ -253,98 +257,15 @@ export default function ReserveScreen() {
           </View>
         </>
       ) : (
-        <>
-          {/* Your details */}
-          <View style={styles.sectionContainer}>
-            <View style={styles.titleContainer}>
-              <CircleText
-                textStyle={{
-                  fontFamily: 'caveat-brush',
-                  fontSize: VALUES.FONT_SIZE['XLARGE'],
-                }}
-              >
-                2
-              </CircleText>
-              <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
-                <HeaderTitle colour={COLOURS.RED}>
-                  {t('reserve.your_details')}
-                </HeaderTitle>
-              </View>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                width: '100%',
-                justifyContent: 'space-between',
-              }}
-            >
-              {/* Sign in */}
-              <View style={styles.signInContainer}>
-                <CustomButton onPress={() => console.log('sign in pressed')}>
-                  {t('buttons.sign_in')}
-                </CustomButton>
-                <Text style={styles.saveDetailsText}>
-                  {t('reserve.to_save_details')}
-                </Text>
-              </View>
-              {/* Guest details */}
-              <View style={styles.guestDetailsContainer}>
-                <Text style={{ fontSize: VALUES.SPACING.MEDIUM }}>
-                  {t('reserve.continue_as_guest')}
-                </Text>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.first_name') + '*'}
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.last_name') + '*'}
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.mobile') + '*'}
-                  keyboardType="phone-pad"
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.email') + '*'}
-                  keyboardType="email-address"
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.company_name')}
-                />
-                <View style={styles.tocContainer}>
-                  <Checkbox
-                    value={isTocChecked}
-                    onValueChange={setIsTocChecked}
-                    color={isTocChecked ? COLOURS.RED : undefined}
-                  />
-                  <Text style={styles.tocText}>
-                    {t('reserve.i_agree')}{' '}
-                    <Text style={styles.tocHyperlink}>
-                      {t('reserve.terms_and_conditions')}
-                    </Text>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.buttonsContainer}>
-                <CustomButton
-                  style={styles.nextButton}
-                  onPress={() => setNextButtonPressed(false)}
-                >
-                  {t('buttons.back')}
-                </CustomButton>
-                <CustomButton
-                  style={styles.nextButton}
-                  onPress={() => console.log('confirm pressed')}
-                >
-                  {t('buttons.confirm')}
-                </CustomButton>
-              </View>
-            </View>
-          </View>
-        </>
+        <ReserveUserDetails
+          onSignInPress={() =>
+            // TODO: login logic
+            //navigation.navigate('ProfileLoginModal')
+            console.log('Sign in pressed')
+          }
+          onBackPress={() => setNextButtonPressed(false)}
+          onConfirmPress={() => console.log('confim press')}
+        />
       )}
     </ScrollView>
   );
@@ -407,49 +328,8 @@ const styles = StyleSheet.create({
     height: VALUES.SIZE['5XLARGE'],
     backgroundColor: COLOURS.BEIGE,
   },
-
-  signInContainer: {
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    paddingHorizontal: VALUES.SPACING['2XLARGE'],
-    marginBottom: VALUES.SPACING.MEDIUM,
-  },
-  saveDetailsText: {
-    paddingVertical: VALUES.SPACING.SMALL,
-  },
-
-  guestDetailsContainer: {
-    width: '100%',
-  },
-  textInput: {
-    fontSize: VALUES.FONT_SIZE.MEDIUM,
-    padding: VALUES.SPACING.SMALL,
-    marginVertical: VALUES.SPACING.SMALL,
-    borderBottomWidth: 0.5,
-    borderColor: COLOURS.TEXT_PLACEHOLDER,
-  },
-  tocContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: VALUES.SPACING.LARGE,
-  },
-  tocText: {
-    fontSize: VALUES.FONT_SIZE.MEDIUM,
-    marginLeft: VALUES.SPACING.SMALL,
-  },
-  tocHyperlink: {
-    color: COLOURS.HYPERLINK,
-    textDecorationLine: 'underline',
-  },
-
   nextButton: {
     alignSelf: 'flex-end',
     paddingHorizontal: VALUES.SPACING.LARGE,
-  },
-
-  buttonsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 });
