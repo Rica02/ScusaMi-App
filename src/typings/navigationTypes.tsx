@@ -9,7 +9,12 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BrowseType, MenuItemType, OrderType } from './menuTypes';
+import {
+  BrowseType,
+  MenuItemType,
+  OrderMenuItemType,
+  OrderType,
+} from './menuTypes';
 
 declare global {
   namespace ReactNavigation {
@@ -20,8 +25,13 @@ declare global {
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   ProfileLoginModal: undefined;
-  MenuItemModal: { title: string; item: MenuItemType; mode: BrowseType };
-  ActiveOrderModal: { order: any };
+  MenuItemModal: {
+    title: string;
+    item: MenuItemType;
+    mode: BrowseType;
+    onAddToOrderPress?: (num: number, item: OrderMenuItemType) => void;
+  };
+  ActiveOrderModal: { order: OrderType };
   ContactUsModal: undefined;
   OrderCartModal: { order: OrderType };
   NotFound: undefined;

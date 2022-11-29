@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 
 interface TimeSelectionProps {
   time: string;
-  onPress: () => void;
+  onPress: (time: string) => void;
+  selected: boolean;
 }
 
 const TimeSelection = (props: TimeSelectionProps) => {
-  const { time, onPress } = props;
+  const { time, onPress, selected } = props;
 
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      style={[
+        styles.container,
+        selected && {
+          borderColor: COLOURS.TEAL,
+          backgroundColor: COLOURS.TEAL,
+        },
+      ]}
+      onPress={() => onPress(time)}
+    >
       <Text>{time}</Text>
     </Pressable>
   );
@@ -23,9 +33,9 @@ export default TimeSelection;
 const styles = StyleSheet.create({
   container: {
     paddingVertical: VALUES.SPACING.SMALL,
-    paddingHorizontal: VALUES.SPACING.MEDIUM,
+    paddingHorizontal: VALUES.SPACING.LARGE,
     marginVertical: VALUES.SPACING.XSMALL,
-    marginHorizontal: VALUES.SPACING.SMALL,
+    marginHorizontal: VALUES.SPACING.XSMALL,
     borderWidth: 0.5,
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     borderRadius: 15,

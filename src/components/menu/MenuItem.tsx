@@ -15,7 +15,7 @@ const MenuItem = (props: MenuItemProps) => {
 
   return (
     <Pressable style={styles.container} onPress={() => onPress(item)}>
-      {primaryIndex && (
+      {primaryIndex && item.image && (
         <Image
           style={styles.image}
           source={{
@@ -32,7 +32,7 @@ const MenuItem = (props: MenuItemProps) => {
           {item.description}
         </Text>
       </View>
-      {!primaryIndex && (
+      {!primaryIndex && item.image && (
         <Image
           style={styles.image}
           source={{

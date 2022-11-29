@@ -1,19 +1,13 @@
 import React from 'react';
-import {
-  FlatList,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../../typings/navigationTypes';
+import { BrowseType } from '../../typings/menuTypes';
 import { MENU_MODE } from '../../constants/AppConstants';
 import { VALUES } from '../../constants/Styling';
 import { COLOURS } from '../../constants/Colours';
-import { useTranslation } from 'react-i18next';
 import CartItem from '../../components/order/CartItem';
 import CustomButton from '../../components/common/CustomButton';
 
@@ -65,7 +59,7 @@ const OrderCartModal = ({
           onPress={() =>
             navigation.navigate('Root', {
               screen: 'MenuScreen',
-              params: { mode: MENU_MODE.BROWSE },
+              params: { mode: MENU_MODE.BROWSE as BrowseType },
             })
           }
         >

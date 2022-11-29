@@ -1,27 +1,46 @@
-import { Feather } from '@expo/vector-icons';
 import React from 'react';
+import { Feather } from '@expo/vector-icons';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { OrderType } from '../../typings/menuTypes';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
+import { MENU_MODE } from '../../constants/AppConstants';
+import { useTranslation } from 'react-i18next';
 
 interface ActiveOrderCardProps {
-  onPress: (order: any) => void;
+  order: OrderType;
+  onPress: () => void;
 }
 
 const ActiveOrderCard = (props: ActiveOrderCardProps) => {
-  const { onPress } = props;
+  const { order, onPress } = props;
+  const { t } = useTranslation();
 
   return (
     <Pressable style={styles.container} onPress={onPress}>
       <View>
-        <Text>Order placed 10 minutes ago</Text>
-        <Text>Monday, 10th October 2022 at 2:19 pm</Text>
-        <Text>Dine-in at Table 1</Text>
+        <Text>{t('order.order_placed')} 10 minutes ago</Text>
+        <Text>{order.dateTime}</Text>
+        {order.mode == MENU_MODE.DINEIN && (
+          <Text>
+            {t('order.dine_in_table')} {order.table}
+          </Text>
+        )}
+        {order.mode == MENU_MODE.TAKEAWAY && (
+          <Text>
+            {t('order.pickup')} {order.pickup}
+          </Text>
+        )}
       </View>
       <View style={styles.lowerContainer}>
-        <Text style={styles.numItemsText}>3 item(s)</Text>
+        <Text style={styles.numItemsText}>
+          {order.items.length} {t('order.num_items')}
+        </Text>
         <View style={styles.viewProgressContainer}>
-          <Text style={styles.viewProgressText}>View progress</Text>
+          <Text style={styles.viewProgressText}>
+            {t('order.view_progress')}
+          </Text>
           <Feather name="chevron-right" size={24} color="black" />
         </View>
       </View>

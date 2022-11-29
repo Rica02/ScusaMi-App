@@ -47,22 +47,30 @@
     "your_active_orders": "Your active orders",
     "no_active_orders": "No active orders",
     "your_order": "Your order",
+    "notes": "Notes",
     "current_progress": "Current progress",
     "need_to_change_order": "If you need to change your order please let our staff know ASAP.",
     "in_queue": "In queue",
     "in_progress": "In progress",
-    "done": "Done"
+    "done": "Done",
+    "order_placed": "Order placed",
+    "dine_in_table": "Dine-in at Table",
+    "pickup": "Pickup",
+    "num_items": "item(s)",
+    "view_progress": "View progress",
+    "status_estimate": "STATUS ESTIMATE:"
   },
   "reserve": {
     "booking": "Booking",
+    "date_selected": "Date selected",
     "how_many_people": "How many people are coming?",
     "which_service": "Which service?",
     "lunch": "Lunch",
     "dinner": "Dinner",
     "select_time": "Select a time",
     "select_service_first": "Please select a type of service first",
-    "notes": "Notes",
-    "special_requirements": "Special requirements",
+    "notes": "Notes (optional)",
+    "special_requirements": "Special requirements (optional)",
     "birthday": "Birthday",
     "bringing_pram": "Bringing a pram",
     "allergy": "Allergy",
@@ -132,5 +140,10 @@
     "order_confirmed": "Order confirmed.",
     "grazie_mille": "Grazie mille!",
     "order_progress_or_change": "You can view the progress of your order from the ORDER screen.\n\nIf you need to change your order please let our staff know ASAP."
+  },
+  "error_alerts": {
+    "error": "Error",
+    "complete_fields": "You must complete all compulsory fields.",
+    "accept_toc": "You must accept the Terms and Conditions to complete your reservation."
   }
 }

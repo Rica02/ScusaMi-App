@@ -1,9 +1,24 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, ScrollView, TextInput } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  Button,
+  Platform,
+  Alert,
+} from 'react-native';
 import { useTranslation } from 'react-i18next';
-import Checkbox from 'expo-checkbox';
 import RadioButtonGroup, { RadioButtonItem } from 'expo-radio-button';
+import DateTimePicker, {
+  DateTimePickerEvent,
+} from '@react-native-community/datetimepicker';
 
+import { RootTabScreenProps } from '../typings/navigationTypes';
+import { ReserveType } from '../typings/menuTypes';
+import { UserType } from '../typings/userTypes';
+import { SERVICE_TYPE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -12,32 +27,98 @@ import CustomButton from '../components/common/CustomButton';
 import TimeSelection from '../components/reserve/TimeSelection';
 import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirementsCheckboxes';
 import NumberModifier from '../components/common/NumberModifier';
+import ReserveUserDetails from '../components/reserve/ReserveUserDetails';
 
 import { BOOKING } from '../DummyData';
 
-export default function ReserveScreen() {
+export default function ReserveScreen({
+  navigation,
+}: RootTabScreenProps<'ReserveScreen'>) {
   const { t } = useTranslation();
   const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
-  const [requirementsSelections, setRequirementsSelection] = useState<
-    string[] | undefined
-  >();
-  const [serviceSelection, setServiceSelection] = useState<
-    string | undefined
-  >();
-  const [isTocChecked, setIsTocChecked] = useState(false);
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
+  const [currentReservation, setCurrentReservation] = useState<
+    ReserveType | undefined
+  >();
+  const [androidShowDate, setAndroidShowDate] = useState(false);
+
+  const [date, setDate] = useState(new Date());
+  const [numPeople, setNumPeople] = useState(1);
+  const [serviceType, setServiceType] = useState<string | undefined>();
+  const [time, setTime] = useState<string | undefined>();
+  const [notes, setNotes] = useState('');
+  const [specialRequirements, setSpecialRequirements] = useState<string[]>([]);
+
+  const [user, setUser] = useState<UserType | undefined>({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    mobile: 123456789,
+    email: 'janedoe@email.com',
+  });
 
   useEffect(() => {
-    console.log(requirementsSelections);
-  }, [requirementsSelections]);
-
-  useEffect(() => {
-    if (serviceSelection == 'lunch') {
+    // Update reservation times shown based on service type selected
+    if (serviceType == SERVICE_TYPE.LUNCH) {
       setTimeSelections(BOOKING.times.lunch);
-    } else if (serviceSelection == 'dinner') {
+    } else if (serviceType == SERVICE_TYPE.DINNER) {
       setTimeSelections(BOOKING.times.dinner);
     }
-  }, [serviceSelection]);
+  }, [serviceType]);
+
+  // useEffect(() => {
+  //   console.log('currentReservation ' + JSON.stringify(currentReservation));
+  // }, [currentReservation]);
+
+  // Handle Next button pressed
+  const onNextButtonPressed = () => {
+    // Check if all required fields have been selected
+    if (date && numPeople && serviceType && time) {
+      setCurrentReservation({
+        date: date,
+        numPeople: numPeople,
+        service: serviceType as 'lunch' | 'dinner',
+        time: time,
+        notes: notes,
+        specialRequirements: specialRequirements,
+        user: user as UserType,
+      });
+      setNextButtonPressed(true);
+    } else {
+      // If not, alert user
+      Alert.alert(t('error_alerts.error'), t('error_alerts.complete_fields'), [
+        { text: t('buttons.okay') },
+      ]);
+    }
+  };
+
+  const onChange = (event: DateTimePickerEvent, selectedDate?: Date) => {
+    if (selectedDate) {
+      const currentDate = selectedDate;
+      setDate(currentDate);
+    }
+
+    if (Platform.OS === 'android') {
+      if (
+        event.type === 'set' ||
+        event.type === 'dismissed' ||
+        event.type === 'neutralButtonPressed'
+      ) {
+        setAndroidShowDate(false);
+      }
+    }
+  };
+
+  const calendarProps = {
+    testID: 'dateTimePicker',
+    value: date,
+    onChange: onChange,
+    minimumDate: new Date(),
+    maximumDate: new Date(
+      new Date().getFullYear(),
+      new Date().getMonth() + 4,
+      new Date().getDate()
+    ),
+  };
 
   return (
     <ScrollView style={styles.container}>
@@ -60,8 +141,32 @@ export default function ReserveScreen() {
                 </HeaderTitle>
               </View>
             </View>
-            <View style={styles.calendarContainer}>
-              <Text>[calendar here]</Text>
+            <View style={styles.datePickerContainer}>
+              {/* Date picker if Android */}
+              {Platform.OS === 'android' && (
+                <>
+                  <Button
+                    onPress={() => setAndroidShowDate(true)}
+                    title="Pick date"
+                    color={COLOURS.GREEN}
+                  />
+                  {androidShowDate && <DateTimePicker {...calendarProps} />}
+                </>
+              )}
+              {/* Date picker if iOS */}
+              {Platform.OS === 'ios' && (
+                <DateTimePicker
+                  {...calendarProps}
+                  display="inline"
+                  accentColor={COLOURS.RED}
+                />
+              )}
+              <Text style={styles.dateSelectedText}>
+                {t('reserve.date_selected')}:{' '}
+                <Text style={{ fontWeight: '600', color: COLOURS.GREEN }}>
+                  {date.toDateString()}
+                </Text>
+              </Text>
             </View>
           </View>
           {/* How many people */}
@@ -69,7 +174,7 @@ export default function ReserveScreen() {
             <Text style={styles.questionText}>
               {t('reserve.how_many_people')}
             </Text>
-            <NumberModifier num={1} />
+            <NumberModifier onPress={(num) => setNumPeople(num)} />
           </View>
           {/* Which service */}
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
@@ -81,13 +186,13 @@ export default function ReserveScreen() {
                 flexDirection: 'row',
                 marginVertical: VALUES.SPACING.SMALL,
               }}
-              selected={serviceSelection}
-              onSelected={(value: string) => setServiceSelection(value)}
+              selected={serviceType}
+              onSelected={(value: string) => setServiceType(value)}
               radioBackground={COLOURS.RED}
             >
               <RadioButtonItem
                 style={{ marginRight: VALUES.SPACING.XSMALL }}
-                value="lunch"
+                value={SERVICE_TYPE.LUNCH}
                 label={t('reserve.lunch')}
               />
               <RadioButtonItem
@@ -95,7 +200,7 @@ export default function ReserveScreen() {
                   marginLeft: VALUES.SPACING.XLARGE,
                   marginRight: VALUES.SPACING.XSMALL,
                 }}
-                value="dinner"
+                value={SERVICE_TYPE.DINNER}
                 label={t('reserve.dinner')}
               />
             </RadioButtonGroup>
@@ -104,12 +209,14 @@ export default function ReserveScreen() {
           <View style={[styles.sectionContainer, styles.bottomBorder]}>
             <Text style={styles.questionText}>{t('reserve.select_time')}</Text>
             <View style={styles.timeSelectionContainer}>
-              {serviceSelection ? (
+              {/* TODO: only show times more than 5 hours ahead of current time */}
+              {serviceType ? (
                 timeSelections?.map((item, index) => (
                   <TimeSelection
                     key={index}
                     time={item}
-                    onPress={() => console.log('')}
+                    onPress={(time) => setTime(time)}
+                    selected={time == item}
                   />
                 ))
               ) : (
@@ -126,119 +233,56 @@ export default function ReserveScreen() {
               <TextInput
                 style={styles.notesTextInput}
                 multiline
+                onChangeText={(text) => setNotes(text)}
+                value={notes}
                 textAlignVertical="top"
               />
             </View>
           </View>
+          {/* TODO: retain checkmarks when pressing "back" */}
           {/* Special requirements */}
           <View style={styles.sectionContainer}>
             <Text style={styles.questionText}>
               {t('reserve.special_requirements')}
             </Text>
             <SpecialRequirementsCheckboxes
-              onToggle={(items) => setRequirementsSelection(items)}
+              onToggle={(items) => setSpecialRequirements(items)}
             />
             <CustomButton
               style={styles.nextButton}
-              onPress={() => setNextButtonPressed(true)}
+              onPress={onNextButtonPressed}
             >
               {t('buttons.next')}
             </CustomButton>
           </View>
         </>
       ) : (
-        <>
-          {/* Your details */}
-          <View style={styles.sectionContainer}>
-            <View style={styles.titleContainer}>
-              <CircleText
-                textStyle={{
-                  fontFamily: 'caveat-brush',
-                  fontSize: VALUES.FONT_SIZE['XLARGE'],
-                }}
-              >
-                2
-              </CircleText>
-              <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
-                <HeaderTitle colour={COLOURS.RED}>
-                  {t('reserve.your_details')}
-                </HeaderTitle>
-              </View>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                width: '100%',
-                justifyContent: 'space-between',
+        <View style={styles.sectionContainer}>
+          <View style={styles.titleContainer}>
+            <CircleText
+              textStyle={{
+                fontFamily: 'caveat-brush',
+                fontSize: VALUES.FONT_SIZE['XLARGE'],
               }}
             >
-              {/* Sign in */}
-              <View style={styles.signInContainer}>
-                <CustomButton onPress={() => console.log('sign in pressed')}>
-                  {t('buttons.sign_in')}
-                </CustomButton>
-                <Text style={styles.saveDetailsText}>
-                  {t('reserve.to_save_details')}
-                </Text>
-              </View>
-              {/* Guest details */}
-              <View style={styles.guestDetailsContainer}>
-                <Text style={{ fontSize: VALUES.SPACING.MEDIUM }}>
-                  {t('reserve.continue_as_guest')}
-                </Text>
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.first_name') + '*'}
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.last_name') + '*'}
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.mobile') + '*'}
-                  keyboardType="phone-pad"
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.email') + '*'}
-                  keyboardType="email-address"
-                />
-                <TextInput
-                  style={styles.textInput}
-                  placeholder={t('user_details.company_name')}
-                />
-                <View style={styles.tocContainer}>
-                  <Checkbox
-                    value={isTocChecked}
-                    onValueChange={setIsTocChecked}
-                    color={isTocChecked ? COLOURS.RED : undefined}
-                  />
-                  <Text style={styles.tocText}>
-                    {t('reserve.i_agree')}{' '}
-                    <Text style={styles.tocHyperlink}>
-                      {t('reserve.terms_and_conditions')}
-                    </Text>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.buttonsContainer}>
-                <CustomButton
-                  style={styles.nextButton}
-                  onPress={() => setNextButtonPressed(false)}
-                >
-                  {t('buttons.back')}
-                </CustomButton>
-                <CustomButton
-                  style={styles.nextButton}
-                  onPress={() => console.log('confirm pressed')}
-                >
-                  {t('buttons.confirm')}
-                </CustomButton>
-              </View>
+              2
+            </CircleText>
+            <View style={{ marginLeft: VALUES.SPACING.SMALL }}>
+              <HeaderTitle colour={COLOURS.RED}>
+                {t('reserve.your_details')}
+              </HeaderTitle>
             </View>
           </View>
-        </>
+          <ReserveUserDetails
+            onSignInPress={() =>
+              // TODO: login logic
+              //navigation.navigate('ProfileLoginModal')
+              console.log('Sign in pressed')
+            }
+            onBackPress={() => setNextButtonPressed(false)}
+            onConfirmPress={() => console.log('confim press')}
+          />
+        </View>
       )}
     </ScrollView>
   );
@@ -253,7 +297,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: VALUES.SPACING.MEDIUM,
+    paddingVertical: VALUES.SPACING.LARGE,
+    paddingHorizontal: VALUES.SPACING.MEDIUM,
   },
   bottomBorder: {
     borderBottomWidth: 10,
@@ -270,12 +315,15 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginBottom: VALUES.SPACING.MEDIUM,
   },
-  calendarContainer: {
-    borderWidth: 0.5,
+
+  datePickerContainer: {
     width: '100%',
-    height: 250,
     justifyContent: 'center',
-    alignItems: 'center',
+  },
+  dateSelectedText: {
+    textAlign: 'center',
+    fontSize: VALUES.FONT_SIZE.MEDIUM,
+    paddingTop: VALUES.SPACING.LARGE,
   },
 
   timeSelectionContainer: {
@@ -297,49 +345,8 @@ const styles = StyleSheet.create({
     height: VALUES.SIZE['5XLARGE'],
     backgroundColor: COLOURS.BEIGE,
   },
-
-  signInContainer: {
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    paddingHorizontal: VALUES.SPACING['2XLARGE'],
-    marginBottom: VALUES.SPACING.MEDIUM,
-  },
-  saveDetailsText: {
-    paddingVertical: VALUES.SPACING.SMALL,
-  },
-
-  guestDetailsContainer: {
-    width: '100%',
-  },
-  textInput: {
-    fontSize: VALUES.FONT_SIZE.MEDIUM,
-    padding: VALUES.SPACING.SMALL,
-    marginVertical: VALUES.SPACING.SMALL,
-    borderBottomWidth: 0.5,
-    borderColor: COLOURS.TEXT_PLACEHOLDER,
-  },
-  tocContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: VALUES.SPACING.LARGE,
-  },
-  tocText: {
-    fontSize: VALUES.FONT_SIZE.MEDIUM,
-    marginLeft: VALUES.SPACING.SMALL,
-  },
-  tocHyperlink: {
-    color: COLOURS.HYPERLINK,
-    textDecorationLine: 'underline',
-  },
-
   nextButton: {
     alignSelf: 'flex-end',
     paddingHorizontal: VALUES.SPACING.LARGE,
-  },
-
-  buttonsContainer: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 });
