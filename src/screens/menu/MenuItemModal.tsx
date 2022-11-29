@@ -59,6 +59,7 @@ export default function MenuItemModal({
       price: item.price,
       price2: item.price2 ? item.price2 : undefined,
       notes: '',
+      totalPrice: item.price,
     };
 
     // Add isChecked property to order modifiers
@@ -79,11 +80,30 @@ export default function MenuItemModal({
       myItem.modifiers = myModifiers;
     }
     setOrderedItem(myItem);
+    console.log('test ' + JSON.stringify(orderedItem));
   }, []);
 
   useEffect(() => {
     console.log('orderedItem: ' + JSON.stringify(orderedItem));
   }, [orderedItem]);
+
+  // Update total price whenever extras are added or removed
+  useEffect(() => {
+    let priceAdded = 0;
+    orderedItem?.modifiers?.add.forEach((value) => {
+      if (value.isChecked) {
+        priceAdded = priceAdded + value.price;
+      }
+    });
+
+    setOrderedItem(
+      (prevState) =>
+        ({
+          ...prevState,
+          totalPrice: priceAdded + item.price,
+        } as OrderMenuItemType)
+    );
+  }, [orderedItem?.modifiers?.add]);
 
   // Handle checkboxes for removing or adding ingredients
   const handleCheckbox = (name: string, array: string) => {
@@ -331,19 +351,21 @@ export default function MenuItemModal({
               {/* Add to order */}
               <View style={styles.addToOrderContainer}>
                 <NumberModifier onPress={(num) => setNumItem(num)} />
-                <CustomButton
-                  style={styles.addToOrderButton}
-                  onPress={() => {
-                    if (onAddToOrderPress && orderedItem) {
-                      onAddToOrderPress(numItem, orderedItem);
-                      navigation.goBack();
-                    }
-                  }}
-                >
-                  {`${t('buttons.add_to_order')} $${Number(item.price).toFixed(
-                    2
-                  )}`}
-                </CustomButton>
+                {orderedItem?.totalPrice && (
+                  <CustomButton
+                    style={styles.addToOrderButton}
+                    onPress={() => {
+                      if (onAddToOrderPress && orderedItem) {
+                        onAddToOrderPress(numItem, orderedItem);
+                        navigation.goBack();
+                      }
+                    }}
+                  >
+                    {`${t('buttons.add_to_order')} $${Number(
+                      numItem * orderedItem?.totalPrice
+                    ).toFixed(2)}`}
+                  </CustomButton>
+                )}
               </View>
             </View>
           )}

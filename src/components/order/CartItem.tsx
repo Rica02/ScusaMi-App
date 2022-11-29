@@ -14,6 +14,12 @@ const CartItem = (props: CartItemProps) => {
   const { t } = useTranslation();
   const { itemList } = props;
 
+  let addedPrice = 0;
+  itemList.item.modifiers?.add.forEach((value) => {
+    if (value.isChecked) {
+    }
+  });
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
@@ -53,6 +59,7 @@ const CartItem = (props: CartItemProps) => {
         )}
 
         {/* Edit & Remove buttons */}
+        {/* TODO: Edit & Remove buttons logic */}
         <View style={styles.buttonsContainer}>
           <CustomButton
             onPress={() => console.log()}
@@ -75,7 +82,7 @@ const CartItem = (props: CartItemProps) => {
         </View>
       </View>
       <Text style={{ fontSize: VALUES.FONT_SIZE.MEDIUM }}>
-        ${itemList.item.price}
+        ${Number(itemList.num * itemList.item.totalPrice).toFixed(2)}
       </Text>
     </View>
   );

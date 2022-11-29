@@ -36,6 +36,7 @@ export type OrderMenuItemType = {
   price2?: number;
   modifiers?: OrderModifiersType;
   notes?: string;
+  totalPrice: number;
 };
 
 export type OrderType = {

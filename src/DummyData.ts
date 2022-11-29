@@ -520,7 +520,7 @@ export const ORDERS = [
         item: {
           name: 'Margherita',
           price: 24,
-
+          totalPrice: 29,
           modifiers: {
             remove: [
               { name: 'Basil', isChecked: true },
@@ -547,6 +547,7 @@ export const ORDERS = [
         item: {
           name: 'Prosciutto Crudo',
           price: 32,
+          totalPrice: 32,
           modifiers: {
             remove: [
               { name: 'Prosciutto', isChecked: false },
@@ -595,6 +596,7 @@ export const ORDERS = [
         item: {
           name: 'Burrata Caprese',
           price: 18,
+          totalPrice: 18,
           modifiers: {
             remove: [
               { name: 'Burrata cheese', isChecked: false },
@@ -612,6 +614,7 @@ export const ORDERS = [
         item: {
           name: 'Insalata Scusa Mi!',
           price: 19,
+          totalPrice: 19,
           modifiers: {
             remove: [
               { name: 'Roasted pumpkin', isChecked: false },

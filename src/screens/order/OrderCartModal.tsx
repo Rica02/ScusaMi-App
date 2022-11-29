@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
@@ -17,6 +17,15 @@ const OrderCartModal = ({
 }: RootStackScreenProps<'OrderCartModal'>) => {
   const order = route.params.order;
   const { t } = useTranslation();
+  const [totalPrice, setTotalPrice] = useState<number | undefined>();
+
+  useEffect(() => {
+    let price = 0;
+    order.items.forEach((item) => {
+      price = price + item.num * item.item.totalPrice;
+    });
+    setTotalPrice(price);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -48,7 +57,9 @@ const OrderCartModal = ({
           ListFooterComponent={
             <View style={styles.total}>
               <Text style={styles.totalText}>{t('cart.total')}</Text>
-              <Text style={styles.totalText}>$43</Text>
+              <Text style={styles.totalText}>
+                ${Number(totalPrice).toFixed(2)}
+              </Text>
             </View>
           }
           renderItem={({ item }) => <CartItem itemList={item} />}
