@@ -7,7 +7,7 @@ export type MenuItemType = {
   name: string;
   image?: string;
   description?: string;
-  price?: number;
+  price: number;
   price2?: number;
   nutriInfo?: {
     'gluten free': NutriInfoValue;
@@ -15,8 +15,8 @@ export type MenuItemType = {
     takeaway: NutriInfoValue;
   };
   modifiers?: {
-    remove?: string[];
-    add?: { addOnName: string; addOnPrice: number }[];
+    remove?: { name: string }[];
+    add?: { name: string; price: number }[];
   };
 };
 
@@ -25,13 +25,26 @@ export type MenuType = {
   items: MenuItemType[];
 };
 
+export type OrderModifiersType = {
+  remove: { name: string; isChecked: boolean }[];
+  add: { name: string; price: number; isChecked: boolean }[];
+};
+
+export type OrderMenuItemType = {
+  name: string;
+  price: number;
+  price2?: number;
+  modifiers?: OrderModifiersType;
+  notes?: string;
+};
+
 export type OrderType = {
   mode: 1 | 2; // 1 = Dine in | 2 = Takeaway
   statusActive: boolean;
   dateTime: string;
   table?: number;
   pickup?: string;
-  items: { num: number; item: MenuItemType }[];
+  items: { num: number; item: OrderMenuItemType }[];
 };
 
 export type ReserveType = {

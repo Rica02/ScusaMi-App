@@ -15,3 +15,8 @@ export const SERVICE_TYPE = {
   LUNCH: 'lunch',
   DINNER: 'dinner',
 };
+
+export const MODIFIER_ARRAY = {
+  ADD: 'add',
+  REMOVE: 'remove',
+};

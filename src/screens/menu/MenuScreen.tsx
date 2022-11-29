@@ -4,7 +4,12 @@ import { Feather } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
 import { RootTabScreenProps } from '../../typings/navigationTypes';
-import { MenuItemType, MenuType, OrderType } from '../../typings/menuTypes';
+import {
+  MenuItemType,
+  MenuType,
+  OrderMenuItemType,
+  OrderType,
+} from '../../typings/menuTypes';
 import { MENU_MODE } from '../../constants/AppConstants';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
@@ -52,7 +57,7 @@ export default function MenuScreen({
   }, [mode]);
 
   // Handle Add To Order
-  const onAddToOrderPress = (num: number, item: MenuItemType) => {
+  const onAddToOrderPress = (num: number, item: OrderMenuItemType) => {
     if (currentOrder?.items) {
       let newItems = currentOrder?.items;
       newItems?.push({ num: num, item: item });
@@ -64,15 +69,15 @@ export default function MenuScreen({
   const getMenu = (mode: number) => {
     // If in takeaway mode, only show items that can be takeaway
     if (mode == MENU_MODE.TAKEAWAY) {
-      let newMenu: MenuType[] = [];
+      let takeAwayMenu: MenuType[] = [];
       MENU.forEach((category) => {
         let newItems = category.items.filter(
-          (item) => item.nutriInfo?.takeaway == 'y'
+          (item) => (item as MenuItemType).nutriInfo?.takeaway == 'y'
         );
         let newCategory = { ...category, items: newItems } as MenuType;
-        newMenu?.push(newCategory);
+        takeAwayMenu?.push(newCategory);
       });
-      setDisplayedMenu(newMenu as MenuType[]);
+      setDisplayedMenu(takeAwayMenu as MenuType[]);
     } else {
       setDisplayedMenu(MENU as MenuType[]);
     }

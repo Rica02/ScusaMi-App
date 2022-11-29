@@ -55,9 +55,36 @@ export default function ActiveOrderModal({
           <Text style={styles.yourOrderTitle}>{t('order.your_order')}</Text>
           <View style={styles.orderContainer}>
             {order.items.map((item, index) => (
-              <Text key={index}>
-                {item.num}x {item.item.name}
-              </Text>
+              <View key={index}>
+                <Text>
+                  {item.num}x {item.item.name}
+                </Text>
+                {item.item.modifiers && (
+                  <View>
+                    {item.item.modifiers.remove.length > 0 &&
+                      item.item.modifiers.remove.map(
+                        (item, index) =>
+                          item.isChecked && (
+                            <Text key={index}>- {item.name}</Text>
+                          )
+                      )}
+                    {item.item.modifiers.add.length > 0 &&
+                      item.item.modifiers.add.map(
+                        (item, index) =>
+                          item.isChecked && (
+                            <Text key={index}>
+                              + {item.name} ${item.price}
+                            </Text>
+                          )
+                      )}
+                  </View>
+                )}
+                {item.item.notes && (
+                  <Text>
+                    {t('order.notes')}: {item.item.notes}
+                  </Text>
+                )}
+              </View>
             ))}
           </View>
         </View>

@@ -15,8 +15,12 @@ import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../../typings/navigationTypes';
-import { NutriInfoValue } from '../../typings/menuTypes';
-import { MENU_MODE } from '../../constants/AppConstants';
+import {
+  NutriInfoValue,
+  OrderMenuItemType,
+  OrderModifiersType,
+} from '../../typings/menuTypes';
+import { MENU_MODE, MODIFIER_ARRAY } from '../../constants/AppConstants';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 import CustomButton from '../../components/common/CustomButton';
@@ -30,6 +34,10 @@ export default function MenuItemModal({
   const { t } = useTranslation();
   const [nutriInfo, setNutriInfo] = useState<string[]>([]);
   const [numItem, setNumItem] = useState(1);
+  const [notes, setNotes] = useState<string | undefined>();
+  const [orderedItem, setOrderedItem] = useState<
+    OrderMenuItemType | undefined
+  >();
 
   useEffect(() => {
     // Set array for nutritional info table
@@ -44,7 +52,83 @@ export default function MenuItemModal({
         >
       );
     }
+
+    // Make order object with relevant info
+    let myItem: OrderMenuItemType = {
+      name: item.name,
+      price: item.price,
+      price2: item.price2 ? item.price2 : undefined,
+      notes: '',
+    };
+
+    // Add isChecked property to order modifiers
+    if (item.modifiers) {
+      let myModifiers: OrderModifiersType = { remove: [], add: [] };
+      item.modifiers?.remove?.forEach((item) => {
+        myModifiers?.remove.push({ name: item.name, isChecked: false });
+      });
+
+      item.modifiers?.add?.forEach((item) => {
+        myModifiers?.add.push({
+          name: item.name,
+          price: item.price,
+          isChecked: false,
+        });
+      });
+
+      myItem.modifiers = myModifiers;
+    }
+    setOrderedItem(myItem);
   }, []);
+
+  useEffect(() => {
+    console.log('orderedItem: ' + JSON.stringify(orderedItem));
+  }, [orderedItem]);
+
+  // Handle checkboxes for removing or adding ingredients
+  const handleCheckbox = (name: string, array: string) => {
+    let newItem;
+    // If updating "add" modifiers
+    // TODO: add limit of 3 addons
+    if (array === MODIFIER_ARRAY.ADD) {
+      let temp = orderedItem?.modifiers?.add.map((value) => {
+        if (name === value.name) {
+          return {
+            ...value,
+            isChecked: !value.isChecked,
+          };
+        }
+        return value;
+      });
+      newItem = {
+        ...orderedItem,
+        modifiers: {
+          add: temp,
+          remove: orderedItem?.modifiers?.remove,
+        },
+      };
+      // If updating "remove" modifiers
+    } else if (array === MODIFIER_ARRAY.REMOVE) {
+      let temp = orderedItem?.modifiers?.remove.map((value) => {
+        if (name === value.name) {
+          return {
+            ...value,
+            isChecked: !value.isChecked,
+          };
+        }
+        return value;
+      });
+      newItem = {
+        ...orderedItem,
+        modifiers: {
+          add: orderedItem?.modifiers?.add,
+          remove: temp,
+        },
+      };
+    }
+
+    setOrderedItem(newItem as OrderMenuItemType);
+  };
 
   // Render nutritional info icon (w = with charge | y = yes | n = no)
   const renderPropertyIcon = (value: NutriInfoValue) => {
@@ -159,30 +243,32 @@ export default function MenuItemModal({
           {/* For order mode (dine-in / takeaway) */}
           {mode != MENU_MODE.BROWSE && (
             <View>
-              {item.modifiers && (
+              {orderedItem?.modifiers && (
                 <View>
                   {/* Remove ingredients */}
-                  {item.modifiers.remove && (
+                  {orderedItem?.modifiers?.remove?.length > 0 && (
                     <View>
                       <Text
                         style={[styles.modifierTitle, { color: COLOURS.RED }]}
                       >
                         {t('menu.remove')}
                       </Text>
-                      {item.modifiers.remove.map((item, index) => (
+                      {orderedItem.modifiers.remove.map((item, index) => (
                         <View key={index} style={styles.modifierCheckbox}>
                           <Checkbox
-                          // value={}
-                          // onValueChange={}
-                          // color={}
+                            value={item.isChecked}
+                            onValueChange={() => {
+                              handleCheckbox(item.name, MODIFIER_ARRAY.REMOVE);
+                            }}
+                            color={COLOURS.RED}
                           />
-                          <Text style={styles.checkboxLabel}>{item}</Text>
+                          <Text style={styles.checkboxLabel}>{item.name}</Text>
                         </View>
                       ))}
                     </View>
                   )}
                   {/* Add ingredients */}
-                  {item.modifiers.add && (
+                  {orderedItem.modifiers.add.length > 0 && (
                     <View>
                       <Text
                         style={[styles.modifierTitle, { color: COLOURS.GREEN }]}
@@ -199,17 +285,19 @@ export default function MenuItemModal({
                           {t('menu.max_3')}
                         </Text>
                       </Text>
-                      {item.modifiers.add.map((item, index) => (
-                        <View style={styles.modifierCheckbox}>
+                      {orderedItem.modifiers.add.map((item, index) => (
+                        <View key={index} style={styles.modifierCheckbox}>
                           <Checkbox
-                          // value={}
-                          // onValueChange={}
-                          // color={}
+                            value={item.isChecked}
+                            onValueChange={() => {
+                              handleCheckbox(item.name, MODIFIER_ARRAY.ADD);
+                            }}
+                            color={COLOURS.GREEN}
                           />
                           <Text style={styles.checkboxLabel}>
-                            {item.addOnName}{' '}
+                            {item.name}{' '}
                             <Text style={{ color: COLOURS.GREY }}>
-                              +${item.addOnPrice}
+                              +${item.price}
                             </Text>
                           </Text>
                         </View>
@@ -229,6 +317,14 @@ export default function MenuItemModal({
                   multiline
                   textAlignVertical="top"
                   placeholder={t('menu.extras_charge')}
+                  value={notes}
+                  onChangeText={(text) => {
+                    setNotes(text);
+                    setOrderedItem({
+                      ...orderedItem,
+                      notes: text,
+                    } as OrderMenuItemType);
+                  }}
                 />
               </View>
 
@@ -238,8 +334,8 @@ export default function MenuItemModal({
                 <CustomButton
                   style={styles.addToOrderButton}
                   onPress={() => {
-                    if (onAddToOrderPress) {
-                      onAddToOrderPress(numItem, item);
+                    if (onAddToOrderPress && orderedItem) {
+                      onAddToOrderPress(numItem, orderedItem);
                       navigation.goBack();
                     }
                   }}
