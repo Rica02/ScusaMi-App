@@ -23,6 +23,9 @@ import {
   RootTabScreenProps,
 } from '../typings/navigationTypes';
 import LinkingConfiguration from './LinkingConfiguration';
+import { BrowseType } from '../typings/menuTypes';
+import { UserType } from '../typings/userTypes';
+import { MENU_MODE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import ProfileLoginModal from '../screens/profile/ProfileLoginModal';
 import MenuItemModal from '../screens/menu/MenuItemModal';
@@ -30,7 +33,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/menu/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
-import ReserveScreen from '../screens/reserve/ReserveScreen';
+import ReserveScreen from '../screens/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
 import ActiveOrderModal from '../screens/order/ActiveOrderModal';
 import ProfileScreen from '../screens/profile/ProfileScreen';
@@ -39,8 +42,7 @@ import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrderCartModal from '../screens/order/OrderCartModal';
 import ConfirmationScreen from '../screens/ConfirmationScreen';
-import { MENU_MODE } from '../constants/AppConstants';
-import { BrowseType } from '../typings/menuTypes';
+import { USER } from '../DummyData';
 
 export default function Navigation() {
   return (
@@ -167,6 +169,13 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const [user, setUser] = React.useState<UserType | undefined>();
+
+  React.useEffect(() => {
+    // TODO: sign in info would be obtained from backend
+    setUser(USER);
+  });
+
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
@@ -188,7 +197,13 @@ function BottomTabNavigator() {
 
         headerRight: () => (
           <Pressable
-            onPress={() => navigation.navigate('ProfileLoginModal')}
+            onPress={() => {
+              if (user) {
+                navigation.navigate('Other', { screen: 'ProfileScreen' });
+              } else {
+                navigation.navigate('ProfileLoginModal');
+              }
+            }}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}

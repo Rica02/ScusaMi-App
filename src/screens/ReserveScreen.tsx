@@ -15,21 +15,21 @@ import DateTimePicker, {
   DateTimePickerEvent,
 } from '@react-native-community/datetimepicker';
 
-import { RootTabScreenProps } from '../../typings/navigationTypes';
-import { ReserveType } from '../../typings/menuTypes';
-import { UserType } from '../../typings/userTypes';
-import { CONFIRM_TYPE, SERVICE_TYPE } from '../../constants/AppConstants';
-import { COLOURS } from '../../constants/Colours';
-import { VALUES } from '../../constants/Styling';
-import HeaderTitle from '../../components/common/HeaderTitle';
-import CircleText from '../../components/common/CircleText';
-import CustomButton from '../../components/common/CustomButton';
-import TimeSelection from '../../components/reserve/TimeSelection';
-import SpecialRequirementsCheckboxes from '../../components/reserve/SpecialRequirementsCheckboxes';
-import NumberModifier from '../../components/common/NumberModifier';
-import ReserveUserDetails from '../../components/reserve/ReserveUserDetails';
+import { RootTabScreenProps } from '../typings/navigationTypes';
+import { ReserveType } from '../typings/menuTypes';
+import { UserType } from '../typings/userTypes';
+import { CONFIRM_TYPE, SERVICE_TYPE } from '../constants/AppConstants';
+import { COLOURS } from '../constants/Colours';
+import { VALUES } from '../constants/Styling';
+import HeaderTitle from '../components/common/HeaderTitle';
+import CircleText from '../components/common/CircleText';
+import CustomButton from '../components/common/CustomButton';
+import TimeSelection from '../components/reserve/TimeSelection';
+import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirementsCheckboxes';
+import NumberModifier from '../components/common/NumberModifier';
+import ReserveUserDetails from '../components/reserve/ReserveUserDetails';
 
-import { BOOKING } from '../../DummyData';
+import { BOOKING, USER } from '../DummyData';
 
 export default function ReserveScreen({
   navigation,
@@ -53,12 +53,7 @@ export default function ReserveScreen({
 
   useEffect(() => {
     // TODO: sign in info would be obtained from backend
-    setUser({
-      firstName: 'Jane',
-      lastName: 'Doe',
-      mobile: 123456789,
-      email: 'janedoe@email.com',
-    });
+    setUser(USER);
   }, []);
 
   useEffect(() => {

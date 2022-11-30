@@ -61,7 +61,7 @@ const ProfileScreen = (props: ProfileScreenProps) => {
   return (
     <View style={styles.container}>
       <HeaderTitle colour={COLOURS.RED}>
-        {t('profile.logged_in_as') + USER.fName}
+        {t('profile.logged_in_as') + USER.firstName}
       </HeaderTitle>
       <CustomButton
         style={styles.editButton}

@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
+import { UserType } from '../typings/userTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
-import { NestedScreenProps } from '../typings/navigationTypes';
+
+import { USER } from '../DummyData';
 
 interface OtherScreenProps {
-  //navigation: NestedScreenProps<'OtherScreen'>;
   navigation: any;
 }
 
 export default function OtherScreen(props: OtherScreenProps) {
   const { navigation } = props;
   const { t } = useTranslation();
+  const [user, setUser] = useState<UserType | undefined>();
+
+  useEffect(() => {
+    // TODO: sign in info would be obtained from backend
+    setUser(USER);
+  }, []);
 
   const buttons = [
     {
@@ -45,7 +51,11 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.my_profile'),
       func: function () {
-        navigation.navigate('Other', { screen: 'ProfileScreen' });
+        if (user) {
+          navigation.navigate('Other', { screen: 'ProfileScreen' });
+        } else {
+          navigation.navigate('ProfileLoginModal');
+        }
       },
     },
     {

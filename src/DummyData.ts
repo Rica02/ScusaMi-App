@@ -500,8 +500,8 @@ export const BOOKING = {
 };
 
 export const USER = {
-  fName: 'Rica',
-  lName: 'Beepboop',
+  firstName: 'Jane',
+  lastName: 'Doe',
   mobile: 123456789,
   email: 'email@email.com',
   company: '',
