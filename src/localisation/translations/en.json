@@ -31,7 +31,8 @@
     "pay_later": "Pay LATER at the front",
     "okay": "Okay",
     "order_again": "Order again",
-    "add_to_order": "Add to order"
+    "add_to_order": "Add to order",
+    "confirm_payment": "Confirm payment"
   },
   "menu": {
     "all": "All",
@@ -58,7 +59,8 @@
     "pickup": "Pickup",
     "num_items": "item(s)",
     "view_progress": "View progress",
-    "status_estimate": "STATUS ESTIMATE:"
+    "status_estimate": "STATUS ESTIMATE:",
+    "no_items": "No items added yet."
   },
   "reserve": {
     "booking": "Booking",
