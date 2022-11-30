@@ -30,7 +30,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import MenuScreen from '../screens/menu/MenuScreen';
 import OrderScreen from '../screens/OrderScreen';
-import ReserveScreen from '../screens/ReserveScreen';
+import ReserveScreen from '../screens/reserve/ReserveScreen';
 import OtherScreen from '../screens/OtherScreen';
 import ActiveOrderModal from '../screens/order/ActiveOrderModal';
 import ProfileScreen from '../screens/profile/ProfileScreen';
@@ -38,7 +38,7 @@ import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrderCartModal from '../screens/order/OrderCartModal';
-import OrderConfirmationScreen from '../screens/order/OrderConfirmationScreen';
+import ConfirmationScreen from '../screens/ConfirmationScreen';
 import { MENU_MODE } from '../constants/AppConstants';
 import { BrowseType } from '../typings/menuTypes';
 
@@ -295,11 +295,6 @@ function Order() {
         component={OrderScreen}
         options={{ headerShown: false }}
       />
-      <NestedOrder.Screen
-        name="OrderConfirmationScreen"
-        component={OrderConfirmationScreen}
-        options={{ headerShown: false }}
-      />
     </NestedOrder.Navigator>
   );
 }
@@ -327,6 +322,11 @@ function Other() {
       <NestedOther.Screen
         name="SettingsScreen"
         component={SettingsScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="ConfirmationScreen"
+        component={ConfirmationScreen}
         options={{ headerShown: false }}
       />
     </NestedOther.Navigator>

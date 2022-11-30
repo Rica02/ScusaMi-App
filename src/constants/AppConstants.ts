@@ -26,3 +26,8 @@ export const PAYMENT_METHOD = {
   APPLE_PAY: 'apple-pay',
   GOOGLE_PAY: 'google-pay',
 };
+
+export const CONFIRM_TYPE = {
+  ORDER: 'order',
+  RESERVE: 'reserve',
+};

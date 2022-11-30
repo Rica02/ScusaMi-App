@@ -68,14 +68,14 @@ export default function ActiveOrderModal({
                 </Text>
                 {item.item.modifiers && (
                   <View>
-                    {item.item.modifiers.remove.length > 0 &&
+                    {item.item.modifiers.remove &&
                       item.item.modifiers.remove.map(
                         (item, index) =>
                           item.isChecked && (
                             <Text key={index}>- {item.name}</Text>
                           )
                       )}
-                    {item.item.modifiers.add.length > 0 &&
+                    {item.item.modifiers.add &&
                       item.item.modifiers.add.map(
                         (item, index) =>
                           item.isChecked && (

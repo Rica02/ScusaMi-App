@@ -6,16 +6,18 @@ import { t } from 'i18next';
 import { COLOURS } from '../../constants/Colours';
 import { VALUES } from '../../constants/Styling';
 import CustomButton from '../common/CustomButton';
+import { UserType } from '../../typings/userTypes';
 
 interface ReserveUserDetailsProps {
   onSignInPress: () => void;
   onBackPress: () => void;
-  onConfirmPress: () => void;
+  onConfirmPress: (user: UserType) => void;
 }
 
 const ReserveUserDetails = (props: ReserveUserDetailsProps) => {
   const { onSignInPress, onBackPress, onConfirmPress } = props;
 
+  const [user, setUser] = useState<UserType | undefined>();
   const [firstName, setFirstName] = useState<string | undefined>();
   const [lastName, setLastName] = useState<string | undefined>();
   const [mobile, setMobile] = useState<string | undefined>();
@@ -27,7 +29,16 @@ const ReserveUserDetails = (props: ReserveUserDetailsProps) => {
     // Check if all compulsory fields are filled in
     if (firstName && lastName && mobile && email) {
       if (isTocChecked) {
-        onConfirmPress();
+        setUser({
+          firstName: firstName,
+          lastName: lastName,
+          mobile: +mobile,
+          email: email,
+          company: company ? company : undefined,
+        });
+        if (user) {
+          onConfirmPress(user);
+        }
       } else {
         Alert.alert(t('error_alerts.error'), t('error_alerts.accept_toc'), [
           { text: t('buttons.okay') },

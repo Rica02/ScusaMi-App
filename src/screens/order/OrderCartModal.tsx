@@ -5,7 +5,7 @@ import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../../typings/navigationTypes';
 import { BrowseType } from '../../typings/menuTypes';
-import { MENU_MODE } from '../../constants/AppConstants';
+import { CONFIRM_TYPE, MENU_MODE } from '../../constants/AppConstants';
 import { VALUES } from '../../constants/Styling';
 import { COLOURS } from '../../constants/Colours';
 import CartItem from '../../components/order/CartItem';
@@ -30,16 +30,19 @@ const OrderCartModal = ({
   }, []);
 
   const handleConfirmPayment = () => {
-    // TODO: payment validation
+    // TODO: payment validation and send order to database
 
     // Set order as paid and go to order confirmation screen
     order.paid = true;
 
     navigation.navigate('Root', {
-      screen: 'Order',
+      screen: 'Other',
       params: {
-        screen: 'OrderConfirmationScreen',
+        screen: 'ConfirmationScreen',
         initial: false,
+        params: {
+          type: CONFIRM_TYPE.ORDER,
+        },
       },
     });
   };
@@ -114,11 +117,13 @@ const OrderCartModal = ({
                 </CustomButton>
                 <CustomButton
                   onPress={() =>
+                    // TODO: send order to database
                     navigation.navigate('Root', {
-                      screen: 'Order',
+                      screen: 'Other',
                       params: {
-                        screen: 'OrderConfirmationScreen',
+                        screen: 'ConfirmationScreen',
                         initial: false,
+                        params: { type: CONFIRM_TYPE.ORDER },
                       },
                     })
                   }

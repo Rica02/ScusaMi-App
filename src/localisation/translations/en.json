@@ -84,7 +84,9 @@
     "to_save_details": "to save your details for next time",
     "continue_as_guest": "Alternatively, continue as a guest:",
     "i_agree": "I agree to the",
-    "terms_and_conditions": "Terms and Conditions"
+    "terms_and_conditions": "Terms and Conditions",
+    "reservation_complete": "Reservation complete.",
+    "reservation_change": "If you need to change your reservation details, please call us at"
   },
   "other": {
     "home": "Home",
