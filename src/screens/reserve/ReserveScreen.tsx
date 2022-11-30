@@ -70,9 +70,9 @@ export default function ReserveScreen({
     }
   }, [serviceType]);
 
-  useEffect(() => {
-    console.log('currentReservation ' + JSON.stringify(currentReservation));
-  }, [currentReservation]);
+  // useEffect(() => {
+  //   console.log('currentReservation ' + JSON.stringify(currentReservation));
+  // }, [currentReservation]);
 
   // Handle Next button pressed
   const onNextButtonPressed = () => {
@@ -116,10 +116,11 @@ export default function ReserveScreen({
   const handleSignIn = () => {
     if (user) {
       // TODO: send reservation details to backend
-      console.log('Logged in as user: ' + JSON.stringify(user));
+      //console.log('Logged in as user: ' + JSON.stringify(user));
       navigation.navigate('Other', {
         screen: 'ConfirmationScreen',
         params: { type: CONFIRM_TYPE.RESERVE },
+        initial: false,
       });
     } else {
       navigation.navigate('ProfileLoginModal');
@@ -132,6 +133,7 @@ export default function ReserveScreen({
     navigation.navigate('Other', {
       screen: 'ConfirmationScreen',
       params: { type: CONFIRM_TYPE.RESERVE },
+      initial: false,
     });
   };
 
