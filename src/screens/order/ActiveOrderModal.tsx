@@ -52,7 +52,14 @@ export default function ActiveOrderModal({
 
         {/* Order summary */}
         <View style={styles.yourOrderContainer}>
-          <Text style={styles.yourOrderTitle}>{t('order.your_order')}</Text>
+          <Text style={styles.orderSummaryTitle}>
+            {t('order.payment')}:{' '}
+            <Text style={{ fontWeight: 'normal' }}>
+              {!order.paid ? t('order.order_paid') : t('order.order_not_paid')}
+            </Text>
+          </Text>
+
+          <Text style={styles.orderSummaryTitle}>{t('order.your_order')}:</Text>
           <View style={styles.orderContainer}>
             {order.items.map((item, index) => (
               <View key={index}>
@@ -154,16 +161,16 @@ const styles = StyleSheet.create({
   yourOrderContainer: {
     paddingVertical: VALUES.SPACING.MEDIUM,
   },
-  yourOrderTitle: {
+  orderSummaryTitle: {
     fontSize: VALUES.FONT_SIZE.MEDIUM,
     fontWeight: '500',
+    paddingBottom: VALUES.SPACING.MEDIUM,
   },
   orderContainer: {
     borderWidth: 1,
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     backgroundColor: COLOURS.BEIGE,
     padding: VALUES.SPACING.SMALL,
-    marginTop: VALUES.SPACING.MEDIUM,
   },
 
   currentProgressContainer: {

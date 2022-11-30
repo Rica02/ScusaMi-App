@@ -511,6 +511,7 @@ export const USER = {
 export const ORDERS = [
   {
     mode: 1,
+    paid: true,
     statusActive: true,
     dateTime: 'Wednesday, 23 Novemeber at 2:19 pm',
     table: 2,
@@ -587,6 +588,7 @@ export const ORDERS = [
   },
   {
     mode: 2,
+    paid: false,
     statusActive: true,
     dateTime: 'Wednesday, 23 Novemeber at 3:05 pm',
     pickup: 'Today',

@@ -29,6 +29,21 @@ const OrderCartModal = ({
     setTotalPrice(price);
   }, []);
 
+  const handleConfirmPayment = () => {
+    // TODO: payment validation
+
+    // Set order as paid and go to order confirmation screen
+    order.paid = true;
+
+    navigation.navigate('Root', {
+      screen: 'Order',
+      params: {
+        screen: 'OrderConfirmationScreen',
+        initial: false,
+      },
+    });
+  };
+
   return (
     <View style={styles.container}>
       {!payNow ? (
@@ -122,15 +137,7 @@ const OrderCartModal = ({
       ) : (
         <PaymentMethod
           backPressed={() => setPayNow(false)}
-          confirmPressed={() => {
-            navigation.navigate('Root', {
-              screen: 'Order',
-              params: {
-                screen: 'OrderConfirmationScreen',
-                initial: false,
-              },
-            });
-          }}
+          confirmPressed={handleConfirmPayment}
         />
       )}
     </View>

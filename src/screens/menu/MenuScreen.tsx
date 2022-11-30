@@ -41,6 +41,7 @@ export default function MenuScreen({
       let startOrder: OrderType;
       startOrder = {
         mode: mode as 1 | 2,
+        paid: false,
         statusActive: true,
         dateTime: 'Wednesday, 23 November 2022 at 2:19 pm',
         table: mode == MENU_MODE.DINEIN ? 1 : undefined,

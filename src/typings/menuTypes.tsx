@@ -42,6 +42,7 @@ export type OrderMenuItemType = {
 export type OrderType = {
   mode: 1 | 2; // 1 = Dine in | 2 = Takeaway
   statusActive: boolean;
+  paid: boolean;
   dateTime: string;
   table?: number;
   pickup?: string;

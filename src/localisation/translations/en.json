@@ -60,7 +60,10 @@
     "num_items": "item(s)",
     "view_progress": "View progress",
     "status_estimate": "STATUS ESTIMATE:",
-    "no_items": "No items added yet."
+    "no_items": "No items added yet.",
+    "order_paid": "This order has been paid for.",
+    "order_not_paid": "This order has NOT yet been paid for.",
+    "payment": "Payment"
   },
   "reserve": {
     "booking": "Booking",
