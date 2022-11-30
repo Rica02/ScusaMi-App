@@ -70,9 +70,6 @@ export default function OtherScreen(props: OtherScreenProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.closeButton}>
-        <AntDesign name="close" size={30} color="COLOURS.BLACK" />
-      </View>
       <View style={styles.buttonsContainer}>
         {buttons.map((button, index) => (
           <Pressable

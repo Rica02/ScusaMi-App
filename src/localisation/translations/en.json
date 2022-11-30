@@ -143,7 +143,9 @@
   },
   "error_alerts": {
     "error": "Error",
+    "warning": "Warning",
     "complete_fields": "You must complete all compulsory fields.",
-    "accept_toc": "You must accept the Terms and Conditions to complete your reservation."
+    "accept_toc": "You must accept the Terms and Conditions to complete your reservation.",
+    "max_addons": "You can only select up to 3 addons."
   }
 }

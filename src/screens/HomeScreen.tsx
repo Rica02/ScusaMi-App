@@ -68,6 +68,7 @@ export default function HomeScreen({
         </View>
         <OrderButtons
           onPressDineIn={() =>
+            // TODO: here would open a camera to scan the table's QR code
             navigation.navigate('MenuScreen', {
               mode: MENU_MODE.DINEIN as BrowseType,
             })

@@ -10,6 +10,7 @@ import {
   Dimensions,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
@@ -80,12 +81,11 @@ export default function MenuItemModal({
       myItem.modifiers = myModifiers;
     }
     setOrderedItem(myItem);
-    console.log('test ' + JSON.stringify(orderedItem));
   }, []);
 
-  useEffect(() => {
-    console.log('orderedItem: ' + JSON.stringify(orderedItem));
-  }, [orderedItem]);
+  // useEffect(() => {
+  //   console.log('orderedItem: ' + JSON.stringify(orderedItem));
+  // }, [orderedItem]);
 
   // Update total price whenever extras are added or removed
   useEffect(() => {
@@ -109,7 +109,6 @@ export default function MenuItemModal({
   const handleCheckbox = (name: string, array: string) => {
     let newItem;
     // If updating "add" modifiers
-    // TODO: add limit of 3 addons
     if (array === MODIFIER_ARRAY.ADD) {
       let temp = orderedItem?.modifiers?.add.map((value) => {
         if (name === value.name) {
@@ -120,13 +119,24 @@ export default function MenuItemModal({
         }
         return value;
       });
-      newItem = {
-        ...orderedItem,
-        modifiers: {
-          add: temp,
-          remove: orderedItem?.modifiers?.remove,
-        },
-      };
+
+      // Check user already selected max 3 addons
+      let addOnsSelected = temp?.filter((value) => value.isChecked).length;
+
+      if (addOnsSelected && addOnsSelected > 3) {
+        Alert.alert(t('error_alerts.warning'), t('error_alerts.max_addons'), [
+          { text: t('buttons.okay') },
+        ]);
+      } else {
+        newItem = {
+          ...orderedItem,
+          modifiers: {
+            add: temp,
+            remove: orderedItem?.modifiers?.remove,
+          },
+        };
+      }
+
       // If updating "remove" modifiers
     } else if (array === MODIFIER_ARRAY.REMOVE) {
       let temp = orderedItem?.modifiers?.remove.map((value) => {
@@ -146,8 +156,9 @@ export default function MenuItemModal({
         },
       };
     }
-
-    setOrderedItem(newItem as OrderMenuItemType);
+    if (newItem) {
+      setOrderedItem(newItem as OrderMenuItemType);
+    }
   };
 
   // Render nutritional info icon (w = with charge | y = yes | n = no)
