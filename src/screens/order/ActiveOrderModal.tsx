@@ -62,8 +62,8 @@ export default function ActiveOrderModal({
           <Text style={styles.orderSummaryTitle}>{t('order.your_order')}:</Text>
           <View style={styles.orderContainer}>
             {order.items.map((item, index) => (
-              <View key={index}>
-                <Text>
+              <View style={{ paddingBottom: VALUES.SPACING.SMALL }} key={index}>
+                <Text style={{ paddingBottom: VALUES.SPACING.SMALL }}>
                   {item.num}x {item.item.name}
                 </Text>
                 {item.item.modifiers && (
@@ -72,14 +72,16 @@ export default function ActiveOrderModal({
                       item.item.modifiers.remove.map(
                         (item, index) =>
                           item.isChecked && (
-                            <Text key={index}>- {item.name}</Text>
+                            <Text style={styles.modifiersText} key={index}>
+                              - {item.name}
+                            </Text>
                           )
                       )}
                     {item.item.modifiers.add &&
                       item.item.modifiers.add.map(
                         (item, index) =>
                           item.isChecked && (
-                            <Text key={index}>
+                            <Text style={styles.modifiersText} key={index}>
                               + {item.name} ${item.price}
                             </Text>
                           )
@@ -87,7 +89,7 @@ export default function ActiveOrderModal({
                   </View>
                 )}
                 {item.item.notes && (
-                  <Text>
+                  <Text style={styles.modifiersText}>
                     {t('order.notes')}: {item.item.notes}
                   </Text>
                 )}
@@ -171,6 +173,11 @@ const styles = StyleSheet.create({
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     backgroundColor: COLOURS.BEIGE,
     padding: VALUES.SPACING.SMALL,
+  },
+  modifiersText: {
+    color: COLOURS.GREY,
+    paddingBottom: VALUES.SPACING.XSMALL,
+    paddingLeft: VALUES.SPACING.MEDIUM,
   },
 
   currentProgressContainer: {

@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import RadioButtonGroup, { RadioButtonItem } from 'expo-radio-button';
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -18,6 +25,16 @@ const PaymentMethod = (props: PaymentMethodProps) => {
   const { backPressed, confirmPressed } = props;
   const { t } = useTranslation();
   const [paymentMethod, setPaymentMethod] = useState<string | undefined>();
+
+  const handleConfirmPayment = () => {
+    if (paymentMethod) {
+      confirmPressed();
+    } else {
+      Alert.alert(t('error_alerts.error'), t('error_alerts.select_payment'), [
+        { text: t('buttons.okay') },
+      ]);
+    }
+  };
 
   const renderPaymentMethodLabel = (method: string) => {
     switch (method) {
@@ -110,7 +127,7 @@ const PaymentMethod = (props: PaymentMethodProps) => {
         </Pressable>
         <View>
           <CustomButton
-            onPress={confirmPressed}
+            onPress={handleConfirmPayment}
             style={{
               paddingHorizontal: VALUES.SPACING.MEDIUM,
               marginTop: VALUES.SPACING.SMALL,

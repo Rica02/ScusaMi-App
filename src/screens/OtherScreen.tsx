@@ -39,7 +39,10 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.order'),
       func: function () {
-        navigation.navigate('Root', { screen: 'OrderScreen' });
+        navigation.navigate('Root', {
+          screen: 'Order',
+          param: { screen: 'OrderScreen' },
+        });
       },
     },
     {
@@ -91,7 +94,17 @@ export default function OtherScreen(props: OtherScreenProps) {
           </Pressable>
         ))}
       </View>
-      <HeaderTitle colour={COLOURS.RED}>{t('buttons.sign_in')}</HeaderTitle>
+      <Pressable
+        onPress={() => {
+          if (user) {
+            navigation.navigate('Other', { screen: 'ProfileScreen' });
+          } else {
+            navigation.navigate('ProfileLoginModal');
+          }
+        }}
+      >
+        <HeaderTitle colour={COLOURS.RED}>{t('buttons.sign_in')}</HeaderTitle>
+      </Pressable>
     </View>
   );
 }

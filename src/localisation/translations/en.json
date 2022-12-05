@@ -32,7 +32,8 @@
     "okay": "Okay",
     "order_again": "Order again",
     "add_to_order": "Add to order",
-    "confirm_payment": "Confirm payment"
+    "confirm_payment": "Confirm payment",
+    "done": "Done"
   },
   "menu": {
     "all": "All",
@@ -153,6 +154,7 @@
     "warning": "Warning",
     "complete_fields": "You must complete all compulsory fields.",
     "accept_toc": "You must accept the Terms and Conditions to complete your reservation.",
-    "max_addons": "You can only select up to 3 addons."
+    "max_addons": "You can only select up to 3 addons.",
+    "select_payment": "Please select a payment method."
   }
 }
