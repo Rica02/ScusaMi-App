@@ -18,7 +18,7 @@ import DateTimePicker, {
 import { RootTabScreenProps } from '../typings/navigationTypes';
 import { ReserveType } from '../typings/menuTypes';
 import { UserType } from '../typings/userTypes';
-import { SERVICE_TYPE } from '../constants/AppConstants';
+import { CONFIRM_TYPE, SERVICE_TYPE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
@@ -29,17 +29,19 @@ import SpecialRequirementsCheckboxes from '../components/reserve/SpecialRequirem
 import NumberModifier from '../components/common/NumberModifier';
 import ReserveUserDetails from '../components/reserve/ReserveUserDetails';
 
-import { BOOKING } from '../DummyData';
+import { BOOKING, USER } from '../DummyData';
 
 export default function ReserveScreen({
   navigation,
 }: RootTabScreenProps<'ReserveScreen'>) {
   const { t } = useTranslation();
-  const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
   const [nextButtonPressed, setNextButtonPressed] = useState(false);
+
+  const [user, setUser] = useState<UserType | undefined>();
   const [currentReservation, setCurrentReservation] = useState<
     ReserveType | undefined
   >();
+  const [timeSelections, setTimeSelections] = useState<string[] | undefined>();
   const [androidShowDate, setAndroidShowDate] = useState(false);
 
   const [date, setDate] = useState(new Date());
@@ -49,12 +51,10 @@ export default function ReserveScreen({
   const [notes, setNotes] = useState('');
   const [specialRequirements, setSpecialRequirements] = useState<string[]>([]);
 
-  const [user, setUser] = useState<UserType | undefined>({
-    firstName: 'Jane',
-    lastName: 'Doe',
-    mobile: 123456789,
-    email: 'janedoe@email.com',
-  });
+  useEffect(() => {
+    // Sign in info would be obtained from backend
+    setUser(USER);
+  }, []);
 
   useEffect(() => {
     // Update reservation times shown based on service type selected
@@ -106,6 +106,29 @@ export default function ReserveScreen({
         setAndroidShowDate(false);
       }
     }
+  };
+
+  const handleSignIn = () => {
+    if (user) {
+      // Send reservation details to backend
+      navigation.navigate('Other', {
+        screen: 'ConfirmationScreen',
+        params: { type: CONFIRM_TYPE.RESERVE },
+        initial: false,
+      });
+    } else {
+      navigation.navigate('ProfileLoginModal');
+    }
+  };
+
+  const handleConfirm = (guestUser: UserType) => {
+    // Send reservation details to backend
+    console.log('Guest user: ' + JSON.stringify(guestUser));
+    navigation.navigate('Other', {
+      screen: 'ConfirmationScreen',
+      params: { type: CONFIRM_TYPE.RESERVE },
+      initial: false,
+    });
   };
 
   const calendarProps = {
@@ -274,13 +297,9 @@ export default function ReserveScreen({
             </View>
           </View>
           <ReserveUserDetails
-            onSignInPress={() =>
-              // TODO: login logic
-              //navigation.navigate('ProfileLoginModal')
-              console.log('Sign in pressed')
-            }
+            onSignInPress={handleSignIn}
             onBackPress={() => setNextButtonPressed(false)}
-            onConfirmPress={() => console.log('confim press')}
+            onConfirmPress={(guestUser) => handleConfirm(guestUser)}
           />
         </View>
       )}

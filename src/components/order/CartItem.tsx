@@ -8,11 +8,12 @@ import CustomButton from '../common/CustomButton';
 
 interface CartItemProps {
   itemList: { num: number; item: OrderMenuItemType };
+  onRemove: (item: OrderMenuItemType) => void;
 }
 
 const CartItem = (props: CartItemProps) => {
   const { t } = useTranslation();
-  const { itemList } = props;
+  const { itemList, onRemove } = props;
 
   return (
     <View style={styles.container}>
@@ -52,7 +53,7 @@ const CartItem = (props: CartItemProps) => {
           </View>
         )}
 
-        {/* Edit & Remove buttons */}
+        {/* Edit & Remove buttons (TODO) */}
         <View style={styles.buttonsContainer}>
           <CustomButton
             onPress={() => console.log()}
@@ -62,7 +63,7 @@ const CartItem = (props: CartItemProps) => {
             {t('buttons.edit')}
           </CustomButton>
           <CustomButton
-            onPress={() => console.log()}
+            onPress={() => onRemove(itemList.item)}
             style={{
               paddingHorizontal: VALUES.SPACING.MEDIUM,
               backgroundColor: COLOURS.RED,
@@ -75,7 +76,7 @@ const CartItem = (props: CartItemProps) => {
         </View>
       </View>
       <Text style={{ fontSize: VALUES.FONT_SIZE.MEDIUM }}>
-        ${itemList.item.price}
+        ${Number(itemList.num * itemList.item.totalPrice).toFixed(2)}
       </Text>
     </View>
   );
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.1,
     shadowRadius: 5,
-    elevation: 2, // TODO: check android
+    elevation: 2,
   },
   itemName: {
     fontSize: VALUES.FONT_SIZE.MEDIUM,

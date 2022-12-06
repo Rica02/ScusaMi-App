@@ -52,27 +52,36 @@ export default function ActiveOrderModal({
 
         {/* Order summary */}
         <View style={styles.yourOrderContainer}>
-          <Text style={styles.yourOrderTitle}>{t('order.your_order')}</Text>
+          <Text style={styles.orderSummaryTitle}>
+            {t('order.payment')}:{' '}
+            <Text style={{ fontWeight: 'normal' }}>
+              {!order.paid ? t('order.order_paid') : t('order.order_not_paid')}
+            </Text>
+          </Text>
+
+          <Text style={styles.orderSummaryTitle}>{t('order.your_order')}:</Text>
           <View style={styles.orderContainer}>
             {order.items.map((item, index) => (
-              <View key={index}>
-                <Text>
+              <View style={{ paddingBottom: VALUES.SPACING.SMALL }} key={index}>
+                <Text style={{ paddingBottom: VALUES.SPACING.SMALL }}>
                   {item.num}x {item.item.name}
                 </Text>
                 {item.item.modifiers && (
                   <View>
-                    {item.item.modifiers.remove.length > 0 &&
+                    {item.item.modifiers.remove &&
                       item.item.modifiers.remove.map(
                         (item, index) =>
                           item.isChecked && (
-                            <Text key={index}>- {item.name}</Text>
+                            <Text style={styles.modifiersText} key={index}>
+                              - {item.name}
+                            </Text>
                           )
                       )}
-                    {item.item.modifiers.add.length > 0 &&
+                    {item.item.modifiers.add &&
                       item.item.modifiers.add.map(
                         (item, index) =>
                           item.isChecked && (
-                            <Text key={index}>
+                            <Text style={styles.modifiersText} key={index}>
                               + {item.name} ${item.price}
                             </Text>
                           )
@@ -80,7 +89,7 @@ export default function ActiveOrderModal({
                   </View>
                 )}
                 {item.item.notes && (
-                  <Text>
+                  <Text style={styles.modifiersText}>
                     {t('order.notes')}: {item.item.notes}
                   </Text>
                 )}
@@ -110,9 +119,11 @@ export default function ActiveOrderModal({
               <MaterialCommunityIcons
                 name="circle-slice-5"
                 size={50}
-                color={COLOURS.TEXT_PLACEHOLDER}
+                color={COLOURS.GREEN}
               />
-              <Text style={styles.progressText}>{t('order.in_progress')}</Text>
+              <Text style={[styles.progressText, { color: COLOURS.GREEN }]}>
+                {t('order.in_progress')}
+              </Text>
             </View>
             <View style={styles.iconContainer}>
               <MaterialCommunityIcons
@@ -154,16 +165,21 @@ const styles = StyleSheet.create({
   yourOrderContainer: {
     paddingVertical: VALUES.SPACING.MEDIUM,
   },
-  yourOrderTitle: {
+  orderSummaryTitle: {
     fontSize: VALUES.FONT_SIZE.MEDIUM,
     fontWeight: '500',
+    paddingBottom: VALUES.SPACING.MEDIUM,
   },
   orderContainer: {
     borderWidth: 1,
     borderColor: COLOURS.TEXT_PLACEHOLDER,
     backgroundColor: COLOURS.BEIGE,
     padding: VALUES.SPACING.SMALL,
-    marginTop: VALUES.SPACING.MEDIUM,
+  },
+  modifiersText: {
+    color: COLOURS.GREY,
+    paddingBottom: VALUES.SPACING.XSMALL,
+    paddingLeft: VALUES.SPACING.MEDIUM,
   },
 
   currentProgressContainer: {

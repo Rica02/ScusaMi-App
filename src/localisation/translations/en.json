@@ -31,7 +31,9 @@
     "pay_later": "Pay LATER at the front",
     "okay": "Okay",
     "order_again": "Order again",
-    "add_to_order": "Add to order"
+    "add_to_order": "Add to order",
+    "confirm_payment": "Confirm payment",
+    "done": "Done"
   },
   "menu": {
     "all": "All",
@@ -58,7 +60,11 @@
     "pickup": "Pickup",
     "num_items": "item(s)",
     "view_progress": "View progress",
-    "status_estimate": "STATUS ESTIMATE:"
+    "status_estimate": "STATUS ESTIMATE:",
+    "no_items": "No items added yet.",
+    "order_paid": "This order has been paid for.",
+    "order_not_paid": "This order has NOT yet been paid for.",
+    "payment": "Payment"
   },
   "reserve": {
     "booking": "Booking",
@@ -79,7 +85,9 @@
     "to_save_details": "to save your details for next time",
     "continue_as_guest": "Alternatively, continue as a guest:",
     "i_agree": "I agree to the",
-    "terms_and_conditions": "Terms and Conditions"
+    "terms_and_conditions": "Terms and Conditions",
+    "reservation_complete": "Reservation complete.",
+    "reservation_change": "If you need to change your reservation details, please call us at"
   },
   "other": {
     "home": "Home",
@@ -143,7 +151,10 @@
   },
   "error_alerts": {
     "error": "Error",
+    "warning": "Warning",
     "complete_fields": "You must complete all compulsory fields.",
-    "accept_toc": "You must accept the Terms and Conditions to complete your reservation."
+    "accept_toc": "You must accept the Terms and Conditions to complete your reservation.",
+    "max_addons": "You can only select up to 3 addons.",
+    "select_payment": "Please select a payment method."
   }
 }

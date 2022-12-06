@@ -1,21 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Pressable } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 
+import { UserType } from '../typings/userTypes';
 import { COLOURS } from '../constants/Colours';
 import { VALUES } from '../constants/Styling';
 import HeaderTitle from '../components/common/HeaderTitle';
-import { NestedScreenProps } from '../typings/navigationTypes';
+
+import { USER } from '../DummyData';
 
 interface OtherScreenProps {
-  //navigation: NestedScreenProps<'OtherScreen'>;
   navigation: any;
 }
 
 export default function OtherScreen(props: OtherScreenProps) {
   const { navigation } = props;
   const { t } = useTranslation();
+  const [user, setUser] = useState<UserType | undefined>();
+
+  useEffect(() => {
+    // Ssign in info would be obtained from backend
+    setUser(USER);
+  }, []);
 
   const buttons = [
     {
@@ -33,7 +39,10 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.order'),
       func: function () {
-        navigation.navigate('Root', { screen: 'OrderScreen' });
+        navigation.navigate('Root', {
+          screen: 'Order',
+          param: { screen: 'OrderScreen' },
+        });
       },
     },
     {
@@ -45,7 +54,11 @@ export default function OtherScreen(props: OtherScreenProps) {
     {
       desc: t('other.my_profile'),
       func: function () {
-        navigation.navigate('Other', { screen: 'ProfileScreen' });
+        if (user) {
+          navigation.navigate('Other', { screen: 'ProfileScreen' });
+        } else {
+          navigation.navigate('ProfileLoginModal');
+        }
       },
     },
     {
@@ -70,9 +83,6 @@ export default function OtherScreen(props: OtherScreenProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.closeButton}>
-        <AntDesign name="close" size={30} color="COLOURS.BLACK" />
-      </View>
       <View style={styles.buttonsContainer}>
         {buttons.map((button, index) => (
           <Pressable
@@ -84,7 +94,17 @@ export default function OtherScreen(props: OtherScreenProps) {
           </Pressable>
         ))}
       </View>
-      <HeaderTitle colour={COLOURS.RED}>{t('buttons.sign_in')}</HeaderTitle>
+      <Pressable
+        onPress={() => {
+          if (user) {
+            navigation.navigate('Other', { screen: 'ProfileScreen' });
+          } else {
+            navigation.navigate('ProfileLoginModal');
+          }
+        }}
+      >
+        <HeaderTitle colour={COLOURS.RED}>{t('buttons.sign_in')}</HeaderTitle>
+      </Pressable>
     </View>
   );
 }

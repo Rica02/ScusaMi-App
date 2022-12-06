@@ -11,10 +11,6 @@ The resulting app will not interfere with the Client’s current existing system
 
 ## Tools and technology
 
-- Language: JavaScript / TypeScript
-- Framework: React Native
-- Back-end: Node.js / Express.js
-- Authentication: Firebase’s Authentication (TBC)
-- Database: Firebase’s Firestore Database (TBC)
+- Language: TypeScript
+- Framework: React Native (Expo)
 - Version control: Git
-- Mock-ups & Prototyping: Figma

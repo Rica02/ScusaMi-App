@@ -500,8 +500,8 @@ export const BOOKING = {
 };
 
 export const USER = {
-  fName: 'Rica',
-  lName: 'Beepboop',
+  firstName: 'Jane',
+  lastName: 'Doe',
   mobile: 123456789,
   email: 'email@email.com',
   company: '',
@@ -511,6 +511,7 @@ export const USER = {
 export const ORDERS = [
   {
     mode: 1,
+    paid: true,
     statusActive: true,
     dateTime: 'Wednesday, 23 Novemeber at 2:19 pm',
     table: 2,
@@ -520,7 +521,7 @@ export const ORDERS = [
         item: {
           name: 'Margherita',
           price: 24,
-
+          totalPrice: 29,
           modifiers: {
             remove: [
               { name: 'Basil', isChecked: true },
@@ -547,6 +548,7 @@ export const ORDERS = [
         item: {
           name: 'Prosciutto Crudo',
           price: 32,
+          totalPrice: 32,
           modifiers: {
             remove: [
               { name: 'Prosciutto', isChecked: false },
@@ -586,6 +588,7 @@ export const ORDERS = [
   },
   {
     mode: 2,
+    paid: false,
     statusActive: true,
     dateTime: 'Wednesday, 23 Novemeber at 3:05 pm',
     pickup: 'Today',
@@ -595,6 +598,7 @@ export const ORDERS = [
         item: {
           name: 'Burrata Caprese',
           price: 18,
+          totalPrice: 18,
           modifiers: {
             remove: [
               { name: 'Burrata cheese', isChecked: false },
@@ -612,6 +616,7 @@ export const ORDERS = [
         item: {
           name: 'Insalata Scusa Mi!',
           price: 19,
+          totalPrice: 19,
           modifiers: {
             remove: [
               { name: 'Roasted pumpkin', isChecked: false },

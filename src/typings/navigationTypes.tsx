@@ -60,7 +60,7 @@ export type NestedParamList = {
   AboutUsScreen: undefined;
   SettingsScreen: undefined;
   OrderScreen: undefined;
-  OrderConfirmationScreen: undefined;
+  ConfirmationScreen: { type: string };
 };
 
 export type NestedScreenProps<Screen extends keyof NestedParamList> =

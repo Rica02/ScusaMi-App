@@ -20,3 +20,14 @@ export const MODIFIER_ARRAY = {
   ADD: 'add',
   REMOVE: 'remove',
 };
+
+export const PAYMENT_METHOD = {
+  CREDIT_DEBIT: 'credit-debit',
+  APPLE_PAY: 'apple-pay',
+  GOOGLE_PAY: 'google-pay',
+};
+
+export const CONFIRM_TYPE = {
+  ORDER: 'order',
+  RESERVE: 'reserve',
+};

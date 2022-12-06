@@ -28,7 +28,6 @@ const linking: LinkingOptions<RootStackParamList> = {
           Order: {
             screens: {
               OrderScreen: 'order',
-              OrderConfirmationScreen: 'orderconfirmation',
             },
           },
           ReserveScreen: {
@@ -41,6 +40,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               OtherScreen: 'other',
               ProfileScreen: 'profile',
               SettingsScreen: 'settings',
+              ConfirmationScreen: 'confirmation',
             },
           },
         },

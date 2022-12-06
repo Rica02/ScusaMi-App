@@ -23,6 +23,9 @@ import {
   RootTabScreenProps,
 } from '../typings/navigationTypes';
 import LinkingConfiguration from './LinkingConfiguration';
+import { BrowseType } from '../typings/menuTypes';
+import { UserType } from '../typings/userTypes';
+import { MENU_MODE } from '../constants/AppConstants';
 import { COLOURS } from '../constants/Colours';
 import ProfileLoginModal from '../screens/profile/ProfileLoginModal';
 import MenuItemModal from '../screens/menu/MenuItemModal';
@@ -38,9 +41,8 @@ import AboutUsScreen from '../screens/AboutUsScreen';
 import ContactUsModal from '../screens/ContactUsModal';
 import SettingsScreen from '../screens/SettingsScreen';
 import OrderCartModal from '../screens/order/OrderCartModal';
-import OrderConfirmationScreen from '../screens/order/OrderConfirmationScreen';
-import { MENU_MODE } from '../constants/AppConstants';
-import { BrowseType } from '../typings/menuTypes';
+import ConfirmationScreen from '../screens/ConfirmationScreen';
+import { USER } from '../DummyData';
 
 export default function Navigation() {
   return (
@@ -167,6 +169,13 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const [user, setUser] = React.useState<UserType | undefined>();
+
+  React.useEffect(() => {
+    // Sign in info would be obtained from backend
+    setUser(USER);
+  });
+
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
@@ -182,13 +191,19 @@ function BottomTabNavigator() {
           <Image
             style={{ marginLeft: 15, width: 30, height: 30 }}
             resizeMode="contain"
-            source={require('../../assets/images/logos/secondary-logo.png')} // TODO: Replace with better image version
+            source={require('../../assets/images/logos/secondary-logo.png')}
           />
         ),
 
         headerRight: () => (
           <Pressable
-            onPress={() => navigation.navigate('ProfileLoginModal')}
+            onPress={() => {
+              if (user) {
+                navigation.navigate('Other', { screen: 'ProfileScreen' });
+              } else {
+                navigation.navigate('ProfileLoginModal');
+              }
+            }}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}
@@ -295,11 +310,6 @@ function Order() {
         component={OrderScreen}
         options={{ headerShown: false }}
       />
-      <NestedOrder.Screen
-        name="OrderConfirmationScreen"
-        component={OrderConfirmationScreen}
-        options={{ headerShown: false }}
-      />
     </NestedOrder.Navigator>
   );
 }
@@ -327,6 +337,11 @@ function Other() {
       <NestedOther.Screen
         name="SettingsScreen"
         component={SettingsScreen}
+        options={{ headerShown: false }}
+      />
+      <NestedOther.Screen
+        name="ConfirmationScreen"
+        component={ConfirmationScreen}
         options={{ headerShown: false }}
       />
     </NestedOther.Navigator>

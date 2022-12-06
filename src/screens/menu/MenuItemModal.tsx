@@ -10,6 +10,7 @@ import {
   Dimensions,
   ScrollView,
   TextInput,
+  Alert,
 } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { Feather } from '@expo/vector-icons';
@@ -59,6 +60,7 @@ export default function MenuItemModal({
       price: item.price,
       price2: item.price2 ? item.price2 : undefined,
       notes: '',
+      totalPrice: item.price,
     };
 
     // Add isChecked property to order modifiers
@@ -81,15 +83,32 @@ export default function MenuItemModal({
     setOrderedItem(myItem);
   }, []);
 
+  // useEffect(() => {
+  //   console.log('orderedItem: ' + JSON.stringify(orderedItem));
+  // }, [orderedItem]);
+
+  // Update total price whenever extras are added or removed
   useEffect(() => {
-    console.log('orderedItem: ' + JSON.stringify(orderedItem));
-  }, [orderedItem]);
+    let priceAdded = 0;
+    orderedItem?.modifiers?.add.forEach((value) => {
+      if (value.isChecked) {
+        priceAdded = priceAdded + value.price;
+      }
+    });
+
+    setOrderedItem(
+      (prevState) =>
+        ({
+          ...prevState,
+          totalPrice: priceAdded + item.price,
+        } as OrderMenuItemType)
+    );
+  }, [orderedItem?.modifiers?.add]);
 
   // Handle checkboxes for removing or adding ingredients
   const handleCheckbox = (name: string, array: string) => {
     let newItem;
     // If updating "add" modifiers
-    // TODO: add limit of 3 addons
     if (array === MODIFIER_ARRAY.ADD) {
       let temp = orderedItem?.modifiers?.add.map((value) => {
         if (name === value.name) {
@@ -100,13 +119,24 @@ export default function MenuItemModal({
         }
         return value;
       });
-      newItem = {
-        ...orderedItem,
-        modifiers: {
-          add: temp,
-          remove: orderedItem?.modifiers?.remove,
-        },
-      };
+
+      // Check user already selected max 3 addons
+      let addOnsSelected = temp?.filter((value) => value.isChecked).length;
+
+      if (addOnsSelected && addOnsSelected > 3) {
+        Alert.alert(t('error_alerts.warning'), t('error_alerts.max_addons'), [
+          { text: t('buttons.okay') },
+        ]);
+      } else {
+        newItem = {
+          ...orderedItem,
+          modifiers: {
+            add: temp,
+            remove: orderedItem?.modifiers?.remove,
+          },
+        };
+      }
+
       // If updating "remove" modifiers
     } else if (array === MODIFIER_ARRAY.REMOVE) {
       let temp = orderedItem?.modifiers?.remove.map((value) => {
@@ -126,8 +156,9 @@ export default function MenuItemModal({
         },
       };
     }
-
-    setOrderedItem(newItem as OrderMenuItemType);
+    if (newItem) {
+      setOrderedItem(newItem as OrderMenuItemType);
+    }
   };
 
   // Render nutritional info icon (w = with charge | y = yes | n = no)
@@ -331,19 +362,21 @@ export default function MenuItemModal({
               {/* Add to order */}
               <View style={styles.addToOrderContainer}>
                 <NumberModifier onPress={(num) => setNumItem(num)} />
-                <CustomButton
-                  style={styles.addToOrderButton}
-                  onPress={() => {
-                    if (onAddToOrderPress && orderedItem) {
-                      onAddToOrderPress(numItem, orderedItem);
-                      navigation.goBack();
-                    }
-                  }}
-                >
-                  {`${t('buttons.add_to_order')} $${Number(item.price).toFixed(
-                    2
-                  )}`}
-                </CustomButton>
+                {orderedItem?.totalPrice && (
+                  <CustomButton
+                    style={styles.addToOrderButton}
+                    onPress={() => {
+                      if (onAddToOrderPress && orderedItem) {
+                        onAddToOrderPress(numItem, orderedItem);
+                        navigation.goBack();
+                      }
+                    }}
+                  >
+                    {`${t('buttons.add_to_order')} $${Number(
+                      numItem * orderedItem?.totalPrice
+                    ).toFixed(2)}`}
+                  </CustomButton>
+                )}
               </View>
             </View>
           )}

@@ -44,6 +44,7 @@ export default function OrderScreen({ navigation }: RootStackScreenProps<any>) {
         </Text>
         <OrderButtons
           onPressDineIn={() =>
+            // Open camera to scan the table's QR code
             navigation.navigate('Root', {
               screen: 'MenuScreen',
               params: { mode: MENU_MODE.DINEIN as BrowseType },
