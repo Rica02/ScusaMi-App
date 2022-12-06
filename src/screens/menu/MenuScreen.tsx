@@ -90,7 +90,7 @@ export default function MenuScreen({
     flatListRef.current.scrollToIndex({ animated: true, index });
   };
 
-  // TODO
+  // TODO: search function
   const handleSearchPress = () => {};
 
   return (

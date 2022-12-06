@@ -119,9 +119,11 @@ export default function ActiveOrderModal({
               <MaterialCommunityIcons
                 name="circle-slice-5"
                 size={50}
-                color={COLOURS.TEXT_PLACEHOLDER}
+                color={COLOURS.GREEN}
               />
-              <Text style={styles.progressText}>{t('order.in_progress')}</Text>
+              <Text style={[styles.progressText, { color: COLOURS.GREEN }]}>
+                {t('order.in_progress')}
+              </Text>
             </View>
             <View style={styles.iconContainer}>
               <MaterialCommunityIcons

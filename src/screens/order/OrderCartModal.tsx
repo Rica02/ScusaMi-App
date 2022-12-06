@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
 import { RootStackScreenProps } from '../../typings/navigationTypes';
-import { BrowseType } from '../../typings/menuTypes';
+import { BrowseType, OrderMenuItemType } from '../../typings/menuTypes';
 import { CONFIRM_TYPE, MENU_MODE } from '../../constants/AppConstants';
 import { VALUES } from '../../constants/Styling';
 import { COLOURS } from '../../constants/Colours';
@@ -30,7 +30,7 @@ const OrderCartModal = ({
   }, []);
 
   const handleConfirmPayment = () => {
-    // TODO: payment validation and send order to database
+    // Payment validation here and send order to database
 
     // Set order as paid and go to order confirmation screen
     order.paid = true;
@@ -45,6 +45,10 @@ const OrderCartModal = ({
         },
       },
     });
+  };
+
+  const handleOnRemoveItem = (item: OrderMenuItemType) => {
+    console.log('removing item: ' + JSON.stringify(item));
   };
 
   return (
@@ -88,7 +92,12 @@ const OrderCartModal = ({
                     </Text>
                   </View>
                 }
-                renderItem={({ item }) => <CartItem itemList={item} />}
+                renderItem={({ item }) => (
+                  <CartItem
+                    itemList={item}
+                    onRemove={(item) => handleOnRemoveItem(item)}
+                  />
+                )}
               />
             ) : (
               <Text style={styles.noItemsText}>{t('order.no_items')}</Text>
@@ -117,7 +126,7 @@ const OrderCartModal = ({
                 </CustomButton>
                 <CustomButton
                   onPress={() =>
-                    // TODO: send order to database
+                    // Send order to database
                     navigation.navigate('Root', {
                       screen: 'Other',
                       params: {

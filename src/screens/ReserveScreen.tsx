@@ -52,7 +52,7 @@ export default function ReserveScreen({
   const [specialRequirements, setSpecialRequirements] = useState<string[]>([]);
 
   useEffect(() => {
-    // TODO: sign in info would be obtained from backend
+    // Sign in info would be obtained from backend
     setUser(USER);
   }, []);
 
@@ -110,8 +110,7 @@ export default function ReserveScreen({
 
   const handleSignIn = () => {
     if (user) {
-      // TODO: send reservation details to backend
-      //console.log('Logged in as user: ' + JSON.stringify(user));
+      // Send reservation details to backend
       navigation.navigate('Other', {
         screen: 'ConfirmationScreen',
         params: { type: CONFIRM_TYPE.RESERVE },
@@ -123,7 +122,7 @@ export default function ReserveScreen({
   };
 
   const handleConfirm = (guestUser: UserType) => {
-    // TODO: send reservation details to backend
+    // Send reservation details to backend
     console.log('Guest user: ' + JSON.stringify(guestUser));
     navigation.navigate('Other', {
       screen: 'ConfirmationScreen',

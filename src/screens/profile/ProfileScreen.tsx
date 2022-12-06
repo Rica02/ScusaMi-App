@@ -122,7 +122,7 @@ const ProfileScreen = (props: ProfileScreenProps) => {
       <CustomButton
         style={styles.signOutButton}
         onPress={() => {
-          // TODO: log user out
+          // Log user out
           navigation.navigate('Root', { screen: 'HomeScreen' });
         }}
       >

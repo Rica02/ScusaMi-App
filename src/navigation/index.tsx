@@ -172,7 +172,7 @@ function BottomTabNavigator() {
   const [user, setUser] = React.useState<UserType | undefined>();
 
   React.useEffect(() => {
-    // TODO: sign in info would be obtained from backend
+    // Sign in info would be obtained from backend
     setUser(USER);
   });
 
@@ -191,7 +191,7 @@ function BottomTabNavigator() {
           <Image
             style={{ marginLeft: 15, width: 30, height: 30 }}
             resizeMode="contain"
-            source={require('../../assets/images/logos/secondary-logo.png')} // TODO: Replace with better image version
+            source={require('../../assets/images/logos/secondary-logo.png')}
           />
         ),
 

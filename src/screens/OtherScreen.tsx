@@ -19,7 +19,7 @@ export default function OtherScreen(props: OtherScreenProps) {
   const [user, setUser] = useState<UserType | undefined>();
 
   useEffect(() => {
-    // TODO: sign in info would be obtained from backend
+    // Ssign in info would be obtained from backend
     setUser(USER);
   }, []);
 
